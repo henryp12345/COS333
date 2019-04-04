@@ -1,37 +1,40 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {SQLite} from 'expo';
+// In App.js in a new project
 
-const database = SQLite.openDatabase('events.db');
+import React from "react";
+import { Button, View, Text } from "react-native";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
-export default class App extends React.Component {
-  /* Creates the table if it doesn't exist */
-  componentDidMount() {
-    database.transaction(tx => {
-      tx.executeSql('CREATE TABLE IF NOT EXISTS events (Description text, Creator text, Date date, StartTime text, EndTime text, Capacity int, Location text, Tags text);')
-    });
-  }
-
+class HomeScreen extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>This text is currently irrelevant</Text>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Home Screen</Text>
+        <Button
+        title="test"
+        onPress={() => this.props.navigation.navigate("Details")}
+        />
       </View>
     );
   }
-
-  addEvent(desc, creator, date, start, end, capacity, loc, tags) {
-    database.transaction(tx => {
-      tx.executeSql('INSERT INTO events VALUES (?, ?, ?, ?, ?, ?, ?, ?);', [desc, creator, date, start, end, capacity, loc, tags])
-    });
-  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+class DetailScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Detail Screen</Text>
+      </View>
+    );
+  }
+}
+const AppNavigator = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Details: DetailScreen
   },
-});
+  {
+    initialRouteName: "Home"
+  }
+);
+
+export default createAppContainer(AppNavigator);
