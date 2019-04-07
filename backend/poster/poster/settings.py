@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'poster333',
         'USER':'posterGroup',
         'PASSWORD':'po$ter',
-        'HOST':'',
+        'HOST':'localhost',
         'PORT':'',
     }
 }
@@ -124,3 +124,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+django_heroku.settings(locals())
