@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from posterApp import views
 
 urlpatterns = [
-	path('test/', include('posterApp.urls')),
+	path('', views.default),
+	path('event/', views.test),
     path('admin/', admin.site.urls),
 ]
