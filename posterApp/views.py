@@ -15,7 +15,7 @@ def event(request):
 	value = ''
 	for item in q:
 		value = value + " " + item.username + '\n'
-	return HttpResponse(q)
+	return HttpResponse(value)
 
 def eventId(request):
 	return HttpResponse("nothing here yet")
