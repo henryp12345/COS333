@@ -14,7 +14,7 @@ def event(request):
 	q = User.objects.all()
 	value = ''
 	for item in q:
-		value = value + " " + q.username + '\n'
+		value = value + " " + item.username + '\n'
 	return HttpResponse(q)
 
 def eventId(request):
