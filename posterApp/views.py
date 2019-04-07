@@ -12,6 +12,9 @@ def event(request):
 	e1.save()
 	e2.save()
 	q = User.objects.all()
+	value = ''
+	for item in q:
+		value = value + " " + q.username + '\n'
 	return HttpResponse(q)
 
 def eventId(request):
