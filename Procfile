@@ -1,1 +1,1 @@
-web: gunicorn posterapp333.wsgi
+web: gunicorn poster.wsgi
