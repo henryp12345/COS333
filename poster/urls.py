@@ -23,6 +23,6 @@ urlpatterns = [
 	path('event/<int:id>/', views.eventId),
 	path('user/hosted/', views.hosted),
 	path('user/joined/', views.joined),
-	path('clear/', views.clearAll)
+	path('clear/', views.clearAll),
     path('admin/', admin.site.urls),
 ]
