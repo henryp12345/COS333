@@ -11,7 +11,7 @@ def event(request):
 	e2 = User(username='test2', hosted = '3', joined='4,5', notifications='2', invitations='4')
 	e1.save()
 	e2.save()
-	q = User.objects.all(username='hpeters')
+	q = User.objects.all()
 	return HttpResponse(q)
 
 def eventId(request):
