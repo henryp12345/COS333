@@ -7,9 +7,20 @@ def default(request):
 
 def event(request):
 	e1 = User(username='test', hosted = '1', joined='2,3', notifications='1', invitations='2')
+	e2 = User(username='test2', hosted = '3', joined='4,5', notifications='2', invitations='4')
 	e1.save()
+	e2.save()
 	q = User.objects.all()
 	return HttpResponse(str(q))
+
+def eventId(request):
+	return HttpResponse("nothing here yet")
+
+def hosted(request):
+	return HttpResponse("nothing here yet")
+
+def joined(request):
+	return HttpResponse("nothing here yet")
 
 def clearAll(request):
 	return HttpResponse('Tables cleared')
