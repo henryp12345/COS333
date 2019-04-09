@@ -42,16 +42,15 @@ const TabNavigator = createBottomTabNavigator(
       }
     }
   },
+
   {
-    tabBarComponent: props => (
-      <TabBar
-        tabColors={["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"]}
-        {...props}
-      />
-    ),
     tabBarOptions: {
-      activeTintColor: "#4aada8",
-      inactiveTintColor: "#222222"
+        showLabel: false, // hide labels
+        activeTintColor: '#F8F8F8', // active icon color
+        inactiveTintColor: '#586589',  // inactive icon color
+        style: {
+            backgroundColor: '#171F33' // TabBar background
+        }
     }
   }
 );
