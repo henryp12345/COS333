@@ -6,12 +6,18 @@ import GenerateForm from 'react-native-form-builder';
 const styles = {
 wrapper: {
 flex: 1,
-marginTop: 150,
+marginTop: 50,
 },
 submitButton: {
 paddingHorizontal: 10,
 paddingTop: 20,
 },
+name:{
+    fontSize:22,
+    color:"#000000",
+    fontWeight:'600',
+    padding:30
+  },
 };
 // These Fields will create a login form with three fields
 const fields = [
@@ -55,7 +61,9 @@ export default class FormGenerator extends Component {
     render() {
         return (
                 <View style={styles.wrapper}>
+                <Text style={styles.name}>Create Event</Text>
                 <View>
+                
                 <GenerateForm
                 ref={(c) => {
                 this.formGenerator = c;
@@ -65,7 +73,7 @@ export default class FormGenerator extends Component {
                 </View>
                 <View style={styles.submitButton}>
                 <Button block onPress={() => this.login()}>
-                <Text>Create Event</Text>
+                <Text>Submit</Text>
                 </Button>
                 </View>
                 </View>

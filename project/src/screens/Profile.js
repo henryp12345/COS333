@@ -1,105 +1,72 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TouchableOpacity
+  StyleSheet,
+  Text,
+  View,
+  Image,
 } from 'react-native';
 
 export default class Profile extends Component {
-    
-    render() {
-        return (
-                <View style={styles.container}>
-                <View style={styles.header}></View>
-                <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
-                <View style={styles.body}>
-                <View style={styles.bodyContent}>
-                <TouchableOpacity style={styles.txtContainer}>
+
+  render() {
+    return (
+      <View style={styles.container}>
+          <View style={styles.header}>
+            <View style={styles.headerContent}>
+
+                <Image style={styles.avatar}
+                  source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
+
                 <Text style={styles.name}>Henry Peters</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.txtContainer}>
-                <Text style={styles.info}>Computer Science, 2020</Text>
-                </TouchableOpacity>
-                
-                <TouchableOpacity style={styles.buttonContainer}>
-                <Text>All Events</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonContainer}>
-                <Text>My Events</Text>
-                </TouchableOpacity>
+                <Text style={styles.userInfo}>henry@princeton.edu </Text>
+                <Text style={styles.userInfo}>2020</Text>
                 </View>
                 </View>
-                </View>
-                );
-    }
+                <View style={styles.body}>
+            <View style={styles.bodyContent}>
+            <Text style={styles.name}>Your Events</Text>
+            <Text style={styles.userInfo}>Event 1 </Text>
+            <Text style={styles.userInfo}>Event 2 </Text>
+            <Text style={styles.userInfo}>Event 3 </Text>
+            </View>
+          </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-                                 header:{
-                                 backgroundColor: "#4285F4",
-                                 height:200,
-                                 },
-                                 avatar: {
-                                 width: 130,
-                                 height: 130,
-                                 borderRadius: 63,
-                                 borderWidth: 4,
-                                 borderColor: "white",
-                                 marginBottom:10,
-                                 alignSelf:'center',
-                                 position: 'absolute',
-                                 marginTop:130
-                                 },
-                                 name:{
-                                 fontSize:22,
-                                 color:"#FFFFFF",
-                                 fontWeight:'600',
-                                 },
-                                 body:{
-                                 marginTop:40,
-                                 },
-                                 bodyContent: {
-                                 flex: 1,
-                                 alignItems: 'center',
-                                 padding:30,
-                                 },
-                                 name:{
-                                 fontSize:28,
-                                 color: "#696969",
-                                 fontWeight: "600"
-                                 },
-                                 info:{
-                                 fontSize:16,
-                                 color: "#4285F4",
-                                 marginTop:10
-                                 },
-                                 description:{
-                                 fontSize:16,
-                                 color: "#696969",
-                                 marginTop:10,
-                                 textAlign: 'center'
-                                 },
-                                 txtContainer: {
-                                 marginTop:10,
-                                 height:45,
-                                 flexDirection: 'row',
-                                 justifyContent: 'center',
-                                 alignItems: 'center',
-                                 marginBottom:20,
-                                 width:250,
-                                 borderRadius:30,
-                                 },
-                                 buttonContainer: {
-                                 marginTop:10,
-                                 height:45,
-                                 flexDirection: 'row',
-                                 justifyContent: 'center',
-                                 alignItems: 'center',
-                                 marginBottom:20,
-                                 width:250,
-                                 borderRadius:30,
-                                 backgroundColor: "#4285F4",
-                                 },
-                                 });
+  header:{
+    backgroundColor: "#ffffff",
+    marginTop:60
+  },
+  headerContent:{
+    padding:30,
+    alignItems: 'center',
+  },
+  body:{
+    marginTop:1,
+  },
+  bodyContent: {
+    alignItems: 'flex-start',
+    padding:30,
+  },
+  avatar: {
+    width: 130,
+    height: 130,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: "white",
+    marginBottom:10,
+  },
+  name:{
+    fontSize:22,
+    color:"#000000",
+    fontWeight:'600',
+  },
+  userInfo:{
+    fontSize:16,
+    color:"#778899",
+    fontWeight:'600',
+  }
+});
