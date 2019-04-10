@@ -1,12 +1,77 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { AppRegistry } from 'react-native';
+import { View, Text, Button } from 'native-base';
+import GenerateForm from 'react-native-form-builder';
 
-export default class AddEventScreen extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Add a new event</Text>
-      </View>
-    );
-  }
+const styles = {
+wrapper: {
+flex: 1,
+marginTop: 150,
+},
+submitButton: {
+paddingHorizontal: 10,
+paddingTop: 20,
+},
+};
+// These Fields will create a login form with three fields
+const fields = [
+                {type: 'text',
+                name: 'event',
+                required: true,
+                label: 'Name of Event',
+                },
+                {type: 'text',
+                props: {multiline: true, secureTextEntry: true},
+                name: 'description',
+                required: true,
+                label: 'Event Description',
+                },
+                {
+                type: 'date',
+                name: 'date',
+                mode: 'datetime',
+                minDate: 'Today',
+                required: true,
+                label: 'When is your event?',
+                },
+                {
+                type: 'number',
+                name: 'count',
+                required: true,
+                label: 'Num People',
+                },
+                {
+                type: 'text',
+                name: 'location',
+                required: false,
+                label: 'Location',
+                },
+                ];
+export default class FormGenerator extends Component {
+    login() {
+        const formValues = this.formGenerator.getValues();
+        console.log('FORM VALUES', formValues);
+    }
+    render() {
+        return (
+                <View style={styles.wrapper}>
+                <View>
+                <GenerateForm
+                ref={(c) => {
+                this.formGenerator = c;
+                }}
+                fields={fields}
+                />
+                </View>
+                <View style={styles.submitButton}>
+                <Button block onPress={() => this.login()}>
+                <Text>Create Event</Text>
+                </Button>
+                </View>
+                </View>
+                );
+    }
 }
+
+AppRegistry.registerComponent('FormGenerator', () => FormGenerator);
+
