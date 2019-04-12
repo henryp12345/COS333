@@ -15,11 +15,11 @@ def event(request):
 		values_list = list(values)
 		return JsonResponse(values_list, safe=False)
 	elif request.method == 'POST':
-		# formData = json.loads(request.body)
+		formData = json.loads(request.body)
 		# e1 = Event(title = formData.title, desc = formData.desc, location = formData.location, startTime = None, endTime = None,
 		# 			date = None, capacity = formData.capacity, numberJoined = 0, tags = "", host = "")
 		# e1.save()
-		return HttpResponse("OK")
+		return HttpResponse(json.dumps(formData))
 
 def eventId(request):
 	return HttpResponse("nothing here yet")
