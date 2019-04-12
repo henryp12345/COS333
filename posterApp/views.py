@@ -12,7 +12,7 @@ def event(request):
 	# 	values = Event.objects.all().values()
 	# 	values_list = list(values)
 	# 	return JsonResponse(values_list, safe=False)
-	elif request.method == 'GET':
+	if request.method == 'GET':
 		formData = json.loads(request.body)
 		e1 = Event(title = formData.title, desc = formData.desc, location = formData.location, startTime = None, endTime = None,
 					date = None, capacity = formData.capacity, numberJoined = 0, tags = "", host = "")
