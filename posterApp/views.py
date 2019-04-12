@@ -17,7 +17,7 @@ def event(request):
 		e1 = Event(title = formData.title, desc = formData.desc, location = formData.location, startTime = None, endTime = None,
 					date = None, capacity = formData.capacity, numberJoined = 0, tags = "", host = "")
 		e1.save()
-		return JsonResponse(request.body)
+		return JsonResponse(json.dumps(request.body))
 
 def eventId(request):
 	return HttpResponse("nothing here yet")
