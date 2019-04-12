@@ -27,4 +27,6 @@ def joined(request):
 	return HttpResponse("nothing here yet")
 
 def clearAll(request):
+	User.objects.all().delete()
+	Event.objects.all().delete()
 	return HttpResponse('Tables cleared')
