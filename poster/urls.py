@@ -20,9 +20,11 @@ from posterApp import views
 urlpatterns = [
 	path('', views.default),
 	path('event/', views.event),
-	path('event/<int:eventId>/', views.eventId),
-    path('user/hosted/<str:username>', views.hosted),
-    path('user/joined/<str:username>', views.joined),
+    path('event/<str:eventString>/', views.eventId),
+    path('hosted/<str:username>/', views.hosted),
+    path('addHosted/<str:username>/<str:idString>/', views.addHosted),
+    path('joined/<str:username>', views.joined),
+    path('addJoined/<str:username>/<str:idString>/', views.addJoined),
 	path('clear/', views.clearAll),
     path('admin/', admin.site.urls),
 ]

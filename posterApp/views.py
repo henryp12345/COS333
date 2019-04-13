@@ -7,7 +7,7 @@ import datetime
 
 # Create your views here.
 def default(request):
-	return HttpResponse("default page")
+	return HttpResponse("")
 
 @csrf_exempt
 def event(request):
@@ -22,25 +22,42 @@ def event(request):
 		e1.save()
 		return HttpResponse("OK")
 
-def eventId(request, eventId):
-	event = Event.objects.get(id = eventId)
-	event_list = list(event)
+def eventId(request, eventString):
+	idList = eventString.split(",")
+	event_list = []
+	for eventId in idList:
+		currentEvent = Event.objects.get(id = eventId)
+		event_list.append(currentEvent)
 	return JsonResponse(event_list, safe=False)
 
-@csrf_exempt
 def hosted(request, username):
-	if request.method == 'GET':
-		u1 = User(username="asd", hosted="1,2,3", joined="4,5,6", notifications="1,2,3", invitations="")
-		u1.save()
-		user = User.objects.get(username = username)
-		eventsHosted = user.hosted
-		hostedList = eventsHosted.split(",")
-		return JsonResponse(hostedList, safe=False)
-	elif request.method == 'POST':
-		return HttpResponse("not implemented")
+	u1 = User(username="asd", hosted="1,2,3", joined="4,5,6", notifications="1,2,3", invitations="")
+	u1.save()
+	user = User.objects.get(username = username)
+	eventsHosted = user.hosted
+	return HttpResponse(eventsHosted)
+
+def addHosted(request, username, idString):
+	idList = idString.split(",")
+	user = User.objects.get(username = username)
+	currentHosted = user.hosted
+	currentHosted = currentHosted + "," + idString
+	user.hosted = currentHosted
+	user.save()
+	return HttpResponse("OK")
 
 def joined(request, username):
-	return HttpResponse("nothing here yet")
+	user = User.objects.get(username = username)
+	eventsJoined = user.joined
+	return HttpResponse(eventsJoined)
+
+def addJoined(request, username, idString):
+	idList = idSrting.split(",")
+	user = User.objects.get(username = username)
+	currentJoined = user.joined
+	currentJoined = currentJoined + "," + idString
+	user.joined = currentJoined
+	return HttpResponse("OK")
 
 def clearAll(request):
 	User.objects.all().delete()
