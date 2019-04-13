@@ -23,12 +23,18 @@ def event(request):
 		return HttpResponse("OK")
 
 def eventId(request, eventId):
-	return HttpResponse(eventId)
+	event = Event.objects.get(id = eventId)
+	event_list = list(event)
+	return JsonResponse(event_list, safe=False)
 
-def hosted(request):
-	return HttpResponse("nothing here yet")
+def hosted(request, username):
+	if request.method == 'GET':
+		user = User.objects.get(username = username)
+		eventsHosted = user.hosted
+		return HttpResponse(type(eventsHosted))
+	elif request.method == 'POST':
 
-def joined(request):
+def joined(request, username):
 	return HttpResponse("nothing here yet")
 
 def clearAll(request):

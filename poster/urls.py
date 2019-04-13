@@ -21,8 +21,8 @@ urlpatterns = [
 	path('', views.default),
 	path('event/', views.event),
 	path('event/<int:eventId>/', views.eventId),
-	path('user/hosted/', views.hosted),
-	path('user/joined/', views.joined),
+    path('user/hosted/<str:username>', views.hosted),
+    path('user/joined/<str:username>', views.joined),
 	path('clear/', views.clearAll),
     path('admin/', admin.site.urls),
 ]
