@@ -22,8 +22,8 @@ def event(request):
 		e1.save()
 		return HttpResponse("OK")
 
-def eventId(request):
-	return HttpResponse("nothing here yet")
+def eventId(request, eventId):
+	return HttpResponse(eventId)
 
 def hosted(request):
 	return HttpResponse("nothing here yet")
