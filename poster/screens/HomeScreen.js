@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity } from 'react-native';
-import { SearchBar, Button } from 'react-native-elements';
+import { SearchBar, Button, Icon } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {Card} from 'native-base';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -71,51 +72,97 @@ export default class HomeScreen extends React.Component {
     return (
       //ListView to show with textinput used as search bar
       <View style={styles.viewStyle}>
+      <Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 24}}>Browse Events</Text>
         <SearchBar
           round
-          lightTheme
+          containerStyle={{ width: '100%', backgroundColor: 'white', borderTopWidth: 0, borderBottomWidth: 0, }}
+          inputContainerStyle={{ backgroundColor: 'white'}}
           searchIcon={{ size: 24 }}
           onChangeText={text => this.SearchFilterFunction(text)}
           onClear={text => this.SearchFilterFunction('')}
-          placeholder="Search events"
+          placeholder="Search"
           value={this.state.search}
         />
 
-<View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5 }}>
-    <Button
-  icon={{name: 'ios-american-football', type: 'ionicon', buttonStyle: styles.someButtonStyle, color:'white' }}
-  buttonStyle={{height: 60, width: 60, borderRadius: 30, marginHorizontal: 10}}
-  />
-<Button
-  icon={{name: 'shopping-cart', type: 'weloveiconfonts', buttonStyle: styles.someButtonStyle, color:'white' }}
-  buttonStyle={{height: 60, width: 60, borderRadius: 30, marginHorizontal: 10}}
-  />
-  <Button
-  icon={{name: 'movie', type: 'material', buttonStyle: styles.someButtonStyle, color:'white' }}
-  buttonStyle={{height: 60, width: 60, borderRadius: 30, marginHorizontal: 10}}
-  />
-    <Button
-  icon={{name: 'car', type: 'font-awesome', buttonStyle: styles.someButtonStyle, color:'white' }}
-  buttonStyle={{height: 60, width: 60, borderRadius: 30, marginHorizontal: 10}}
-  />
-    <Button
-  icon={{name: 'book', type: 'font-awesome', buttonStyle: styles.someButtonStyle, color:'white' }}
-  buttonStyle={{height: 60, width: 60, borderRadius: 30, marginHorizontal: 10}}
-  />
+<Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 16}}>Popular categories</Text>
+<View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
+<TouchableOpacity> 
+<Icon
+  reverse
+  name='ios-basketball'
+  type='ionicon'
+  color='#517fa4'
+  size = '45'
+/> 
+<Text style = {{textAlign: 'center'}}>Sports</Text>
+</TouchableOpacity>
+<TouchableOpacity> 
+<Icon
+  reverse
+  name='book'
+  type='font-awesome'
+  color='#517fa4'
+  size = '45'
+/> 
+<Text style = {{textAlign: 'center'}}>Study Groups</Text>
+</TouchableOpacity>
+<TouchableOpacity> 
+<Icon
+  reverse
+  name='logo-game-controller-b'
+  type='ionicon'
+  color='#517fa4'
+  size = '45'
+/> 
+<Text style = {{textAlign: 'center'}}>Gaming</Text>
+</TouchableOpacity>
+</View>
 
-  </View>
-  <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation" })}
-        >
-          <Text style={styles.link}>Temporary button to navigate to event details page</Text>
-        </TouchableOpacity>
+<View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
+<TouchableOpacity> 
+<Icon
+  reverse
+  name='car'
+  type='font-awesome'
+  color='#517fa4'
+  size = '45'
+/> 
+<Text style = {{textAlign: 'center'}}>Transport</Text>
+</TouchableOpacity>
+<TouchableOpacity> 
+<Icon
+  reverse
+  name='shopping-cart'
+  type='weloveiconfonts'
+  color='#517fa4'
+  size = '45'
+/> 
+<Text style = {{textAlign: 'center'}}>Bulk Orders</Text>
+</TouchableOpacity>
+<TouchableOpacity> 
+<Icon
+  reverse
+  name='comments'
+  type='font-awesome'
+  color='#517fa4'
+  size = '45'
+/> 
+<Text style = {{textAlign: 'center'}}>Campus Events</Text>
+</TouchableOpacity>
+</View>
+  
 
         <FlatList
           data={this.state.dataSource}
-          ItemSeparatorComponent={this.ListViewItemSeparator}
-          //Item Separator View
           renderItem={({ item }) => (
+          <Card>
             <Text style={styles.textStyle}>{item.title}</Text>
+            <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation" })}
+        >
+          <Text style={styles.textStyle}>Go to event details page</Text>
+        </TouchableOpacity>
+            </Card>
           )}
           enableEmptySections={true}
           style={{ marginTop: 10 }}
@@ -131,7 +178,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     backgroundColor: 'white',
+    margin: 20,
+    margin: 15,
+    textAlign: 'center',
+ 
   },
+
   textStyle: {
     padding: 10,
   },
