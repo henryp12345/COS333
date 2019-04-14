@@ -92,7 +92,7 @@ export default class HomeScreen extends React.Component {
   name='ios-basketball'
   type='ionicon'
   color='#517fa4'
-  size = '45'
+  size = {45}
 /> 
 <Text style = {{textAlign: 'center'}}>Sports</Text>
 </TouchableOpacity>
@@ -102,7 +102,7 @@ export default class HomeScreen extends React.Component {
   name='book'
   type='font-awesome'
   color='#517fa4'
-  size = '45'
+  size = {45}
 /> 
 <Text style = {{textAlign: 'center'}}>Study Groups</Text>
 </TouchableOpacity>
@@ -112,7 +112,7 @@ export default class HomeScreen extends React.Component {
   name='logo-game-controller-b'
   type='ionicon'
   color='#517fa4'
-  size = '45'
+  size = {45}
 /> 
 <Text style = {{textAlign: 'center'}}>Gaming</Text>
 </TouchableOpacity>
@@ -125,7 +125,7 @@ export default class HomeScreen extends React.Component {
   name='car'
   type='font-awesome'
   color='#517fa4'
-  size = '45'
+  size = {45}
 /> 
 <Text style = {{textAlign: 'center'}}>Transport</Text>
 </TouchableOpacity>
@@ -135,7 +135,7 @@ export default class HomeScreen extends React.Component {
   name='shopping-cart'
   type='weloveiconfonts'
   color='#517fa4'
-  size = '45'
+  size = {45}
 /> 
 <Text style = {{textAlign: 'center'}}>Bulk Orders</Text>
 </TouchableOpacity>
@@ -145,7 +145,7 @@ export default class HomeScreen extends React.Component {
   name='comments'
   type='font-awesome'
   color='#517fa4'
-  size = '45'
+  size = {45}
 /> 
 <Text style = {{textAlign: 'center'}}>Campus Events</Text>
 </TouchableOpacity>
@@ -175,6 +175,7 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   viewStyle: {
+    backgroundColor: '#171F33',
     justifyContent: 'center',
     flex: 1,
     backgroundColor: 'white',
