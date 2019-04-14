@@ -1,12 +1,30 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 export default class DiscoverScreen extends Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Suggested events for the user</Text>
+      <View style={styles.viewStyle}>
+      <Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 24}}>Discover</Text>      
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  viewStyle: {
+    flex: 1,
+    backgroundColor: 'white',
+    margin: 20,
+    margin: 15,
+    textAlign: 'center',
+ 
+  },
+
+  textStyle: {
+    padding: 10,
+    alignItems: 'flex-start',
+    padding:30,
+  },
+
+});

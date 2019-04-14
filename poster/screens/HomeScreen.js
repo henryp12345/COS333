@@ -84,7 +84,7 @@ export default class HomeScreen extends React.Component {
           value={this.state.search}
         />
 
-<Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 16}}>Popular categories</Text>
+<Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 16}}>Popular Categories</Text>
 <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
 <TouchableOpacity> 
 <Icon
