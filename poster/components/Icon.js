@@ -6,8 +6,9 @@ const iconMap = {
   Home: "md-home",
   Discover: "md-search",
   Add: "md-add",
-  Joined: "md-star",
-  Profile: "md-person"
+  Profile: "md-calendar",
+  Info: "md-information-circle",
+
 };
 
 const Icon: SFC<

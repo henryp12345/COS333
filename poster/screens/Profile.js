@@ -5,68 +5,44 @@ import {
   View,
   Image,
 } from 'react-native';
+import { Card } from 'react-native-elements'
 
-export default class Profile extends Component {
-
+export default class Profile extends React.Component {
+  
   render() {
     return (
-      <View style={styles.container}>
-          <View style={styles.header}>
-            <View style={styles.headerContent}>
+      //ListView to show with textinput used as search bar
+      <View style={styles.viewStyle}>
+      <Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 24}}>Welcome back, Henry.</Text>
 
-                <Image style={styles.avatar}
-                  source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
-
-                <Text style={styles.name}>Henry Peters</Text>
-                <Text style={styles.userInfo}>henry@princeton.edu </Text>
-                <Text style={styles.userInfo}>2020</Text>
-                </View>
-                </View>
-                <View style={styles.body}>
-            <View style={styles.bodyContent}>
-            <Text style={styles.name}>Your Events</Text>
-            <Text style={styles.userInfo}>Event 1 </Text>
-            <Text style={styles.userInfo}>Event 2 </Text>
-            <Text style={styles.userInfo}>Event 3 </Text>
-            </View>
-          </View>
+      <Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 20}}>Your Current Events</Text>
+      <Card><Text>Event 1</Text></Card>
+      <Card><Text>Event 2</Text></Card>
+      <Card><Text>Event 3</Text></Card>
+      <Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 20}}>Your Past Events</Text>
+      <Card><Text>Event 4</Text></Card>
+      <Card><Text>Event 5</Text></Card>
+      <Card><Text>Event 6</Text></Card>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  header:{
-    backgroundColor: "#ffffff",
-    marginTop:60
+  viewStyle: {
+    flex: 1,
+    backgroundColor: 'white',
+    margin: 20,
+    margin: 15,
+    textAlign: 'center',
+ 
   },
-  headerContent:{
-    padding:30,
-    alignItems: 'center',
-  },
-  body:{
-    marginTop:1,
-  },
-  bodyContent: {
+
+  textStyle: {
+    padding: 10,
     alignItems: 'flex-start',
     padding:30,
   },
-  avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom:10,
-  },
-  name:{
-    fontSize:22,
-    color:"#000000",
-    fontWeight:'600',
-  },
-  userInfo:{
-    fontSize:16,
-    color:"#778899",
-    fontWeight:'600',
-  }
+
 });
+

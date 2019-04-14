@@ -28,7 +28,7 @@ export default class JoinedEventsScreen extends Component {
   render() {
    return (
    	<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Will likely remove this page</Text>
+        <Text>Poster is designed to help you find other Princeton students looking to participate in your intended group activity. </Text>
     
               </View>        
    )

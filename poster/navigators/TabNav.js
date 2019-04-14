@@ -6,7 +6,7 @@ import { Icon, TabBar } from "../components";
 import Home from "../screens/HomeScreen";
 import Discover from "../screens/DiscoverScreen";
 import Add from "../screens/AddEventScreen";
-import Joined from "../screens/JoinedEventsScreen";
+import Info from "../screens/InfoScreen";
 import Profile from "../screens/Profile";
 
 const TabNav = createBottomTabNavigator(
@@ -29,16 +29,17 @@ const TabNav = createBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => <Icon name="Add" color={tintColor} />
       }
     },
-    JoinedEventsScreen: {
-      screen: Joined,
-      navigationOptions: {
-        tabBarIcon: ({ tintColor }) => <Icon name="Joined" color={tintColor} />
-      }
-    },
+    
     Profile: {
       screen: Profile,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => <Icon name="Profile" color={tintColor} />
+      }
+    },
+    InfoScreen: {
+      screen: Info,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => <Icon name="Info" color={tintColor} />
       }
     }
   },
