@@ -1,27 +1,63 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from .models import User, Event
+import json
+import datetime
 
 # Create your views here.
 def default(request):
-	return HttpResponse("default page")
+	return HttpResponse("")
 
+@csrf_exempt
 def event(request):
-	e1 = User(username='test', hosted = '1', joined='2,3', notifications='1', invitations='2')
-	e2 = User(username='test2', hosted = '3', joined='4,5', notifications='2', invitations='4')
-	e1.save()
-	e2.save()
-	q = User.objects.all()
-	return HttpResponse(q)
+	if request.method == 'GET':
+		values = Event.objects.all().values()
+		values_list = list(values)
+		return JsonResponse(values_list, safe=False)
+	elif request.method == 'POST':
+		formData = json.loads(request.body)
+		e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startTime = datetime.datetime.now().time(), endTime = datetime.datetime.now().time(),
+					date = datetime.date.today(), capacity = formData["capacity"], numberJoined = 0, tags = "", host = "")
+		e1.save()
+		return HttpResponse("OK")
 
-def eventId(request):
-	return HttpResponse("nothing here yet")
+def eventId(request, eventString):
+	idList = eventString.split(",")
+	event_list = []
+	for eventId in idList:
+		currentEvent = Event.objects.get(id = eventId)
+		event_list.append(currentEvent)
+	return JsonResponse(event_list, safe=False)
 
-def hosted(request):
-	return HttpResponse("nothing here yet")
+def hosted(request, username):
+	user = User.objects.get(username = username)
+	eventsHosted = user.hosted
+	return HttpResponse(eventsHosted)
 
-def joined(request):
-	return HttpResponse("nothing here yet")
+def addHosted(request, username, idString):
+	idList = idString.split(",")
+	user = User.objects.get(username = username)
+	currentHosted = user.hosted
+	currentHosted = currentHosted + "," + idString
+	user.hosted = currentHosted
+	user.save()
+	return HttpResponse("OK")
+
+def joined(request, username):
+	user = User.objects.get(username = username)
+	eventsJoined = user.joined
+	return HttpResponse(eventsJoined)
+
+def addJoined(request, username, idString):
+	idList = idSrting.split(",")
+	user = User.objects.get(username = username)
+	currentJoined = user.joined
+	currentJoined = currentJoined + "," + idString
+	user.joined = currentJoined
+	return HttpResponse("OK")
 
 def clearAll(request):
+	User.objects.all().delete()
+	Event.objects.all().delete()
 	return HttpResponse('Tables cleared')

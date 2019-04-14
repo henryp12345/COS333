@@ -1,4 +1,4 @@
-"""poster URL Configuration
+"""testProject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -15,16 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from posterApp import views
 
 urlpatterns = [
-	path('', views.default),
-	path('event/', views.event),
-    path('event/<str:eventString>/', views.eventId),
-    path('hosted/<str:username>/', views.hosted),
-    path('addHosted/<str:username>/<str:idString>/', views.addHosted),
-    path('joined/<str:username>', views.joined),
-    path('addJoined/<str:username>/<str:idString>/', views.addJoined),
-	path('clear/', views.clearAll),
+    path('testApp/', include('testApp.urls')),
     path('admin/', admin.site.urls),
 ]
