@@ -1,13 +1,13 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Event(models.Model):
     title = models.CharField(max_length=15)
     desc = models.CharField(max_length=300)
     location = models.CharField(max_length=25)
-    startTime = models.TimeField()
-    endTime = models.TimeField()
-    date = models.DateField()
+    startDate = models.DateTimeField(default=timezone.now)
+    endDate = models.DateTimeField(default=timezone.now)
     capacity = models.IntegerField()
     numberJoined = models.IntegerField()
     tags = models.CharField(max_length=200)

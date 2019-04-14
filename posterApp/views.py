@@ -17,7 +17,7 @@ def event(request):
 		return JsonResponse(values_list, safe=False)
 	elif request.method == 'POST':
 		formData = json.loads(request.body)
-		e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startTime = datetime.datetime.now().time(), endTime = datetime.datetime.now().time(),
+		e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = datetime.datetime.now(), endTime = datetime.datetime.now(),
 					date = datetime.date.today(), capacity = formData["capacity"], numberJoined = 0, tags = "", host = "")
 		e1.save()
 		return HttpResponse("OK")
@@ -31,8 +31,6 @@ def eventId(request, eventString):
 	return JsonResponse(event_list, safe=False)
 
 def hosted(request, username):
-	u1 = User(username="asd", hosted="1,2,3", joined="4,5,6", notifications="1,2,3", invitations="")
-	u1.save()
 	user = User.objects.get(username = username)
 	eventsHosted = user.hosted
 	return HttpResponse(eventsHosted)
