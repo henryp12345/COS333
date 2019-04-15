@@ -87,7 +87,7 @@ export default class HomeScreen extends React.Component {
           value={this.state.search}
         />
 <ScrollView>
-<Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 16}}>Popular Categories</Text>
+<Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 18}}>Popular Categories</Text>
 <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
 <TouchableOpacity 
    onPress ={() => {
@@ -213,7 +213,7 @@ export default class HomeScreen extends React.Component {
 </TouchableOpacity>
 </View>
 
-<View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
+<View style={{ paddingBottom: 20, flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
 <TouchableOpacity 
    onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
@@ -338,6 +338,7 @@ export default class HomeScreen extends React.Component {
 </TouchableOpacity>
 </View>
 
+<Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 18}}>Happenings</Text>
         <FlatList
           data={this.state.dataSource}
           renderItem={({ item }) => (
