@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import User, Event
 import json
 import datetime
+import dateutil.parser
 
 # Create your views here.
 def default(request):
@@ -19,7 +20,7 @@ def event(request):
         return JsonResponse(values_list, safe=False)
     elif request.method == 'POST':
         formData = json.loads(request.body)
-        e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = datetime.datetime.fromisoformat(formData["startdate"]), endDate = datetime.datetime.fromisoformat(formData["enddate"]), capacity = formData["capacity"], numberJoined = 1, tags = formData["tags"], host = "")
+        e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = dateutil.parser.parse(formData["startdate"]), endDate = dateutil.parser.parse(formData["enddate"]), capacity = formData["capacity"], numberJoined = 1, tags = formData["tags"], host = "")
         e1.save()
         return HttpResponse("OK")
 
