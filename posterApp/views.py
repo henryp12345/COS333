@@ -29,7 +29,7 @@ def eventId(request, eventString):
     for eventId in idList:
         currentEvent = Event.objects.get(id = eventId)
         eventDict = model_to_dict(currentEvent)
-        event_list.append(currentEvent)
+        event_list.append(eventDict)
     return JsonResponse(event_list, safe=False)
 
 def hosted(request, username):
