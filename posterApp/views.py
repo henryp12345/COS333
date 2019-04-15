@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.core import serializers
+from django.forms.models import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import User, Event
