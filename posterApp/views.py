@@ -27,7 +27,7 @@ def eventId(request, eventString):
     idList = eventString.split(",")
     event_list = []
     for eventId in idList:
-        if len(eventId) > 0:
+        if len(eventId) > 0 and Event.objects.filter(id = eventId).count() > 0:
             currentEvent = Event.objects.get(id = eventId)
             eventDict = model_to_dict(currentEvent)
             event_list.append(eventDict)
