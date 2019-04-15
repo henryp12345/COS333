@@ -17,7 +17,7 @@ def event(request):
         return JsonResponse(values_list, safe=False)
     elif request.method == 'POST':
         formData = json.loads(request.body)
-        e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = datetime.datetime.now(), endTime = datetime.datetime.now(), capacity = formData["capacity"], numberJoined = 0, tags = "", host = "")
+        e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = datetime.datetime.now(), endDate = datetime.datetime.now(), capacity = formData["capacity"], numberJoined = 0, tags = "", host = "")
         e1.save()
         return HttpResponse("OK")
 
