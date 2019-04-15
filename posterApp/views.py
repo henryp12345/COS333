@@ -26,9 +26,8 @@ def eventId(request, eventString):
     idList = eventString.split(",")
     event_list = []
     for eventId in idList:
-        currentEvent = Event.objects.get(id = eventId)
+        currentEvent = Event.objects.filter(id = eventId)
         event_list.append(currentEvent)
-    serialized = serializers.serialize('json', event_list)
     return JsonResponse(event_list, safe=False)
 
 def hosted(request, username):
