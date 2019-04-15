@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity } from 'react-native';
 import { SearchBar, Button, Icon } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 export default class DiscoverScreen extends Component {
   render() {
     return (

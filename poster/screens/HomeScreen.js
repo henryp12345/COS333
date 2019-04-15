@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity, ScrollView } from 'react-native';
 import { SearchBar, Button, Icon } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Card} from 'native-base';
+import { LinearGradient } from 'expo';
+
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -62,6 +64,7 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
+    var size = 100;
     if (this.state.isLoading) {
       return (
         <View style={{ flex: 1}}>
@@ -72,7 +75,7 @@ export default class HomeScreen extends React.Component {
     return (
       //ListView to show with textinput used as search bar
       <View style={styles.viewStyle}>
-      <Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 24}}>Browse Events</Text>
+      <Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 26}}>Browse Events</Text>
         <SearchBar
           round
           containerStyle={{ width: '100%', backgroundColor: 'white', borderTopWidth: 0, borderBottomWidth: 0, }}
@@ -83,140 +86,257 @@ export default class HomeScreen extends React.Component {
           placeholder="Search"
           value={this.state.search}
         />
-
+<ScrollView>
 <Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 16}}>Popular Categories</Text>
 <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
-<TouchableOpacity onPress ={() => {
+<TouchableOpacity 
+   onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
       const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
       const textData = "sports".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
-
     this.setState({
       dataSource: newData,
       search: "",
     });
   }}>
-<Icon
-  reverse
+   <LinearGradient
+  colors={['#f42e78', '#c17afc']}
+   height={100}
+    width={120}
+   style={{
+    borderRadius: 5,
+     alignItems: 'flex-start',
+     justifyContent: 'center',
+     padding: 20
+          }}>
+          <Icon
   name='ios-basketball'
   type='ionicon'
-  color='#517fa4'
-  size = {45}
+  color='#ffffff'
+  size = {30}
 />
-<Text style = {{textAlign: 'center'}}>Sports</Text>
+<Text
+            style={{
+              backgroundColor: 'transparent',
+              fontSize: 14,
+              color: '#ffffff',
+              textAlign: 'left'
+            }}>
+            Sports
+          </Text>
+  </LinearGradient>
+        
 </TouchableOpacity>
-<TouchableOpacity onPress ={() => {
+
+<TouchableOpacity 
+   onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
       const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
-      const textData = "sports".toUpperCase();
+      const textData = "study".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
-
     this.setState({
       dataSource: newData,
       search: "",
     });
   }}>
-<Icon
-  reverse
+   <LinearGradient
+  colors={['#fec180', '#ff8993']}
+   height={100}
+    width={120}
+   style={{
+     borderRadius: 5,
+     alignItems: 'flex-start',
+     justifyContent: 'center',
+     padding: 20
+          }}>
+          <Icon
   name='book'
   type='font-awesome'
-  color='#517fa4'
-  size = {45}
+  color='#ffffff'
+  size = {30}
 /> 
-<Text style = {{textAlign: 'center'}}>Study Groups</Text>
+<Text
+            style={{
+              backgroundColor: 'transparent',
+              fontSize: 14,
+              color: '#ffffff',
+              textAlign: 'left'
+            }}>
+            Study
+          </Text>
+  </LinearGradient>
+        
 </TouchableOpacity>
-<TouchableOpacity onPress ={() => {
+
+<TouchableOpacity 
+   onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
       const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
       const textData = "gaming".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
-
     this.setState({
       dataSource: newData,
       search: "",
     });
   }}>
-<Icon
-  reverse
+   <LinearGradient
+  colors={['#6681ea', '#7e43aa']}
+   height={100}
+    width={120}
+   style={{
+     borderRadius: 5,
+     alignItems: 'flex-start',
+     justifyContent: 'center',
+     padding: 20
+          }}>
+          <Icon
   name='logo-game-controller-b'
   type='ionicon'
-  color='#517fa4'
-  size = {45}
+  color='#ffffff'
+  size = {30}
 /> 
-<Text style = {{textAlign: 'center'}}>Gaming</Text>
+ <Text
+            style={{
+              backgroundColor: 'transparent',
+              fontSize: 14,
+              color: '#ffffff',
+              textAlign: 'left'
+            }}>
+            Gaming
+          </Text>
+  </LinearGradient>
+       
 </TouchableOpacity>
 </View>
 
 <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
-<TouchableOpacity onPress ={() => {
+<TouchableOpacity 
+   onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
       const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
       const textData = "transport".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
-
     this.setState({
       dataSource: newData,
       search: "",
     });
   }}>
-<Icon
-  reverse
+   <LinearGradient
+  colors={['#f3dcfb', '#679fe4']}
+   height={100}
+    width={120}
+   style={{
+     borderRadius: 5,
+     alignItems: 'flex-start',
+     justifyContent: 'center',
+     padding: 20
+          }}>
+          <Icon
   name='car'
   type='font-awesome'
-  color='#517fa4'
-  size = {45}
+  color='#ffffff'
+  size = {30}
 /> 
-<Text style = {{textAlign: 'center'}}>Transport</Text>
+<Text
+            style={{
+              backgroundColor: 'transparent',
+              fontSize: 14,
+              color: '#ffffff',
+              textAlign: 'left'
+            }}>
+            Transport
+          </Text>
+  </LinearGradient>
+        
 </TouchableOpacity>
-<TouchableOpacity onPress ={() => {
+
+<TouchableOpacity 
+   onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
       const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
       const textData = "shopping".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
-
     this.setState({
       dataSource: newData,
       search: "",
     });
   }}>
-<Icon
-  reverse
+   <LinearGradient
+  colors={['#80f9b7', '#00A8C5']}
+   height={100}
+    width={120}
+   style={{
+     borderRadius: 5,
+     alignItems: 'flex-start',
+     justifyContent: 'center',
+     padding: 20
+          }}>
+          <Icon
   name='shopping-cart'
   type='weloveiconfonts'
-  color='#517fa4'
-  size = {45}
+  color='#ffffff'
+  size = {30}
 /> 
-<Text style = {{textAlign: 'center'}}>Bulk Orders</Text>
+<Text
+            style={{
+              backgroundColor: 'transparent',
+              fontSize: 14,
+              color: '#ffffff',
+              textAlign: 'left'
+            }}>
+            Bulk Orders
+          </Text>
+  </LinearGradient>
+        
 </TouchableOpacity>
-<TouchableOpacity onPress ={() => {
+
+<TouchableOpacity 
+   onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
       const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
       const textData = "campus activity".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
-
     this.setState({
       dataSource: newData,
       search: "",
     });
   }}>
-<Icon
-  reverse
+   <LinearGradient
+  colors={['#ff839d', '#f50b9a']}
+   height={100}
+    width={120}
+   style={{
+     borderRadius: 5,
+     alignItems: 'flex-start',
+     justifyContent: 'center',
+     padding: 20
+          }}>
+          <Icon
   name='comments'
   type='font-awesome'
-  color='#517fa4'
-  size = {45}
+  color='#ffffff'
+  size = {30}
 /> 
-<Text style = {{textAlign: 'center'}}>Campus Events</Text>
+<Text
+            style={{
+              backgroundColor: 'transparent',
+              fontSize: 14,
+              color: '#ffffff',
+              textAlign: 'left'
+            }}>
+            Campus Events
+          </Text>
+  </LinearGradient>
+        
 </TouchableOpacity>
 </View>
-  
 
         <FlatList
           data={this.state.dataSource}
@@ -224,8 +344,7 @@ export default class HomeScreen extends React.Component {
           <Card>
             <Text style={styles.textStyle}>{item.title}</Text>
             <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation" })}
-        >
+          onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation" })}>
           <Text style={styles.textStyle}>Go to event details page</Text>
         </TouchableOpacity>
             </Card>
@@ -234,6 +353,7 @@ export default class HomeScreen extends React.Component {
           style={{ marginTop: 10 }}
           keyExtractor={(item, index) => index.toString()}
         />
+        </ScrollView>
       </View>
     );
   }
@@ -243,15 +363,23 @@ export default class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create({
   viewStyle: {
-    backgroundColor: '#171F33',
+    backgroundColor: 'white',
     justifyContent: 'center',
     flex: 1,
-    backgroundColor: 'white',
     margin: 20,
     margin: 15,
     textAlign: 'center',
- 
   },
+  TextViewStyle:
+    {
+       borderWidth: 1, 
+       borderRadius: 10,
+       borderColor: '#E91E63',
+       width: '80%',
+       padding: 5,
+       backgroundColor: '#FFEB3B'
+ 
+    },
 
   textStyle: {
     padding: 10,
