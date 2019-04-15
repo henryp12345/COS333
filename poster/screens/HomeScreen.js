@@ -11,7 +11,7 @@ export default class HomeScreen extends React.Component {
     this.arrayholder = [];
   }
   componentDidMount() {
-    return fetch('https://jsonplaceholder.typicode.com/posts')
+    return fetch('https://posterapp333.herokuapp.com/event')
       .then(response => response.json())
       .then(responseJson => {
         this.setState(
@@ -86,17 +86,39 @@ export default class HomeScreen extends React.Component {
 
 <Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 16}}>Popular Categories</Text>
 <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
-<TouchableOpacity> 
+<TouchableOpacity onPress ={() => {
+    const newData = this.arrayholder.filter(function(item) {
+      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
+      const textData = "sports".toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+
+    this.setState({
+      dataSource: newData,
+      search: "",
+    });
+  }}>
 <Icon
   reverse
   name='ios-basketball'
   type='ionicon'
   color='#517fa4'
   size = {45}
-/> 
+/>
 <Text style = {{textAlign: 'center'}}>Sports</Text>
 </TouchableOpacity>
-<TouchableOpacity> 
+<TouchableOpacity onPress ={() => {
+    const newData = this.arrayholder.filter(function(item) {
+      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
+      const textData = "sports".toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+
+    this.setState({
+      dataSource: newData,
+      search: "",
+    });
+  }}>
 <Icon
   reverse
   name='book'
@@ -106,7 +128,18 @@ export default class HomeScreen extends React.Component {
 /> 
 <Text style = {{textAlign: 'center'}}>Study Groups</Text>
 </TouchableOpacity>
-<TouchableOpacity> 
+<TouchableOpacity onPress ={() => {
+    const newData = this.arrayholder.filter(function(item) {
+      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
+      const textData = "gaming".toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+
+    this.setState({
+      dataSource: newData,
+      search: "",
+    });
+  }}>
 <Icon
   reverse
   name='logo-game-controller-b'
@@ -119,7 +152,18 @@ export default class HomeScreen extends React.Component {
 </View>
 
 <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
-<TouchableOpacity> 
+<TouchableOpacity onPress ={() => {
+    const newData = this.arrayholder.filter(function(item) {
+      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
+      const textData = "transport".toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+
+    this.setState({
+      dataSource: newData,
+      search: "",
+    });
+  }}>
 <Icon
   reverse
   name='car'
@@ -129,7 +173,18 @@ export default class HomeScreen extends React.Component {
 /> 
 <Text style = {{textAlign: 'center'}}>Transport</Text>
 </TouchableOpacity>
-<TouchableOpacity> 
+<TouchableOpacity onPress ={() => {
+    const newData = this.arrayholder.filter(function(item) {
+      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
+      const textData = "shopping".toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+
+    this.setState({
+      dataSource: newData,
+      search: "",
+    });
+  }}>
 <Icon
   reverse
   name='shopping-cart'
@@ -139,7 +194,18 @@ export default class HomeScreen extends React.Component {
 /> 
 <Text style = {{textAlign: 'center'}}>Bulk Orders</Text>
 </TouchableOpacity>
-<TouchableOpacity> 
+<TouchableOpacity onPress ={() => {
+    const newData = this.arrayholder.filter(function(item) {
+      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
+      const textData = "campus activity".toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+
+    this.setState({
+      dataSource: newData,
+      search: "",
+    });
+  }}>
 <Icon
   reverse
   name='comments'
@@ -172,6 +238,8 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
   viewStyle: {

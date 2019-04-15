@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Alert } from 'react-native';
+import { AppRegistry, StyleSheet, Alert, ScrollView } from 'react-native';
 import { View, Text, Button } from 'native-base';
 import GenerateForm from 'react-native-form-builder';
 import { TagSelect } from 'react-native-tag-select';
@@ -35,7 +35,7 @@ const fields = [
                 },
                 {
                 type: 'date',
-                name: 'starttdate',
+                name: 'startdate',
                 mode: 'datetime',
                 minDate: 'Today',
                 required: true,
@@ -47,7 +47,7 @@ const fields = [
                 mode: 'datetime',
                 minDate: 'Today',
                 required: true,
-                label: 'When do you need a group by?',
+                label: 'When does the event end?',
                 },
                 {
                 type: 'number',
@@ -64,15 +64,34 @@ const fields = [
                 },
                 ];
 export default class FormGenerator extends Component {
-    login() {
+    login(items) {
         const formValues = this.formGenerator.getValues();
+        var tags = "";
+        for (i = 0; i < items.length; i++)
+            tags = tags + items[i] + ",";
+        fetch("https://posterapp333.herokuapp.com/event/", {
+              method: 'POST',
+              headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                   title: formValues.event,
+                   desc: formValues.description,
+                   startdate: formValues.startdate,
+                   enddate: formValues.enddate,
+                   capacity: formValues.count,
+                   location: formValues.location,
+                   tags: tags,
+              }),
+        })
         console.log('FORM VALUES', formValues);
     }
     render() {
         const arrayOfString = ['Sports', 'Study', 'Gaming', 'Shopping', 'Transport', 'Campus Activity', 'Project', 'Other']
 
         return (
-                <View style={styles.wrapper}>
+                <ScrollView style={styles.wrapper}>
                 <Text style={styles.name}>Create Event</Text>
                 <View>
                 
@@ -92,14 +111,14 @@ export default class FormGenerator extends Component {
         />
                 </View>
                 <View style={styles.submitButton}>
-                <Button block onPress={() => this.login()}>
+                <Button block onPress={() => this.login(this.tagString.itemsSelected)}>
                 <Text>Submit</Text>
                 </Button>
                 </View>
                 
 
 
-                </View>
+                </ScrollView>
                 );
     }
 }
