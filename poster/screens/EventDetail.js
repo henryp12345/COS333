@@ -21,13 +21,13 @@ export default class EventDetail extends Component {
     return fetch("https://posterapp333.herokuapp.com/event/" + navigation.getParam('eventId', -1) + "/")
       .then((response) => {
         var eventData = JSON.parse(response._bodyText)[0];
-        var startDate = new Date(eventData.startDate);
-        var endDate = new Date(eventData.endDate)
+        var startDate = new Date(eventData.startdate);
+        var endDate = new Date(eventData.enddate)
         this.setState({ title: eventData.title,
                         desc: eventData.desc,
                         location: eventData.location,
-                        startDate: new Date(eventData.startDate),
-                        endDate: new Date(eventData.endDate),
+                        startDate: startDate,
+                        endDate: endDate,
                         capacity: eventData.capacity,
                         numberJoined: eventData.numberJoined,
                         tags: eventData.tags,
