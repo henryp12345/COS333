@@ -25,7 +25,7 @@ def eventId(request, eventString):
     idList = eventString.split(",")
     event_list = []
     for eventId in idList:
-        currentEvent = Event.objects.get(id = eventId)
+        currentEvent = Event.objects.get(id = eventId).values()
         event_list.append(currentEvent)
     return JsonResponse(event_list, safe=False)
 
