@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import User, Event
@@ -25,7 +26,8 @@ def eventId(request, eventString):
     idList = eventString.split(",")
     event_list = []
     for eventId in idList:
-        currentEvent = Event.objects.get(id = eventId).values()
+        currentEvent = Event.objects.get(id = eventId)
+        serialized = serializers.serialize('json', currentEvent)
         event_list.append(currentEvent)
     return JsonResponse(event_list, safe=False)
 
