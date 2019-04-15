@@ -88,7 +88,7 @@ export default class HomeScreen extends React.Component {
 <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
 <TouchableOpacity onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
-      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
+      const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
       const textData = "sports".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
@@ -109,8 +109,8 @@ export default class HomeScreen extends React.Component {
 </TouchableOpacity>
 <TouchableOpacity onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
-      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
-      const textData = "sports".toUpperCase();
+      const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
+      const textData = "study".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
 
@@ -130,7 +130,7 @@ export default class HomeScreen extends React.Component {
 </TouchableOpacity>
 <TouchableOpacity onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
-      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
+      const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
       const textData = "gaming".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
@@ -154,7 +154,7 @@ export default class HomeScreen extends React.Component {
 <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
 <TouchableOpacity onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
-      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
+      const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
       const textData = "transport".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
@@ -175,7 +175,7 @@ export default class HomeScreen extends React.Component {
 </TouchableOpacity>
 <TouchableOpacity onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
-      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
+      const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
       const textData = "shopping".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
@@ -196,7 +196,7 @@ export default class HomeScreen extends React.Component {
 </TouchableOpacity>
 <TouchableOpacity onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
-      const itemData = item.tags ? item.tags.toUpperCase : ''.toUpperCase();
+      const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
       const textData = "campus activity".toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
@@ -224,7 +224,10 @@ export default class HomeScreen extends React.Component {
           <Card>
             <Text style={styles.textStyle}>{item.title}</Text>
             <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation" })}
+          onPress={() => this.props.navigation.navigate("EventDetail",
+            { topic: "React Navigation",
+              eventId: item.id,
+            })}
         >
           <Text style={styles.textStyle}>Go to event details page</Text>
         </TouchableOpacity>

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+# COMMENT OUT TO CHANGE DATABASE STUFF
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -125,4 +126,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# COMMENT OUT TO CHANGE DATABASE STUFF
 django_heroku.settings(locals())
