@@ -27,9 +27,10 @@ def eventId(request, eventString):
     idList = eventString.split(",")
     event_list = []
     for eventId in idList:
-        currentEvent = Event.objects.get(id = eventId)
-        eventDict = model_to_dict(currentEvent)
-        event_list.append(eventDict)
+        if len(eventId) > 0:
+            currentEvent = Event.objects.get(id = eventId)
+            eventDict = model_to_dict(currentEvent)
+            event_list.append(eventDict)
     return JsonResponse(event_list, safe=False)
 
 def hosted(request, username):
