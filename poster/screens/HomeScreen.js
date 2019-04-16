@@ -343,7 +343,10 @@ export default class HomeScreen extends React.Component {
           data={this.state.dataSource}
           renderItem={({ item }) => (
           <Card>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={styles.textStyle}>{item.title}</Text>
+            <Text style={styles.rightText}>{item.numberJoined}/{item.capacity}</Text>
+          </View>
             <TouchableOpacity
           onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation" , eventId: item.id})}>
           <Text style={styles.textStyle}>Go to event details page</Text>
@@ -384,6 +387,12 @@ const styles = StyleSheet.create({
 
   textStyle: {
     padding: 10,
+    textAlign: 'left',
+  },
+  
+  rightText: {
+    padding: 10,
+    textAlign: 'right',
   },
 
 });
