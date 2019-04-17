@@ -4,8 +4,8 @@ import Dimensions from 'Dimensions';
 import {StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity } from 'react-native';
 import { NavigationActions } from "react-navigation";
 
-import bgSrc from '../images/wallpaper.png';
-import logoImg from '../images/logo.png';
+import bgSrc from '../images/wallpaper.jpg';
+import logoImg from '../images/windows.png';
 
 export default class Login extends Component {
   render() {
@@ -16,7 +16,7 @@ export default class Login extends Component {
         {this.props.children}
         <View style={styles.container}>
         <Image source={logoImg} style={styles.image} />
-        <Text style={styles.text}>POSTER (Replace Logo)</Text>
+        <Text style={styles.title}>POSTER</Text>
         <TouchableOpacity style={styles.container2} onPress={() => navigate("Dashboard")}>
       <Text style={styles.name}>LOG IN</Text>
       </TouchableOpacity> 
@@ -30,13 +30,13 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   container2: {
     marginTop:100,
-    height:45,
+    height:30,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf:'center',
     marginBottom:20,
-    width:300,
+    width:200,
     borderRadius:30,
     backgroundColor: "#ffffff",
   },
@@ -62,8 +62,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize:20
   },
+  title: {
+    color: 'black',
+    fontWeight: 'bold',
+    backgroundColor: 'transparent',
+    marginTop: 20,
+    fontSize:25
+  },
   name:{
-    fontSize:14,
+    fontSize:15,
     fontWeight: 'bold',
     color: "#171F33",
   }
