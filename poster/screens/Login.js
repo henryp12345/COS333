@@ -16,7 +16,7 @@ export default class Login extends Component {
         {this.props.children}
         <View style={styles.container}>
         <Image source={logoImg} style={styles.image} />
-        <Text style={styles.title}>POSTER</Text>
+        <Text style={styles.title}>p o s t e r</Text>
         <TouchableOpacity style={styles.container2} onPress={() => navigate("Dashboard")}>
       <Text style={styles.name}>LOG IN</Text>
       </TouchableOpacity> 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     marginBottom:20,
     width:200,
     borderRadius:30,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#e0ffff",
   },
   picture: {
     flex: 1,
@@ -64,10 +64,10 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'black',
-    fontWeight: 'bold',
     backgroundColor: 'transparent',
     marginTop: 20,
-    fontSize:25
+    fontSize:25,
+    fontFamily: 'Avenir'
   },
   name:{
     fontSize:15,
