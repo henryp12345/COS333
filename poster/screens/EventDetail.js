@@ -16,7 +16,7 @@ export default class EventDetail extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
   const { navigation } = this.props;
     return fetch("https://posterapp333.herokuapp.com/event/" + navigation.getParam('eventId', -1) + "/")
       .then((response) => {
@@ -35,6 +35,11 @@ export default class EventDetail extends Component {
         });
       });
   }
+  
+  componentDidUpdate() {
+    alert('test');
+  }
+  
 	render() {
     const { navigation } = this.props;
 		return (

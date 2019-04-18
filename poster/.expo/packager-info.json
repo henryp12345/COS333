@@ -1,8 +1,8 @@
 {
   "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://53-s7q.anonymous.poster.exp.direct",
+  "packagerNgrokUrl": "https://packager.53-s7q.anonymous.poster.exp.direct",
+  "ngrokPid": 51030,
   "devToolsPort": 19002,
   "packagerPort": null,
   "packagerPid": null,
