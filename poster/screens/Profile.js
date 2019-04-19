@@ -46,7 +46,7 @@ class Profile extends React.Component {
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={styles.textStyle}>{item.title}</Text>
             <TouchableOpacity style={styles.textStyle}
-              onPress={() => this.props.navigation.navigate("Room", {topic: "React Navigation", roomId: item.id.toString(10), userId: this.state.userId})}>
+              onPress={() => this.props.navigation.navigate("Room", {topic: "React Navigation", roomId: item.chatroom, userId: this.state.userId})}>
               <Icon name='comment'
                     type='font-awesome'
                     color='#00bfff'

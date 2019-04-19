@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {GiftedChat} from 'react-native-gifted-chat';
 import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
 import {Icon} from 'react-native-elements';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 
 export default class Chatroom extends Component {
   constructor(props) {
@@ -12,7 +12,6 @@ export default class Chatroom extends Component {
   
   componentDidMount() {
     const {navigation} = this.props;
-    alert(navigation.getParam('roomId'));
     this.setState({userId: navigation.getParam('userId')});
     const manager = new ChatManager({
       instanceLocator: 'v1:us1:d8ae0067-3c87-4ca0-b2a0-5af6e602488e',
@@ -61,15 +60,15 @@ export default class Chatroom extends Component {
   render() {
   const {navigation} = this.props;
     return(
-    <View styles={styles.container}>
+    <KeyboardAvoidingView style={{flex:1}} behavior='padding'>
       <GiftedChat
         messages={this.state.messages}
         onSend={messages => this.onSend(messages)}
         user={{
           _id: this.state.userId
         }}
-      />
-    </View>
+      ></GiftedChat>
+    </KeyboardAvoidingView>
     );
   }
 }
