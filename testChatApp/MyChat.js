@@ -1,94 +1,84 @@
-import React from "react";
-import {View, KeyboardAvoidingView} from "react-native";
-import { GiftedChat } from "react-native-gifted-chat";
-import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import { Card } from 'react-native-elements'
+import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
+import {createAppContainer, createStackNavigator} from 'react-navigation';
+import Chatroom from './Chatroom';
 
-    const CHATKIT_TOKEN_PROVIDER_ENDPOINT = 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/741c30a0-4302-4476-bae4-75ac6c1744ba/token';
-    const CHATKIT_INSTANCE_LOCATOR = 'v1:us1:741c30a0-4302-4476-bae4-75ac6c1744ba';
-    const CHATKIT_ROOM_ID = '19427112';
-    const CHATKIT_USER_NAME = 'Mensheng';
-
-export default class MyChat extends React.Component {
-  state = {
-    messages: []
-  };
-
-  componentDidMount() {
-      const tokenProvider = new TokenProvider({
-        url: CHATKIT_TOKEN_PROVIDER_ENDPOINT,
-      });
-
-      const chatManager = new ChatManager({
-        instanceLocator: CHATKIT_INSTANCE_LOCATOR,
-        userId: CHATKIT_USER_NAME,
-        tokenProvider: tokenProvider,
-      });
-
-      chatManager
-        .connect()
-        .then(currentUser => {
-          this.currentUser = currentUser;
-          this.currentUser.subscribeToRoom({
-            roomId: CHATKIT_ROOM_ID,
-            hooks: {
-              onMessage: this.onReceive,
-            },
-          });
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-
-  onReceive = data => {
-      const { id, senderId, text, createdAt } = data;
-      const incomingMessage = {
-        _id: id,
-        text: text,
-        createdAt: new Date(createdAt),
-        user: {
-          _id: senderId,
-          name: senderId,
-          avatar:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmXGGuS_PrRhQt73sGzdZvnkQrPXvtA-9cjcPxJLhLo8rW-sVA',
-        },
-      };
-
-      this.setState(previousState => ({
-        messages: GiftedChat.append(previousState.messages, incomingMessage),
-      }));
-    };
+class MyChat extends React.Component {
   
+  constructor(props) {
+    super(props);
+    const {navigation} = this.props;
+    this.state = {rooms : [], userId: 'Henry' /* or navigation.getParam('userId')*/}
+  }
   
-  onSend = (messages = []) => {
-    messages.forEach(message => {
-      this.currentUser
-        .sendMessage({
-          text: message.text,
-          roomId: CHATKIT_ROOM_ID,
-        })
-        .then(() => {})
-        .catch(err => {
-          console.log(err);
-        });
+  componentDidUpdate() {
+    const {navigation} = this.props;
+    const manager = new ChatManager({
+      instanceLocator: 'v1:us1:d8ae0067-3c87-4ca0-b2a0-5af6e602488e',
+      userId: 'Henry' /* or navigation.getParam('userId')*/,
+      tokenProvider: new TokenProvider({url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/d8ae0067-3c87-4ca0-b2a0-5af6e602488e/token'}),
     });
-  };
-  
-  
+    manager.connect()
+      .then(currentUser => {this.setState({rooms: currentUser.rooms})});
+  }
+
   render() {
     return (
-      <View style={{ flex:1 }}>
-        <GiftedChat
-          messages={this.state.messages}
-          onSend={messages => this.onSend(messages)}
-          user={{
-            _id: CHATKIT_USER_NAME
-          }}
-        />
-        <KeyboardAvoidingView
-          behavior={'padding'}
+      //ListView to show with textinput used as search bar
+      <View style={styles.viewStyle}>
+      <Text style={{ fontFamily: 'Roboto', fontWeight: "bold", fontSize: 24}}>Welcome back, Henry.</Text>
+      <Text style={{ fontFamily: 'Roboto', fontWeight: "bold", fontSize: 20}}>Here are your chats</Text>
+      <FlatList
+          data={this.state.rooms}
+          renderItem={({ item }) => (
+          <Card>
+          <Text style={styles.textStyle}>{item.name}</Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("Room", { topic: "React Navigation" , roomId: item.id, userId: this.state.userId})}>
+          <Text style={styles.textStyle}>Go to event details page</Text>
+        </TouchableOpacity>
+            </Card>
+          )}
+          enableEmptySections={true}
+          style={{ marginTop: 10 }}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  viewStyle: {
+    flex: 1,
+    backgroundColor: 'white',
+    margin: 20,
+    margin: 15,
+    textAlign: 'center',
+ 
+  },
+
+  textStyle: {
+    padding: 10,
+    alignItems: 'flex-start',
+    padding:30,
+  },
+
+});
+
+const AppNavigator = createStackNavigator({
+  Home: {screen: MyChat},
+  Room: {screen: Chatroom},
+});
+
+export default createAppContainer(AppNavigator);
+

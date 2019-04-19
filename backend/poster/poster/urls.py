@@ -18,13 +18,14 @@ from django.urls import include, path
 from posterApp import views
 
 urlpatterns = [
-	path('', views.default),
-	path('event/', views.event),
+	  path('', views.default),
+	  path('event/', views.event),
     path('event/<str:eventString>/', views.eventId),
     path('hosted/<str:username>/', views.hosted),
     path('addHosted/<str:username>/<str:idString>/', views.addHosted),
-    path('joined/<str:username>', views.joined),
+    path('joined/<str:username>/', views.joined),
     path('addJoined/<str:username>/<str:idString>/', views.addJoined),
-	path('clear/', views.clearAll),
+	  path('clear/', views.clearAll),
+    path('addUser/<str:username>/', views.addUser),
     path('admin/', admin.site.urls),
 ]

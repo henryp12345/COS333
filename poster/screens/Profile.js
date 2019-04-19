@@ -7,10 +7,12 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import { Card } from 'react-native-elements';
+import { Card, Icon } from 'react-native-elements';
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
+import Chatroom from './Chatroom';
 
-export default class Profile extends React.Component {
+class Profile extends React.Component {
 
   constructor(props) {
     super(props)
@@ -20,8 +22,11 @@ export default class Profile extends React.Component {
   
   componentDidMount() {
     fetch("https://posterapp333.herokuapp.com/hosted/" + this.state.userId + "/")
-      .then((response) => alert(response._bodyText));
-    fetch("https://posterapp333.herokuapp.com/joined/" + this.state.userId + "/");
+      .then(response => response.json())
+      .then(responseJson => this.setState({hosted: responseJson}));
+    fetch("https://posterapp333.herokuapp.com/joined/" + this.state.userId + "/")
+      .then(response => response.json())
+      .then(responseJson => this.setState({joined: responseJson}));
   }
   
   componentDidUpdate() {
@@ -33,7 +38,6 @@ export default class Profile extends React.Component {
       //ListView to show with textinput used as search bar
       <View style={styles.viewStyle}>
       <Text style={{ fontFamily: 'Roboto', fontWeight: "bold", fontSize: 24}}>Welcome back, Henry.</Text>
-
       <Text style={{ fontFamily: 'Roboto', fontWeight: "bold", fontSize: 20}}>Events You are Hosting</Text>
       <FlatList
         data={this.state.hosted}
@@ -41,14 +45,34 @@ export default class Profile extends React.Component {
           <Card>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={styles.textStyle}>{item.title}</Text>
-            <TouchableOpacity style={styles.button}></TouchableOpacity>
+            <TouchableOpacity style={styles.textStyle}
+              onPress={() => this.props.navigation.navigate("Room", {topic: "React Navigation", roomId: item.id.toString(10), userId: this.state.userId})}>
+              <Icon name='comment'
+                    type='font-awesome'
+                    color='#00bfff'
+                    size={30}/>
+            </TouchableOpacity>
           </View>
           </Card>
-        )} />
+        )}
+        keyExtractor={(item, index) => index.toString()} />
       <Text style={{ fontFamily: 'Roboto', fontWeight: "bold", fontSize: 20}}>Events You Have Joined</Text>
-      <Card><Text>Event 4</Text></Card>
-      <Card><Text>Event 5</Text></Card>
-      <Card><Text>Event 6</Text></Card>
+      <FlatList
+        data={this.state.joined}
+        renderItem={({ item }) => (
+          <Card>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={styles.textStyle}>{item.title}</Text>
+            <TouchableOpacity style={styles.textStyle}>
+              <Icon name='comment'
+                    type='font-awesome'
+                    color='#00bfff'
+                    size={30}/>
+            </TouchableOpacity>
+          </View>
+          </Card>
+        )}
+        keyExtractor={(item, index) => index.toString()} />
       </View>
     );
   }
@@ -68,12 +92,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     padding:30,
   },
-
-  button: {
-      alignItems: 'flex-end',
-      height: 20,
-      width: 20,
-      borderRadius: 20,
-    },
 });
+
+const AppNavigator = createStackNavigator({
+  Home: {screen: Profile},
+  Room: {screen: Chatroom},
+});
+
+export default createAppContainer(AppNavigator);
 

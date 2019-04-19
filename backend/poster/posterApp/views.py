@@ -20,9 +20,9 @@ def event(request):
         return JsonResponse(values_list, safe=False)
     elif request.method == 'POST':
         formData = json.loads(request.body)
-        e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = dateutil.parser.parse(formData["startdate"]), endDate = dateutil.parser.parse(formData["enddate"]), capacity = formData["capacity"], numberJoined = 1, tags = formData["tags"], host = "Henry")
+        e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = dateutil.parser.parse(formData["startdate"]), endDate = dateutil.parser.parse(formData["enddate"]), capacity = formData["capacity"], numberJoined = 1, tags = formData["tags"], host = formData["host"], chatroom = formData["chatId"])
         e1.save()
-        return HttpResponse("OK")
+        return HttpResponse(e1.id)
 
 def eventId(request, eventString):
     idList = eventString.split(",")
@@ -37,7 +37,7 @@ def eventId(request, eventString):
 def hosted(request, username):
     user = User.objects.get(username = username)
     eventsHosted = user.hosted
-    return HttpResponse(eventsHosted)
+    return eventId(request, eventsHosted)
 
 def addHosted(request, username, idString):
     idList = idString.split(",")
@@ -51,14 +51,20 @@ def addHosted(request, username, idString):
 def joined(request, username):
     user = User.objects.get(username = username)
     eventsJoined = user.joined
-    return HttpResponse(eventsJoined)
+    return eventId(request, eventsJoined)
 
 def addJoined(request, username, idString):
-    idList = idSrting.split(",")
+    idList = idString.split(",")
     user = User.objects.get(username = username)
     currentJoined = user.joined
     currentJoined = currentJoined + "," + idString
     user.joined = currentJoined
+    user.save()
+    return HttpResponse("OK")
+
+def addUser(request, username):
+    newUser = User(username = username, hosted = "", joined = "", notifications = "", invitations = "")
+    newUser.save()
     return HttpResponse("OK")
 
 def clearAll(request):

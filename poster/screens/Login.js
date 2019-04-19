@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginTop: 20,
     fontSize:25,
-    fontFamily: 'Avenir'
+    fontFamily: 'Roboto'
   },
   name:{
     fontSize:15,

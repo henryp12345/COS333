@@ -12,6 +12,7 @@ class Event(models.Model):
     numberJoined = models.IntegerField()
     tags = models.CharField(max_length=200)
     host = models.CharField(max_length=30)
+    chatroom = models.CharField(max_length=50, default = '')
 
 class User(models.Model):
     username = models.CharField(max_length=30)

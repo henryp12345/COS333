@@ -7,7 +7,7 @@ import Home from "../screens/HomeScreen";
 import Discover from "../screens/DiscoverScreen";
 import Add from "../screens/AddEventScreen";
 import Info from "../screens/InfoScreen";
-import Profile from "../screens/Profile";
+import Test from "../screens/Profile";
 
 const TabNav = createBottomTabNavigator(
   {
@@ -31,7 +31,7 @@ const TabNav = createBottomTabNavigator(
     },
     
     Profile: {
-      screen: Profile,
+      screen: Test,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => <Icon name="Profile" color={tintColor} />
       }

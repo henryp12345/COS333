@@ -75,7 +75,7 @@ export default class HomeScreen extends React.Component {
     return (
       //ListView to show with textinput used as search bar
       <View style={styles.viewStyle}>
-      <Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 26}}>Browse Events</Text>
+      <Text style={{ fontFamily: 'Roboto', fontWeight: "bold", fontSize: 26}}>Browse Events</Text>
         <SearchBar
           round
           containerStyle={{ width: '100%', backgroundColor: 'white', borderTopWidth: 0, borderBottomWidth: 0, }}
@@ -87,7 +87,7 @@ export default class HomeScreen extends React.Component {
           value={this.state.search}
         />
 <ScrollView>
-<Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 18}}>Popular Categories</Text>
+<Text style={{ fontFamily: 'Roboto', fontWeight: "bold", fontSize: 18}}>Popular Categories</Text>
 <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
 <TouchableOpacity 
    onPress ={() => {
@@ -338,7 +338,7 @@ export default class HomeScreen extends React.Component {
 </TouchableOpacity>
 </View>
 
-<Text style={{ fontFamily: 'Avenir', fontWeight: "bold", fontSize: 18}}>Happenings</Text>
+<Text style={{ fontFamily: 'Roboto', fontWeight: "bold", fontSize: 18}}>Happenings</Text>
         <FlatList
           data={this.state.dataSource}
           renderItem={({ item }) => (
@@ -348,7 +348,7 @@ export default class HomeScreen extends React.Component {
             <Text style={styles.rightText}>{item.numberJoined}/{item.capacity}</Text>
           </View>
             <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation" , eventId: item.id})}>
+          onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id})}>
           <Text style={styles.textStyle}>Go to event details page</Text>
         </TouchableOpacity>
             </Card>
