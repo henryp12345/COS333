@@ -30,14 +30,14 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   container2: {
     marginTop:100,
-    height:30,
+    height:40,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf:'center',
     marginBottom:20,
     width:200,
-    borderRadius:30,
+    borderRadius:20,
     backgroundColor: "#e0ffff",
   },
   picture: {
