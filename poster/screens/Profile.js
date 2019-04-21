@@ -13,7 +13,7 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import Chatroom from './Chatroom';
 import { iOSUIKit } from 'react-native-typography'
 
-export default class Profile extends React.Component {
+class Profile extends React.Component {
 
   constructor(props) {
     super(props)
@@ -103,3 +103,11 @@ customSubtitle: {
     padding:30,
   },
 });
+
+
+const AppNavigator = createStackNavigator({
+  Home: {screen: Profile},
+  Room: {screen: Chatroom},
+});
+
+export default createAppContainer(AppNavigator);

@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {GiftedChat} from 'react-native-gifted-chat';
 import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
 import {Icon} from 'react-native-elements';
-import {View, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView, Platform} from 'react-native';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 export default class Chatroom extends Component {
   constructor(props) {
@@ -60,7 +61,7 @@ export default class Chatroom extends Component {
   render() {
   const {navigation} = this.props;
     return(
-    <KeyboardAvoidingView style={{flex:1}} behavior='padding'>
+    <View style={{flex: 1}}>
       <GiftedChat
         messages={this.state.messages}
         onSend={messages => this.onSend(messages)}
@@ -68,7 +69,8 @@ export default class Chatroom extends Component {
           _id: this.state.userId
         }}
       ></GiftedChat>
-    </KeyboardAvoidingView>
+      {Platform.OS === 'android' ? <KeyboardSpacer topSpacing={-50}/> : null}
+    </View>
     );
   }
 }

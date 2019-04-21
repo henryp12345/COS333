@@ -2,13 +2,29 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity } from 'react-native';
 import { SearchBar, Button, Icon } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { iOSUIKit } from 'react-native-typography'
+import { iOSUIKit } from 'react-native-typography';
 
 export default class NotificationScreen extends Component {
+  constructor(props) {
+    super(props);
+    const {navigation} = this.props;
+    this.state = {messageString: [], notifications: [], userId: 'Henry'/*navigation.getParam('userId')*/};
+  }
+  
+  componentDidMount() {
+   fetch("https://posterapp333.herokuapp.com/notifications/")
+    .then((response) => response.json())
+      .then((responseJson) => this.setState({notifications: responseJson}));
+   fetch("https://posterapp333.herokuapp.com/newMessages/")
+    .then((response) => response.json())
+      .then((responseJson) => this.setState({messageString: responseJson}));
+  }
+
   render() {
     return (
       <View style={styles.viewStyle}>
-      <Text style={styles.customTitle}>Notifications</Text>  
+      <Text style={styles.customTitle}>Notifications</Text>
+      <Text style={styles.customTitle}></Text>
       </View>
 
     );

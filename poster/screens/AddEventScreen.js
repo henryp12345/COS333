@@ -108,7 +108,6 @@ export default class FormGenerator extends Component {
             })
             alert(chatId);
             console.log('FORM VALUES', formValues);
-//            fetch("https://posterapp333.herokuapp.com/event")
           });
         });
     }

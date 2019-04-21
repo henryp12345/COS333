@@ -22,6 +22,7 @@ def event(request):
         formData = json.loads(request.body)
         e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = dateutil.parser.parse(formData["startdate"]), endDate = dateutil.parser.parse(formData["enddate"]), capacity = formData["capacity"], numberJoined = 1, tags = formData["tags"], host = formData["host"], chatroom = formData["chatId"])
         e1.save()
+        addHosted(request, str(e1.id))
         return HttpResponse(e1.id)
 
 def eventId(request, eventString):
@@ -66,6 +67,16 @@ def addUser(request, username):
     newUser = User(username = username, hosted = "", joined = "", notifications = "", invitations = "")
     newUser.save()
     return HttpResponse("OK")
+
+def notifications(request, username):
+    user = User.objects.get(username = username)
+    notificationString = user.notifications
+    return eventId(request, notificationString)
+
+def newMessages(request, username):
+    user = User.objects.get(username = username)
+    messageString = user.newMessages
+    return eventId(request, messageString)
 
 def clearAll(request):
     User.objects.all().delete()
