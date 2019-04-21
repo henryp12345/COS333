@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     marginBottom:20,
     width:200,
     borderRadius:20,
-    backgroundColor: "#e0ffff",
+    backgroundColor: "#ff1493",
   },
   picture: {
     flex: 1,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 80,
-    height: 80,
+    height: 120,
   },
   text: {
     color: 'white',
@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
     ...iOSUIKit.subheadEmphasizedObject,
     fontSize:15,
     fontWeight: 'bold',
-    color: "#171F33",
+    color: 'white',
   }
 });
