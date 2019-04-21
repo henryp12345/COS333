@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
 import {StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity } from 'react-native';
 import { NavigationActions } from "react-navigation";
+import { iOSUIKit } from 'react-native-typography'
 
 import bgSrc from '../images/wallpaper.jpg';
 import logoImg from '../images/windows.png';
@@ -63,13 +64,14 @@ const styles = StyleSheet.create({
     fontSize:20
   },
   title: {
+    ...iOSUIKit.subheadEmphasizedObject,
     color: 'black',
     backgroundColor: 'transparent',
     marginTop: 20,
     fontSize:25,
-    fontFamily: 'Roboto'
   },
   name:{
+    ...iOSUIKit.subheadEmphasizedObject,
     fontSize:15,
     fontWeight: 'bold',
     color: "#171F33",

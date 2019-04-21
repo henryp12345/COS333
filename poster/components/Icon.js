@@ -7,7 +7,7 @@ const iconMap = {
   Discover: "md-search",
   Add: "md-add",
   Profile: "md-calendar",
-  Info: "md-information-circle",
+  Notifications: "md-notifications",
 
 };
 

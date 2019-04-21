@@ -11,8 +11,9 @@ import { Card, Icon } from 'react-native-elements';
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import Chatroom from './Chatroom';
+import { iOSUIKit } from 'react-native-typography'
 
-class Profile extends React.Component {
+export default class Profile extends React.Component {
 
   constructor(props) {
     super(props)
@@ -37,8 +38,8 @@ class Profile extends React.Component {
     return (
       //ListView to show with textinput used as search bar
       <View style={styles.viewStyle}>
-      <Text style={{ fontFamily: 'Roboto', fontWeight: "bold", fontSize: 24}}>Welcome back, Henry.</Text>
-      <Text style={{ fontFamily: 'Roboto', fontWeight: "bold", fontSize: 20}}>Events You are Hosting</Text>
+      <Text style={styles.customTitle}>Welcome back, Henry.</Text>
+      <Text style={styles.customSubtitle}>Events You are Hosting</Text>
       <FlatList
         data={this.state.hosted}
         renderItem={({ item }) => (
@@ -56,7 +57,7 @@ class Profile extends React.Component {
           </Card>
         )}
         keyExtractor={(item, index) => index.toString()} />
-      <Text style={{ fontFamily: 'Roboto', fontWeight: "bold", fontSize: 20}}>Events You Have Joined</Text>
+      <Text style={styles.customSubtitle}>Events You Have Joined</Text>
       <FlatList
         data={this.state.joined}
         renderItem={({ item }) => (
@@ -79,6 +80,15 @@ class Profile extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  customTitle: {
+  ...iOSUIKit.largeTitleEmphasizedObject,
+  fontSize: 28,
+},
+customSubtitle: {
+  ...iOSUIKit.subheadEmphasizedObject,
+  fontSize: 20,
+},
+
   viewStyle: {
     flex: 1,
     backgroundColor: 'white',
@@ -93,11 +103,3 @@ const styles = StyleSheet.create({
     padding:30,
   },
 });
-
-const AppNavigator = createStackNavigator({
-  Home: {screen: Profile},
-  Room: {screen: Chatroom},
-});
-
-export default createAppContainer(AppNavigator);
-
