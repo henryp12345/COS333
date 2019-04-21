@@ -89,7 +89,12 @@ export default class HomeScreen extends React.Component {
       value={this.state.search}
       />
       <ScrollView>
+      <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customSubtitle}>Popular Categories</Text>
+<TouchableOpacity onPress={text => this.SearchFilterFunction('')}>
+<Text style={styles.customSubtitle2}>Clear All</Text>
+</TouchableOpacity>
+</View>
       <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
       <TouchableOpacity 
       onPress ={() => {
@@ -341,7 +346,9 @@ Campus Events
 </View>
 <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
 <Text style={styles.customSubtitle}>Happenings</Text>
+<TouchableOpacity onPress={text => this.SearchFilterFunction('')}>
 <Text style={styles.customSubtitle2}>See All</Text>
+</TouchableOpacity>
 </View>
 <FlatList
 data={this.state.dataSource}
