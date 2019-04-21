@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import PropTypes from 'prop-types';
+import Dimensions from 'Dimensions';
+import { ImageBackground, StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
+import { iOSUIKit } from 'react-native-typography'
+
+import bgEvent from '../images/event-wall.png';
 
 export default class EventDetail extends Component {
   constructor(props) {
@@ -36,45 +41,86 @@ export default class EventDetail extends Component {
       });
   }
   
+  /*
   componentDidUpdate() {
     alert('test');
   }
+  */
   
 	render() {
     const { navigation } = this.props;
 		return (
+			<ImageBackground style={styles.picture} source={bgEvent}>
+			{this.props.children}
 			<View style={styles.container}>
-				<Text style={styles.welcome}>Event Details</Text>
-        <Text style={styles.params}> {this.state.title} </Text>
-        <Text style={styles.params}> {this.state.tags} </Text>
-				<Text style={styles.params}>Params Passed:{'\n'} {navigation.state.params.topic}</Text>
+        <Text style={styles.welcome}> {this.state.title} </Text>
+        	<Text style={styles.params1}> {"Starting @ "} {this.state.startdate} {"\t\t"} {this.state.location} </Text>
+        	<Text style={styles.params2}> {this.state.desc} </Text>
+        	<TouchableOpacity style={styles.joinButton} onPress={() => navigate("Dashboard")}>
+      <Text style={styles.name}>join event</Text>
+      </TouchableOpacity> 
         <TouchableOpacity onPress={() => navigation.goBack()}>
 					<Text style={styles.link}>Go Back</Text>
 				</TouchableOpacity>
 			</View>
+			</ImageBackground>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
 	container: {
+		marginTop: 50,
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: "#F5FCFF"
+	},
+	joinButton: {
+		marginTop:100,
+   		height:40,
+    	flexDirection: 'row',
+    	justifyContent: 'center',
+    	alignItems: 'center',
+    	alignSelf:'center',
+    	marginBottom:20,
+    	width:200,
+    	borderRadius:20,
+    	backgroundColor: "#ff1493",
 	},
 	welcome: {
-		fontSize: 20,
+		...iOSUIKit.largeTitleEmphasizedObject,
+		fontSize: 30,
 		textAlign: "center",
-		margin: 10
+		margin: 10,
+		color: 'white',
+
 	},
-	params: {
+	params1: {
+		...iOSUIKit.largeTitleEmphasizedObject,
+		fontSize: 15,
 		textAlign: "center",
-		margin: 10
+		margin: 10,
+		color: "#f5fffa",
+	},
+	params2: {
+		textAlign: "center",
+		fontSize: 15,
+		margin: 10,
 	},
   link: {
 		fontSize: 16,
 		textAlign: "center",
 		margin: 10
-	}
-});
+	},
+   picture: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover',
+  },
+  name:{
+    ...iOSUIKit.subheadEmphasizedObject,
+    fontSize:15,
+    fontWeight: 'bold',
+    color: "white",
+  }
