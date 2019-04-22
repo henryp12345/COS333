@@ -12,10 +12,10 @@ export default class NotificationScreen extends Component {
   }
   
   componentDidMount() {
-   fetch("https://posterapp333.herokuapp.com/notifications/")
+   fetch("https://posterapp333.herokuapp.com/notifications/" + this.state.userId + "/")
     .then((response) => response.json())
       .then((responseJson) => this.setState({notifications: responseJson}));
-   fetch("https://posterapp333.herokuapp.com/newMessages/")
+   fetch("https://posterapp333.herokuapp.com/newMessages/" + this.state.userId + "/")
     .then((response) => response.json())
       .then((responseJson) => this.setState({messageString: responseJson}));
   }
@@ -24,7 +24,10 @@ export default class NotificationScreen extends Component {
     return (
       <View style={styles.viewStyle}>
       <Text style={styles.customTitle}>Notifications</Text>
-      <Text style={styles.customTitle}></Text>
+      <Text style={styles.customTitle}>More people have joined these events</Text>
+      <FlatList data={this.state.notifications} />
+      <Text style={styles.customTitle}>You have new messages in these chats</Text>
+      <FlatList data={this.state.newMessages} />
       </View>
 
     );

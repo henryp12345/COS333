@@ -106,7 +106,7 @@ export default class FormGenerator extends Component {
                        chatId: chatId,
                   }),
             })
-            alert(chatId);
+            .then(response => alert(response._bodyText))
             console.log('FORM VALUES', formValues);
           });
         });

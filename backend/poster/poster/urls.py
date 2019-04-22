@@ -27,5 +27,7 @@ urlpatterns = [
     path('addJoined/<str:username>/<str:idString>/', views.addJoined),
 	  path('clear/', views.clearAll),
     path('addUser/<str:username>/', views.addUser),
+    path('notifications/<str:username>/', views.notifications),
+    path('newMessages/<str:username>/', views.newMessages),
     path('admin/', admin.site.urls),
 ]

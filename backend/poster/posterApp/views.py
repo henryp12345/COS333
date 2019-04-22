@@ -20,9 +20,9 @@ def event(request):
         return JsonResponse(values_list, safe=False)
     elif request.method == 'POST':
         formData = json.loads(request.body)
-        e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = dateutil.parser.parse(formData["startdate"]), endDate = dateutil.parser.parse(formData["enddate"]), capacity = formData["capacity"], numberJoined = 1, tags = formData["tags"], host = formData["host"], chatroom = formData["chatId"])
+        e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = dateutil.parser.parse(formData["startdate"]), endDate = dateutil.parser.parse(formData["enddate"]), capacity = formData["capacity"], numberJoined = 0, tags = formData["tags"], host = formData["host"], chatroom = formData["chatId"])
         e1.save()
-        addHosted(request, str(e1.id))
+        addHosted(request, formData["host"], str(e1.id))
         return HttpResponse(e1.id)
 
 def eventId(request, eventString):
@@ -61,10 +61,23 @@ def addJoined(request, username, idString):
     currentJoined = currentJoined + "," + idString
     user.joined = currentJoined
     user.save()
-    return HttpResponse("OK")
+    # Updates numberJoined for the events
+    for item in idList:
+        if len(item) > 0 and Event.objects.filter(id = item).count() > 0:
+            currentEvent = Event.objects.get(id = item)
+            currentJoined = currentEvent.numberJoined
+            currentJoined = currentJoined + 1
+            currentEvent.numberJoined = currentJoined
+            currentEvent.save()
+            currentUser = User.objects.get(username = currentEvent.host)
+            currentNotifications = currentUser.notifications
+            currentNotifications = currentNotifications + "," + item
+            currentUser.notifications = currentNotifications
+            currentUser.save()
+    return HttpResponse(idString)
 
 def addUser(request, username):
-    newUser = User(username = username, hosted = "", joined = "", notifications = "", invitations = "")
+    newUser = User(username = username, hosted = "", joined = "", notifications = "", newMessages = "")
     newUser.save()
     return HttpResponse("OK")
 

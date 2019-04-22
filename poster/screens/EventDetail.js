@@ -64,7 +64,13 @@ export default class EventDetail extends Component {
         	<Text style={styles.params1}>{"meet @ "} {this.state.location} </Text>
         	<Text style={styles.params2}> {this.state.desc} </Text>
         	<Text> {"👥\t"}{this.state.numberJoined}{"/"}{this.state.capacity}{" attending"}</Text>
-        	<TouchableOpacity style={styles.joinButton} onPress={() => navigate("Dashboard")}>
+        	<TouchableOpacity style={styles.joinButton} onPress={() => {
+            fetch("https://posterapp333.herokuapp.com/addJoined/" +  navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
+            .then(() => {
+              alert("Event Joined");
+              navigation.goBack();
+            });
+            }}>
       <Text style={styles.name}>join event</Text>
       </TouchableOpacity> 
         <TouchableOpacity onPress={() => navigation.goBack()}>

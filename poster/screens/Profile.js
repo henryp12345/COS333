@@ -13,7 +13,7 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import Chatroom from './Chatroom';
 import { iOSUIKit } from 'react-native-typography'
 
-class Profile extends React.Component {
+export default class Profile extends React.Component {
 
   constructor(props) {
     super(props)
@@ -64,7 +64,8 @@ class Profile extends React.Component {
           <Card>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={styles.textStyle}>{item.title}</Text>
-            <TouchableOpacity style={styles.textStyle}>
+            <TouchableOpacity style={styles.textStyle}
+              onPress={() => this.props.navigation.navigate("Room", {topic: "React Navigation", roomId: item.chatroom, userId: this.state.userId})}>
               <Icon name='comment'
                     type='font-awesome'
                     color='#00bfff'
@@ -105,9 +106,9 @@ customSubtitle: {
 });
 
 
-const AppNavigator = createStackNavigator({
-  Home: {screen: Profile},
-  Room: {screen: Chatroom},
-});
-
-export default createAppContainer(AppNavigator);
+//const AppNavigator = createStackNavigator({
+//  Home: {screen: Profile},
+//  Room: {screen: Chatroom},
+//});
+//
+//export default createAppContainer(AppNavigator);
