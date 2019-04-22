@@ -85,10 +85,10 @@ const styles = StyleSheet.create({
 	},
 	date: {
 		...iOSUIKit.largeTitleEmphasizedObject,
-		fontSize: 15,
+		fontSize: 17,
 		textAlign: "center",
 		color: "#f5fffa",
-		lineHeight: 15,
+		lineHeight: 17,
 	},
 	joinButton: {
 		marginTop:100,
@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
 	},
 	welcome: {
 		...iOSUIKit.largeTitleEmphasizedObject,
-		fontSize: 30,
+		fontSize: 45,
+    lineHeight:46,
 		textAlign: "center",
 		margin: 10,
 		color: 'white',
@@ -112,9 +113,10 @@ const styles = StyleSheet.create({
 	},
 	params1: {
 		...iOSUIKit.largeTitleEmphasizedObject,
-		fontSize: 15,
+		fontSize: 17,
 		textAlign: "center",
-		margin: 10,
+    lineHeight:17,
+		margin: 17,
 		color: "#f5fffa",
 	},
 	params2: {
