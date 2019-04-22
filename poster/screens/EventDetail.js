@@ -21,6 +21,7 @@ export default class EventDetail extends Component {
                    numberJoined: 0,
                    tags: '',
                    host: '',
+                   whichButton: 2,
     };
   }
 
@@ -54,42 +55,53 @@ export default class EventDetail extends Component {
   
 	render() {
     const { navigation } = this.props;
-		return (
-			<ImageBackground style={styles.picture} source={bgEvent}>
-			{this.props.children}
-			<View style={styles.container}>
-        <Text style={styles.welcome}> {this.state.title} </Text>
-        	<Text style={styles.date}> {this.state.startdate.substring(5,7)}{"/"}{this.state.startdate.substring(8,10)}
-        	{"  ║  ◷ "}{this.state.startdate.substring(11,16)}        	 
-        	</Text>
-        	<Text style={styles.params1}>{"meet @ "} {this.state.location} </Text>
-        	<Text style={styles.params2}> {this.state.desc} </Text>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Icon
-              name='users'
-              type='feather'
-              color='#ffffff'
-              size = {15}
-              />
-          	<Text style={styles.params3}> 
-              {"  "}{this.state.numberJoined}{"/"}{this.state.capacity}{" attending"}
+    // Put join button return stuff here
+    if (this.state.whichButton == 0) {
+      return (
+        <ImageBackground style={styles.picture} source={bgEvent}>
+        {this.props.children}
+        <View style={styles.container}>
+          <Text style={styles.welcome}> {this.state.title} </Text>
+            <Text style={styles.date}> {this.state.startdate.substring(5,7)}{"/"}{this.state.startdate.substring(8,10)}
+            {"  ║  ◷ "}{this.state.startdate.substring(11,16)}
             </Text>
-          </View>
-        	<TouchableOpacity style={styles.joinButton} onPress={() => {
-            fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
-            .then(() => {
-              alert("Event joined");
-              navigation.goBack();
-            });
-            }}>
-      <Text style={styles.name}>join event</Text>
-      </TouchableOpacity> 
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-					<Text style={styles.link}>Go Back</Text>
-				</TouchableOpacity>
-			</View>
-			</ImageBackground>
-		);
+            <Text style={styles.params1}>{"meet @ "} {this.state.location} </Text>
+            <Text style={styles.params2}> {this.state.desc} </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Icon
+                name='users'
+                type='feather'
+                color='#ffffff'
+                size = {15}
+                />
+              <Text style={styles.params3}>
+                {"  "}{this.state.numberJoined}{"/"}{this.state.capacity}{" attending"}
+              </Text>
+            </View>
+            <TouchableOpacity style={styles.joinButton} onPress={() => {
+              fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
+              .then(() => {
+                alert("Event joined");
+                navigation.goBack();
+              });
+              }}>
+        <Text style={styles.name}>join event</Text>
+        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={styles.link}>Go Back</Text>
+          </TouchableOpacity>
+        </View>
+        </ImageBackground>
+      );
+    }
+    // Put leave button return stuff here
+    if (this.state.whichButton == 1) {
+      return(<Text> Hi </Text>);
+    }
+    // Put delete button return stuff here
+    else {
+      return(<Text> Hey </Text>);
+    }
 	}
 }
 
