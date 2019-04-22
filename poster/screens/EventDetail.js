@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
 import { ImageBackground, StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import { iOSUIKit } from 'react-native-typography'
+import { Icon } from 'react-native-elements'
 
 import bgEvent from '../images/event-wall.png';
 
@@ -63,11 +64,21 @@ export default class EventDetail extends Component {
         	</Text>
         	<Text style={styles.params1}>{"meet @ "} {this.state.location} </Text>
         	<Text style={styles.params2}> {this.state.desc} </Text>
-        	<Text> {"👥\t"}{this.state.numberJoined}{"/"}{this.state.capacity}{" attending"}</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Icon
+              name='users'
+              type='feather'
+              color='#ffffff'
+              size = {15}
+              />
+          	<Text style={styles.params3}> 
+              {"  "}{this.state.numberJoined}{"/"}{this.state.capacity}{" attending"}
+            </Text>
+          </View>
         	<TouchableOpacity style={styles.joinButton} onPress={() => {
-            fetch("https://posterapp333.herokuapp.com/addJoined/" +  navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
+            fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
             .then(() => {
-              alert("Event Joined");
+              alert("Event joined");
               navigation.goBack();
             });
             }}>
@@ -126,10 +137,16 @@ const styles = StyleSheet.create({
 		color: "#f5fffa",
 	},
 	params2: {
+    ...iOSUIKit.largeTitleEmphasizedObject,
 		textAlign: "center",
 		fontSize: 15,
 		margin: 10,
 	},
+  params3: {
+    fontSize: 15,
+    textAlign: "center",
+    color: 'white',
+  },
   link: {
 		fontSize: 16,
 		textAlign: "center",
