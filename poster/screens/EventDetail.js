@@ -13,6 +13,8 @@ export default class EventDetail extends Component {
                    desc: '',
                    location: '',
                    startDate: new Date(),
+                   startdate: '',
+                   enddate: '',
                    endDate: new Date(),
                    capacity: 0,
                    numberJoined: 0,
@@ -32,6 +34,8 @@ export default class EventDetail extends Component {
                         desc: eventData.desc,
                         location: eventData.location,
                         startDate: startDate,
+                        startdate: eventData.startDate,
+                        enddate: eventData.endDate,
                         endDate: endDate,
                         capacity: eventData.capacity,
                         numberJoined: eventData.numberJoined,
@@ -54,8 +58,12 @@ export default class EventDetail extends Component {
 			{this.props.children}
 			<View style={styles.container}>
         <Text style={styles.welcome}> {this.state.title} </Text>
-        	<Text style={styles.params1}> {"Starting @ "} {this.state.startdate} {"\t\t"} {this.state.location} </Text>
+        	<Text style={styles.date}> {this.state.startdate.substring(5,7)}{"/"}{this.state.startdate.substring(8,10)}
+        	{"  ║  ◷ "}{this.state.startdate.substring(11,16)}        	 
+        	</Text>
+        	<Text style={styles.params1}>{"meet @ "} {this.state.location} </Text>
         	<Text style={styles.params2}> {this.state.desc} </Text>
+        	<Text> {"👥\t"}{this.state.numberJoined}{"/"}{this.state.capacity}{" attending"}</Text>
         	<TouchableOpacity style={styles.joinButton} onPress={() => navigate("Dashboard")}>
       <Text style={styles.name}>join event</Text>
       </TouchableOpacity> 
@@ -74,6 +82,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
+	},
+	date: {
+		...iOSUIKit.largeTitleEmphasizedObject,
+		fontSize: 15,
+		textAlign: "center",
+		color: "#f5fffa",
+		lineHeight: 15,
 	},
 	joinButton: {
 		marginTop:100,
@@ -124,3 +139,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: "white",
   }
+
+});
