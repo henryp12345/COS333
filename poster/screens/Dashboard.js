@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import DetailsStackNav from "../navigators/DetailsStackNav";
 import { NavigationActions } from "react-navigation";
@@ -15,6 +15,6 @@ export default class Dashboard extends Component {
 	};
 
 	render() {
-		return <DetailsStackNav navigation={this.props.navigation} />;
+		return(<DetailsStackNav navigation={this.props.navigation} />);
 	}
 }

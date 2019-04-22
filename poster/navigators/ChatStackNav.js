@@ -4,8 +4,8 @@ import Chatroom from "../screens/Chatroom";
 
 const ChatStackNav = createStackNavigator (
   {
-    TabNav: {screen: TabNav},
-    Chatroom: {screen: Chatroom}
+    TabNav: { screen: TabNav },
+    Chatroom: { screen: Chatroom },
   },
   {
     headerMode: "none"

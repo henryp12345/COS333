@@ -8,7 +8,7 @@ export default class NotificationScreen extends Component {
   constructor(props) {
     super(props);
     const {navigation} = this.props;
-    this.state = {messageString: [], notifications: [], userId: 'Henry'/*navigation.getParam('userId')*/};
+    this.state = {messages: [], notifications: [], userId: 'Henry'/*navigation.getParam('userId')*/};
   }
   
   componentDidMount() {
@@ -17,7 +17,7 @@ export default class NotificationScreen extends Component {
       .then((responseJson) => this.setState({notifications: responseJson}));
    fetch("https://posterapp333.herokuapp.com/newMessages/" + this.state.userId + "/")
     .then((response) => response.json())
-      .then((responseJson) => this.setState({messageString: responseJson}));
+      .then((responseJson) => this.setState({messages: responseJson}));
   }
 
   render() {
