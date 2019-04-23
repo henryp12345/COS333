@@ -353,9 +353,11 @@ Campus Events
 <FlatList
 data={this.state.dataSource}
 renderItem={({ item }) => (
+
 <Card style={{borderRadius: 10}}>
 <View style={styles.itemContent}>
 <View style={styles.iconContainer}>
+<Text style={styles.dateText}>{item.startDate.substring(5,7)}/{item.startDate.substring(8,10)}</Text>
 </View>
 <View style={styles.textContainer}>
 <View style={styles.titleContainer}>
@@ -442,6 +444,14 @@ eventTitle: {
   fontSize: 18,
 },
 
+dateText: {
+  ...iOSUIKit.subheadEmphasizedObject,
+  fontSize: 18,
+  color: 'white',
+  textAlign: 'center',
+
+},
+
 textStyle: {
   padding: 5,
   textAlign: 'left',
@@ -458,14 +468,15 @@ itemContent:  {
  flexDirection: 'row',
  borderBottomWidth: 1,
  borderColor: '#e5e5e5',
- minHeight: 90
+ minHeight: 75
 },
 
 iconContainer: {
   padding: 5,
   flex: 1,
   borderRadius: 5,
-  backgroundColor: '#558fed'
+  backgroundColor: '#558fed',
+  justifyContent: 'center',
 },
 
 textContainer: {

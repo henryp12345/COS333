@@ -79,8 +79,8 @@ renderItem={({ item }) => (
     <TouchableOpacity>
     <LinearGradient
     colors={['#47e5bc', '#a2efdb']}
-    height={150}
-    width={200}
+    height={260}
+    width={240}
     style={{
      marginHorizontal: 5,
      borderRadius: 5,
@@ -92,7 +92,7 @@ renderItem={({ item }) => (
   </TouchableOpacity>
 )}
 enableEmptySections={true}
-style={{ marginTop: 10, marginBottom: 30}}
+style={{ marginTop: 5, marginBottom: 20}}
 keyExtractor={(item, index) => index.toString()}
 />
         </ScrollView>
@@ -108,7 +108,7 @@ renderItem={({ item }) => (
     <TouchableOpacity>
     <LinearGradient
     colors={['#6bc9f4', '#b0e4fc']}
-    height={150}
+    height={130}
     width={200}
     style={{
      marginHorizontal: 5,
@@ -122,7 +122,7 @@ renderItem={({ item }) => (
   </TouchableOpacity>
 )}
 enableEmptySections={true}
-style={{ marginTop: 10, marginBottom: 30}}
+style={{ marginTop: 5, marginBottom: 20}}
 keyExtractor={(item, index) => index.toString()}
 />
         </ScrollView>
@@ -137,7 +137,7 @@ renderItem={({ item }) => (
     <TouchableOpacity>
     <LinearGradient
     colors={['#6bc9f4', '#b0e4fc']}
-    height={150}
+    height={130}
     width={200}
     style={{
      marginHorizontal: 5,
@@ -151,7 +151,7 @@ renderItem={({ item }) => (
   </TouchableOpacity>
 )}
 enableEmptySections={true}
-style={{ marginTop: 10}}
+style={{ marginTop: 5}}
 keyExtractor={(item, index) => index.toString()}
 />
         </ScrollView>

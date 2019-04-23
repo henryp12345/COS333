@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import React, { Component } from "react";
-import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
 import { ImageBackground, StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import { iOSUIKit } from 'react-native-typography'
