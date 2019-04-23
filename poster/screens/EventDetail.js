@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
 import { ImageBackground, StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import { iOSUIKit } from 'react-native-typography'
@@ -96,11 +98,81 @@ export default class EventDetail extends Component {
     }
     // Put leave button return stuff here
     if (this.state.whichButton == 1) {
-      return(<Text> Hi </Text>);
+      return (
+        <ImageBackground style={styles.picture} source={bgEvent}>
+        {this.props.children}
+        <View style={styles.container}>
+          <Text style={styles.welcome}> {this.state.title} </Text>
+            <Text style={styles.date}> {this.state.startdate.substring(5,7)}{"/"}{this.state.startdate.substring(8,10)}
+            {"  ║  ◷ "}{this.state.startdate.substring(11,16)}
+            </Text>
+            <Text style={styles.params1}>{"meet @ "} {this.state.location} </Text>
+            <Text style={styles.params2}> {this.state.desc} </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Icon
+                name='users'
+                type='feather'
+                color='#ffffff'
+                size = {15}
+                />
+              <Text style={styles.params3}>
+                {"  "}{this.state.numberJoined}{"/"}{this.state.capacity}{" attending"}
+              </Text>
+            </View>
+            <TouchableOpacity style={styles.joinButton} onPress={() => {
+              fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
+              .then(() => {
+                alert("Event joined");
+                navigation.goBack();
+              });
+              }}>
+        <Text style={styles.name}>leave event</Text>
+        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={styles.link}>Go Back</Text>
+          </TouchableOpacity>
+        </View>
+        </ImageBackground>
+      );
     }
     // Put delete button return stuff here
     else {
-      return(<Text> Hey </Text>);
+      return (
+        <ImageBackground style={styles.picture} source={bgEvent}>
+        {this.props.children}
+        <View style={styles.container}>
+          <Text style={styles.welcome}> {this.state.title} </Text>
+            <Text style={styles.date}> {this.state.startdate.substring(5,7)}{"/"}{this.state.startdate.substring(8,10)}
+            {"  ║  ◷ "}{this.state.startdate.substring(11,16)}
+            </Text>
+            <Text style={styles.params1}>{"meet @ "} {this.state.location} </Text>
+            <Text style={styles.params2}> {this.state.desc} </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Icon
+                name='users'
+                type='feather'
+                color='#ffffff'
+                size = {15}
+                />
+              <Text style={styles.params3}>
+                {"  "}{this.state.numberJoined}{"/"}{this.state.capacity}{" attending"}
+              </Text>
+            </View>
+            <TouchableOpacity style={styles.joinButton} onPress={() => {
+              fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
+              .then(() => {
+                alert("Event joined");
+                navigation.goBack();
+              });
+              }}>
+        <Text style={styles.name}>cancel event</Text>
+        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={styles.link}>Go Back</Text>
+          </TouchableOpacity>
+        </View>
+        </ImageBackground>
+      );
     }
 	}
 }
