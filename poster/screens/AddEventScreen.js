@@ -69,7 +69,7 @@ export default class FormGenerator extends Component {
     constructor(props) {
       super(props);
       const {navigation} = this.props;
-      this.state = {userId: navigation.getParam('userId')};
+      this.state = {userId: this.props.screenProps.userId};
     }
 
     login(items) {
@@ -113,7 +113,7 @@ export default class FormGenerator extends Component {
     }
   
     componentDidUpdate() {
-      this.setState({userId: navigation.getParam('userId')});
+      // this.setState({userId: this.props.navigation.getParam('userId')}}/>);
     }
   
     render() {
@@ -132,7 +132,7 @@ export default class FormGenerator extends Component {
                 />
                 <Text style={styles.labelText}>Tags</Text>
         <TagSelect
-          value={[arrayOfString[0]]}
+          value={[arrayOfString]}
           data={arrayOfString}
           ref={(tag) => {
             this.tagString = tag;
