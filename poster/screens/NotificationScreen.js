@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity } from 'react-native';
-import { SearchBar, Button, Icon } from 'react-native-elements';
+import { SearchBar, Button, Icon, Card } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { iOSUIKit } from 'react-native-typography';
 
@@ -20,14 +20,34 @@ export default class NotificationScreen extends Component {
       .then((responseJson) => this.setState({messages: responseJson}));
   }
 
+renderSeparator = () => (
+    <View
+      style={{
+        backgroundColor: 'black',
+        height: 0.5,
+      }}
+    />
+  );
+
   render() {
     return (
       <View style={styles.viewStyle}>
       <Text style={styles.customTitle}>Notifications</Text>
-      <Text style={styles.customTitle}>More people have joined these events</Text>
-      <FlatList data={this.state.notifications} />
-      <Text style={styles.customTitle}>You have new messages in these chats</Text>
-      <FlatList data={this.state.newMessages} />
+      <FlatList
+        data={this.state.notifications}
+        ItemSeparatorComponent={this.renderSeparator}
+        renderItem={({ item }) => (
+            <Text style={styles.textStyle}>A new user has joined {item.title}</Text>
+        )}
+        keyExtractor={(item, index) => index.toString()} />
+
+            <FlatList
+        data={this.state.newMessages}
+        ItemSeparatorComponent={this.renderSeparator}
+        renderItem={({ item }) => (
+            <Text style={styles.textStyle}>You have a new message in the {item.title} chat</Text>
+        )}
+        keyExtractor={(item, index) => index.toString()} />
       </View>
 
     );
@@ -50,9 +70,8 @@ const styles = StyleSheet.create({
   },
 
   textStyle: {
-    padding: 10,
+    padding: 20,
     alignItems: 'flex-start',
-    padding:30,
   },
 
 });
