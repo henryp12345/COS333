@@ -75,7 +75,7 @@ export default class EventDetail extends Component {
                 size = {15}
                 />
               <Text style={styles.params3}>
-                {"  "}{this.state.numberJoined}{"/"}{this.state.capacity}{" attending"}
+                {"  "}{this.state.numberJoined}{" of "}{this.state.capacity}{" attending"}
               </Text>
             </View>
             <TouchableOpacity style={styles.joinButton} onPress={() => {
@@ -114,7 +114,7 @@ export default class EventDetail extends Component {
                 size = {15}
                 />
               <Text style={styles.params3}>
-                {"  "}{this.state.numberJoined}{"/"}{this.state.capacity}{" attending"}
+                {"  "}{this.state.numberJoined}{" of "}{this.state.capacity}{" attending"}
               </Text>
             </View>
             <TouchableOpacity style={styles.joinButton} onPress={() => {

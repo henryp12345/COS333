@@ -79,15 +79,50 @@ renderItem={({ item }) => (
     <TouchableOpacity>
     <LinearGradient
     colors={['#47e5bc', '#a2efdb']}
-    height={260}
-    width={240}
+    height={280}
+    width={260}
     style={{
      marginHorizontal: 5,
-     borderRadius: 5,
-     alignItems: 'flex-start',
-     padding: 20
+     borderRadius: 10,
+     alignItems: 'center',
+     padding: 30
    }}>
-   <Text style={styles.eventTitle}>{item.title}</Text>
+   <View style={styles.container}>
+   <Text style={styles.recTitle}>{item.title}</Text>
+   <Text style = {styles.recSubtitle}> {item.startDate.substring(5,7)}/{item.startDate.substring(8,10)}
+   {"  ║  ◷ "}{item.startDate.substring(11,16)}</Text>
+   <Text style = {styles.recDetails}>{"meet @ "} {item.location} </Text>
+   <Text style = {{marginBottom: 5}}> {item.desc} </Text>
+   <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+  <Icon
+      name='users'
+      type='feather'
+      color='black'
+      size = {15}
+      />
+    <Text style = {styles.recDetails}>{"  "}{item.numberJoined} of {item.capacity} attending</Text>
+             </View>
+
+       <TouchableOpacity>
+       <LinearGradient
+    colors={['#333333', '#5a5454']}
+    height={40}
+    width={180}
+    style={{
+      marginTop:10,
+     borderRadius: 20,
+     marginBottom:20,
+     flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf:'center',
+   }}>
+        <Text style={styles.recDetailsWhite}>join event</Text>
+  </LinearGradient>
+
+        </TouchableOpacity>
+     </View>
+
   </LinearGradient>
   </TouchableOpacity>
 )}
@@ -98,26 +133,25 @@ keyExtractor={(item, index) => index.toString()}
         </ScrollView>
 
       <Text style={styles.customTitle}>Today</Text> 
-       <ScrollView horizontal={true}
-       showsHorizontalScrollIndicator={false}> 
-       
+      
        <FlatList
        horizontal={true}
 data={this.state.dataSource}
 renderItem={({ item }) => (
-    <TouchableOpacity>
-    <LinearGradient
+    <TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: 'Henry'})}>
+       <LinearGradient
     colors={['#6bc9f4', '#b0e4fc']}
-    height={130}
-    width={200}
+    minHeight={10}
+    minWidth={10}
     style={{
      marginHorizontal: 5,
-     borderRadius: 5,
-     alignItems: 'flex-start',
+     borderRadius: 10,
+     alignItems: 'center',
      padding: 15
    }}>
    <Text style={styles.eventTitle}>{item.title}</Text>
-   
+    <Text>{item.location}</Text>
+   <Text>◷ {item.startDate.substring(11,16)}</Text>
   </LinearGradient>
   </TouchableOpacity>
 )}
@@ -125,38 +159,32 @@ enableEmptySections={true}
 style={{ marginTop: 5, marginBottom: 20}}
 keyExtractor={(item, index) => index.toString()}
 />
-        </ScrollView>
          <Text style={styles.customTitle}>Tomorrow</Text> 
-       <ScrollView horizontal={true}
-       showsHorizontalScrollIndicator={false}> 
-       
        <FlatList
        horizontal={true}
-data={this.state.dataSource}
-renderItem={({ item }) => (
-    <TouchableOpacity>
+    data={this.state.dataSource}
+    renderItem={({ item }) => (
+    <TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: 'Henry'})}>
     <LinearGradient
     colors={['#6bc9f4', '#b0e4fc']}
-    height={130}
-    width={200}
+    minHeight={10}
+    minWidth={10}
     style={{
      marginHorizontal: 5,
-     borderRadius: 5,
-     alignItems: 'flex-start',
+     borderRadius: 10,
+     alignItems: 'center',
      padding: 15
    }}>
    <Text style={styles.eventTitle}>{item.title}</Text>
-   
+    <Text>{item.location}</Text>
+   <Text>◷ {item.startDate.substring(11,16)}</Text>
   </LinearGradient>
   </TouchableOpacity>
 )}
 enableEmptySections={true}
 style={{ marginTop: 5}}
 keyExtractor={(item, index) => index.toString()}
-/>
-        </ScrollView>
-
-      
+/>    
       </View>
             </ScrollView>
 
@@ -169,13 +197,51 @@ const styles = StyleSheet.create({
 
   customTitle: {
   ...iOSUIKit.largeTitleEmphasizedObject,
-  fontSize: 28,
+  fontSize: 24,
 },
 
 eventTitle: {
   ...iOSUIKit.subheadEmphasizedObject,
   fontSize: 18,
 },
+
+recTitle: {
+  ...iOSUIKit.largeTitleEmphasizedObject,
+  fontSize: 22,
+  marginBottom: 10,
+},
+
+recSubtitle: {
+  ...iOSUIKit.subheadObject,
+  fontSize: 18,
+  marginBottom: 5,
+},
+
+recDetails: {
+  ...iOSUIKit.subheadObject,
+  fontSize: 16,
+  marginBottom: 5,
+},
+
+recDetailsWhite: {
+  ...iOSUIKit.subheadObject,
+  fontSize: 16,
+  marginBottom: 5,
+  color: 'white'
+},
+
+joinButton: {
+    marginTop:10,
+      height:40,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf:'center',
+      marginBottom:20,
+      width:200,
+      borderRadius:20,
+      backgroundColor: "#ff1493",
+  },
 
   viewStyle: {
     flex: 1,
@@ -193,11 +259,8 @@ eventTitle: {
   },
   container: {
     flex: 1,
-    width: 250,
-    height: 150,
-    margin: 20,
-    margin: 15,
-    marginHorizontal: 5
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   itemContent:  {
