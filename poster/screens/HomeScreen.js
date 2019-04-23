@@ -375,7 +375,7 @@ renderItem={({ item }) => (
 
 <View style={styles.label}>
 
-<TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: 'Henry'})}>
+<TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
 <Icon
 name='plus-circle'
 type='font-awesome'

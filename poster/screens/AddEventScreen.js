@@ -69,7 +69,7 @@ export default class FormGenerator extends Component {
     constructor(props) {
       super(props);
       const {navigation} = this.props;
-      this.state = {userId: 'Henry'/*navigation.getParam('userId')*/};
+      this.state = {userId: navigation.getParam('userId')};
     }
 
     login(items) {
@@ -113,7 +113,7 @@ export default class FormGenerator extends Component {
     }
   
     componentDidUpdate() {
-      this.setState({userId: 'Henry'/*navigation.getParam('userId')*/});
+      this.setState({userId: navigation.getParam('userId')});
     }
   
     render() {

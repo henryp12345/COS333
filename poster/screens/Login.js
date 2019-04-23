@@ -18,7 +18,7 @@ export default class Login extends Component {
         <View style={styles.container}>
         <Image source={logoImg} style={styles.image} />
         <Text style={styles.title}>p o s t e r</Text>
-        <TouchableOpacity style={styles.container2} onPress={() => navigate("Dashboard")}>
+        <TouchableOpacity style={styles.container2} onPress={() => navigate("Dashboard", {userId: 'Henry'})}>
       <Text style={styles.name}>LOG IN</Text>
       </TouchableOpacity> 
         </View>

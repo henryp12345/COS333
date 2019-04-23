@@ -15,6 +15,7 @@ export default class Dashboard extends Component {
 	};
 
 	render() {
-		return(<DetailsStackNav navigation={this.props.navigation} />);
+		return(<DetailsStackNav navigation={this.props.navigation}
+                            screenProps={{userId: this.props.navigation.getParam('userId')}}/>);
 	}
 }

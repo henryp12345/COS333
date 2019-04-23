@@ -8,7 +8,7 @@ export default class NotificationScreen extends Component {
   constructor(props) {
     super(props);
     const {navigation} = this.props;
-    this.state = {messages: [], notifications: [], userId: 'Henry'/*navigation.getParam('userId')*/};
+    this.state = {messages: [], notifications: [], userId: this.props.screenProps.userId};
   }
   
   componentDidMount() {

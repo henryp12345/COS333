@@ -138,7 +138,7 @@ keyExtractor={(item, index) => index.toString()}
        horizontal={true}
 data={this.state.dataSource}
 renderItem={({ item }) => (
-    <TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: 'Henry'})}>
+    <TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
        <LinearGradient
     colors={['#6bc9f4', '#b0e4fc']}
     minHeight={10}
@@ -164,7 +164,7 @@ keyExtractor={(item, index) => index.toString()}
        horizontal={true}
     data={this.state.dataSource}
     renderItem={({ item }) => (
-    <TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: 'Henry'})}>
+    <TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
     <LinearGradient
     colors={['#6bc9f4', '#b0e4fc']}
     minHeight={10}

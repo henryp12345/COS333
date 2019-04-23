@@ -70,6 +70,8 @@ def addJoined(request, username, idString):
             currentEvent.numberJoined = currentJoined
             currentEvent.save()
             currentUser = User.objects.get(username = currentEvent.host)
+            if item in currentUser.joined or item in currentUser.hosted:
+                return HttpResponse("Already joined")
             currentNotifications = currentUser.notifications
             currentNotifications = currentNotifications + "," + item
             currentUser.notifications = currentNotifications

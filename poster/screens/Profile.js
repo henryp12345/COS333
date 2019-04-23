@@ -18,7 +18,7 @@ class Profile extends React.Component {
   constructor(props) {
     super(props)
     const {navigation} = this.props;
-    this.state = { hosted: [], joined: [], userId: 'Henry' }
+    this.state = { hosted: [], joined: [], userId: this.props.screenProps.userId }
   }
   
   componentDidMount() {
