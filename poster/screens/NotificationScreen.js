@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Animated, AppRegistry, Dimensions, ListView, StyleSheet, Text, TouchableOpacity, TouchableHighlight, View } from 'react-native';
+import { Animated, AppRegistry, Dimensions, ListView, StyleSheet, Text, TouchableOpacity, TouchableHighlight, View, ScrollView } from 'react-native';
 import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { iOSUIKit } from 'react-native-typography';
@@ -43,6 +43,7 @@ export default class NotificationScreen extends Component {
   render() {
     return (
        <View style={styles.viewStyle}>
+       <ScrollView>
       <Text style={styles.customTitle}>Notifications</Text>
           <SwipeListView
             useFlatList
@@ -100,6 +101,7 @@ export default class NotificationScreen extends Component {
             )}
             rightOpenValue={-75}
           />
+          </ScrollView>
       </View>
     );
   }
@@ -123,7 +125,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   rowFront: {
-    backgroundColor: '#f7eedc',
+    backgroundColor: '#ffe066',
     justifyContent: 'center',
     padding: 10,
     height: 50,

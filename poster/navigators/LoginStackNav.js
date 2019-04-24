@@ -6,12 +6,16 @@ const LoginStackNav = createStackNavigator({
 	Login: {
 		screen: Login,
 		navigationOptions: {
-			header: null
+			header: null,
+			gesturesEnabled: false,
 		}
 	},
 	Dashboard: { 
-		screen: Dashboard 
+		screen: Dashboard,
+		navigationOptions: {
+		gesturesEnabled: false,
 	}
+}
 });
 
 export default createAppContainer(LoginStackNav);
