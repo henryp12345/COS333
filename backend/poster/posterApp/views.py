@@ -26,8 +26,7 @@ def event(request):
         formData = json.loads(request.body)
         e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = dateutil.parser.parse(formData["startdate"]), endDate = dateutil.parser.parse(formData["enddate"]), capacity = formData["capacity"], numberJoined = 0, tags = formData["tags"], host = formData["host"], chatroom = formData["chatId"])
         e1.save()
-        addHosted(request, formData["host"], str(e1.id))
-        return HttpResponse(e1.id)
+        return addHosted(request, formData["host"], str(e1.id))
 
 def eventId(request, eventString):
     idList = eventString.split(",")

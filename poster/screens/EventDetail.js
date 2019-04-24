@@ -4,13 +4,15 @@ import Dimensions from 'Dimensions';
 import { ImageBackground, StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import { iOSUIKit } from 'react-native-typography'
 import { Icon } from 'react-native-elements'
+import { ChatManager, TokenProvider} from '@pusher/chatkit-client'
 
 import bgEvent from '../images/event-wall.png';
 
 export default class EventDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = { title: '',
+    this.state = { id: '',
+                   title: '',
                    desc: '',
                    location: '',
                    startDate: new Date(),
@@ -22,6 +24,7 @@ export default class EventDetail extends Component {
                    tags: '',
                    host: '',
                    whichButton: 2,
+                   chatroom: ''
     };
   }
 
@@ -32,7 +35,8 @@ export default class EventDetail extends Component {
         var eventData = JSON.parse(response._bodyText)[0];
         var startDate = new Date(eventData.startdate);
         var endDate = new Date(eventData.enddate)
-        this.setState({ title: eventData.title,
+        this.setState({ id: eventData.id,
+                        title: eventData.title,
                         desc: eventData.desc,
                         location: eventData.location,
                         startDate: startDate,
@@ -43,16 +47,17 @@ export default class EventDetail extends Component {
                         numberJoined: eventData.numberJoined,
                         tags: eventData.tags,
                         host: eventData.host,
+                        chatroom: eventData.chatroom,
         });
       });
     const manager = new ChatManager({
-      instanceLocator: 'v1:us1:d8ae0067-3c87-4ca0-b2a0-5af6e602488e',
+        instanceLocator: 'v1:us1:d8ae0067-3c87-4ca0-b2a0-5af6e602488e',
         userId: this.props.screenProps.userId,
         tokenProvider:new TokenProvider({url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/d8ae0067-3c87-4ca0-b2a0-5af6e602488e/token'}),
     });
     manager.connect()
     .then(currentUser => {
-      this.currenUser = currentUser;
+      this.currentUser = currentUser;
     });
   }
   
@@ -123,10 +128,11 @@ export default class EventDetail extends Component {
             <TouchableOpacity style={styles.joinButton} onPress={() => {
               fetch("https://posterapp333.herokuapp.com/leave/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
               .then(() => {
-                alert("Event joined");
+                alert("Event left");
                 navigation.goBack();
               });
-              }}>
+              this.currentUser.leaveRoom({roomId: this.state.chatroom});
+            }}>
         <Text style={styles.name}>leave event</Text>
         </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -162,10 +168,10 @@ export default class EventDetail extends Component {
             <TouchableOpacity style={styles.joinButton} onPress={() => {
               fetch("https://posterapp333.herokuapp.com/delete/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
               .then(() => {
-                alert("Event joined");
+                alert("Event deleted");
                 navigation.goBack();
               });
-              currentUser
+              this.currentUser.deleteRoom({roomId: this.state.chatroom});
             }}>
         <Text style={styles.name}>cancel event</Text>
         </TouchableOpacity>

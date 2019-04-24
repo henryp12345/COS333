@@ -113,10 +113,6 @@ export default class FormGenerator extends Component {
         });
     }
   
-    componentDidUpdate() {
-      // this.setState({userId: this.props.navigation.getParam('userId')}}/>);
-    }
-  
     render() {
         const arrayOfString = ['Sports', 'Study', 'Gaming', 'Shopping', 'Transport', 'Campus Activity', 'Project', 'Other']
 
