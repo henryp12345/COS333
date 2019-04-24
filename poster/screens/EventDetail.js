@@ -27,7 +27,7 @@ export default class EventDetail extends Component {
 
   componentDidMount() {
   const { navigation } = this.props;
-    return fetch("https://posterapp333.herokuapp.com/event/" + navigation.getParam('eventId', -1) + "/")
+    fetch("https://posterapp333.herokuapp.com/event/" + navigation.getParam('eventId', -1) + "/")
       .then((response) => {
         var eventData = JSON.parse(response._bodyText)[0];
         var startDate = new Date(eventData.startdate);
@@ -45,13 +45,16 @@ export default class EventDetail extends Component {
                         host: eventData.host,
         });
       });
+    const manager = new ChatManager({
+      instanceLocator: 'v1:us1:d8ae0067-3c87-4ca0-b2a0-5af6e602488e',
+        userId: this.props.screenProps.userId,
+        tokenProvider:new TokenProvider({url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/d8ae0067-3c87-4ca0-b2a0-5af6e602488e/token'}),
+    });
+    manager.connect()
+    .then(currentUser => {
+      this.currenUser = currentUser;
+    });
   }
-  
-  /*
-  componentDidUpdate() {
-    alert('test');
-  }
-  */
   
 	render() {
     const { navigation } = this.props;
@@ -162,7 +165,8 @@ export default class EventDetail extends Component {
                 alert("Event joined");
                 navigation.goBack();
               });
-              }}>
+              currentUser
+            }}>
         <Text style={styles.name}>cancel event</Text>
         </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.goBack()}>

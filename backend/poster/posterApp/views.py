@@ -114,12 +114,19 @@ def addMessage(request, username, roomId):
 
 def leave(request, username, idString):
     # Delete from users events string
-
+    user = User.objects.get(username = username)
+    user.joined.strip(idString)
+    user.save()
     return HttpResponse("OK")
 
 def delete(request, username, idString):
-    # Remove from users joined string
+    # Remove from users' joined string
+    users = User.objects.all().filter(joined__contains = idString).values()
+    for user in users:
+        user.joined.strip(idString)
     # Remove from events database
+    event = Event.objects.get(id = idString)
+    event.delete()
     return HttpResponse("OK")
 
 def recommendations(request, username):
