@@ -3,7 +3,7 @@ import { Animated, AppRegistry, Dimensions, ListView, StyleSheet, Text, Touchabl
 import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { iOSUIKit } from 'react-native-typography';
-import { SearchBar, Button, Icon } from 'react-native-elements';
+import { SearchBar, Button, Icon, Card } from 'react-native-elements';
 
 export default class NotificationScreen extends Component {
   constructor(props) {
@@ -59,7 +59,6 @@ export default class NotificationScreen extends Component {
                     size = {20}
                     />
                   <Text>  A new user joined {data.item.title}</Text>
-
                   </View>
                 </View>
               </TouchableHighlight>
@@ -125,11 +124,11 @@ const styles = StyleSheet.create({
   },
   rowFront: {
     backgroundColor: '#f7eedc',
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
     justifyContent: 'center',
     padding: 10,
     height: 50,
+    borderRadius: 10,
+    marginVertical: 5
   },
   rowBack: {
     textAlign: 'center',
@@ -138,6 +137,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
+    borderRadius: 10,
+    marginVertical: 5
+
   },
   backRightBtn: {
     bottom: 0,
@@ -145,11 +147,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     top: 0,
-    width: 75
+    width: 75,
+    borderRadius: 10
   },
   backRightBtnRight: {
     textAlign: 'center',
     backgroundColor: 'red',
-    right: 0
+    right: 0,
+    borderRadius: 10
   },
 });
