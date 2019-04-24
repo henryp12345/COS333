@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "expoServerPort": null,
   "expoServerNgrokUrl": "https://5d-vqb.anonymous.poster.exp.direct",
   "packagerNgrokUrl": "https://packager.5d-vqb.anonymous.poster.exp.direct",
@@ -6,5 +7,14 @@
   "devToolsPort": 19002,
   "packagerPort": null,
   "packagerPid": null,
+=======
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://yu-zfg.anonymous.poster.exp.direct",
+  "packagerNgrokUrl": "https://packager.yu-zfg.anonymous.poster.exp.direct",
+  "ngrokPid": 84134,
+  "devToolsPort": 19002,
+  "packagerPort": 19006,
+  "packagerPid": 84103,
+>>>>>>> deab0d2adde0c6088913517cc5b285feca91d872
   "webpackServerPort": null
 }
