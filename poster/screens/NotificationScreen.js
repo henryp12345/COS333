@@ -9,8 +9,8 @@ export default class NotificationScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notifications: [], 
-      messages: [],
+      notifications: [],
+      newMessages: [],
       userId: this.props.screenProps.userId
     };
   }
@@ -21,7 +21,7 @@ export default class NotificationScreen extends Component {
       .then((responseJson) => this.setState({notifications: responseJson}));
    fetch("https://posterapp333.herokuapp.com/newMessages/" + this.state.userId + "/")
     .then((response) => response.json())
-      .then((responseJson) => this.setState({messages: responseJson}));
+      .then((responseJson) => this.setState({newMessages: responseJson}));
   }
 
   deleteNotificationRow(rowKey) {

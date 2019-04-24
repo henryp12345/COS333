@@ -9,6 +9,7 @@ from .models import User, Event
 import json
 import datetime
 import dateutil.parser
+import pytz
 
 # Create your views here.
 def default(request):
@@ -33,7 +34,10 @@ def eventId(request, eventString):
     for eventId in idList:
         if len(eventId) > 0 and Event.objects.filter(id = eventId).count() > 0:
             currentEvent = Event.objects.get(id = eventId)
-            if currentEvent.endDate > datetime.datetime.now():
+            utc = pytz.UTC
+            startDate = currentEvent.startDate.replace(tzinfo = utc)
+            # startDate = utc.localize(startDate)
+            if startDate > datetime.datetime.now(startDate.tzinfo):
                 eventDict = model_to_dict(currentEvent)
                 event_list.append(eventDict)
     return JsonResponse(event_list, safe=False)
@@ -89,12 +93,24 @@ def addUser(request, username):
 def notifications(request, username):
     user = User.objects.get(username = username)
     notificationString = user.notifications
+    user.notifications = ""
+    user.save()
     return eventId(request, notificationString)
 
 def newMessages(request, username):
     user = User.objects.get(username = username)
     messageString = user.newMessages
-    return eventId(request, messageString)
+    returnValue = eventId(request, messageString)
+    user.newMessages = ""
+    user.save()
+    return returnValue
+
+def addMessage(request, username, roomId):
+    user = User.objects.get(username = username)
+    if roomId not in user.newMessages:
+        user.newMessages = user.newMessages + roomId + ","
+        user.save()
+    return HttpResponse("OK")
 
 def leave(request, username, idString):
     # Delete from users events string

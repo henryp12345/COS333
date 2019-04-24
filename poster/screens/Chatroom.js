@@ -13,6 +13,7 @@ export default class Chatroom extends Component {
   
   componentDidMount() {
     const {navigation} = this.props;
+    this._isMounted = true;
     this.setState({userId: navigation.getParam('userId')});
     const manager = new ChatManager({
       instanceLocator: 'v1:us1:d8ae0067-3c87-4ca0-b2a0-5af6e602488e',
@@ -21,41 +22,46 @@ export default class Chatroom extends Component {
     });
     manager.connect()
       .then(currentUser => {
-        currentUser.fetchMultipartMessages({roomId: navigation.getParam('roomId')})
-          .then(oldMessages => {
-            var temp = [];
-            for(i = 0; i < oldMessages.length; i++) {
-              temp.push({
-                _id: i,
-                text: oldMessages.reverse()[i].parts[0].payload.content,
-                createdAt: oldMessages.reverse()[i].createdAt,
-                user: {_id:oldMessages.reverse()[i].senderId, name:oldMessages.reverse()[i].senderId}
-              });
-            }
-            this.setState({messages: temp});
-          });
+        this.currentUser = currentUser;
+        this.currentUser.subscribeToRoom({
+          roomId: navigation.getParam('roomId'),
+          hooks: {onMessage: this.onReceive},
+          messageLimit: 100,
+        });
       });
+  }
+  
+  onReceive = data => {
+    const { id, senderId, text, createdAt } = data;
+    const incomingMessage = {
+      _id: id,
+      text: text,
+      createdAt: new Date(createdAt),
+      user: {
+        _id: senderId,
+        name: senderId,
+      },
+    };
+    if(this._isMounted) {
+      this.setState(previousState => ({messages: GiftedChat.append(previousState.messages, incomingMessage)}));
+    }
+    else if (senderId != this.state.userId) {
+      fetch("http://posterapp333/herokuapp.com/addMessage/" + userId + "/" + this.props.navigation.getParam('roomId'));
+    }
   }
   
   onSend(messages = []) {
     const {navigation} = this.props;
-    const manager = new ChatManager({
-      instanceLocator: 'v1:us1:d8ae0067-3c87-4ca0-b2a0-5af6e602488e',
-      userId: navigation.getParam('userId'),
-      tokenProvider:new TokenProvider({url: 'https://us1.pusherplatform.io/services/chatkit_token_provider/v1/d8ae0067-3c87-4ca0-b2a0-5af6e602488e/token'}),
-    });
-    manager.connect()
-      .then(currentUser => {
         messages.forEach(message => {
-          currentUser.sendMessage({
+          this.currentUser.sendMessage({
             text: message.text,
             roomId: navigation.getParam('roomId'),
           })
         });
-        this.setState(previousState => ({
-          messages: GiftedChat.append(previousState.messages, messages)
-        }));
-      });
+  }
+  
+  componentWillUnmount() {
+    this._isMounted = false;
   }
   
   render() {

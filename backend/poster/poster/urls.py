@@ -30,7 +30,8 @@ urlpatterns = [
     path('notifications/<str:username>/', views.notifications),
     path('newMessages/<str:username>/', views.newMessages),
     path('leave/<str:username>/<str:idString>/', views.leave),
-    path('delete/<str:username>/<str:idString>', views.delete),
+    path('delete/<str:username>/<str:idString>/', views.delete),
     path('recs/<str:username>/', views.recommendations),
+    path('addMessage/<str:username>/<str:roomId>/', views.addMessage),
     path('admin/', admin.site.urls),
 ]
