@@ -88,7 +88,7 @@ renderItem={({ item }) => (
       color='black'
       size = {15}
       />
-    <Text style = {styles.recDetails}>{"  "}{item.numberJoined} of {item.capacity} attending</Text>
+    <Text style = {styles.recDetails}>{"  "}{item.capacity-item.numberJoined} of {item.capacity} slots available</Text>
              </View>
 
        <TouchableOpacity>
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
 
   customTitle: {
   ...iOSUIKit.largeTitleEmphasizedObject,
-  fontSize: 24,
+  fontSize: 28,
 },
 
 eventTitle: {
