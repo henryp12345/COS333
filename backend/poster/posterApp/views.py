@@ -3,6 +3,8 @@ from django.core import serializers
 from django.forms.models import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
+from django.db.models import F
 from .models import User, Event
 import json
 import datetime
@@ -15,7 +17,7 @@ def default(request):
 @csrf_exempt
 def event(request):
     if request.method == 'GET':
-        values = Event.objects.all().values()
+        values = Event.objects.all().filter(endDate__gt = datetime.datetime.now()).values()
         values_list = list(values)
         return JsonResponse(values_list, safe=False)
     elif request.method == 'POST':
@@ -31,8 +33,9 @@ def eventId(request, eventString):
     for eventId in idList:
         if len(eventId) > 0 and Event.objects.filter(id = eventId).count() > 0:
             currentEvent = Event.objects.get(id = eventId)
-            eventDict = model_to_dict(currentEvent)
-            event_list.append(eventDict)
+            if currentEvent.endDate > datetime.datetime.now():
+                eventDict = model_to_dict(currentEvent)
+                event_list.append(eventDict)
     return JsonResponse(event_list, safe=False)
 
 def hosted(request, username):
@@ -92,6 +95,69 @@ def newMessages(request, username):
     user = User.objects.get(username = username)
     messageString = user.newMessages
     return eventId(request, messageString)
+
+def leave(request, username, idString):
+    # Delete from users events string
+
+    return HttpResponse("OK")
+
+def delete(request, username, idString):
+    # Remove from users joined string
+    # Remove from events database
+    return HttpResponse("OK")
+
+def recommendations(request, username):
+    user = User.objects.get(username = username)
+    EventList = user.joined.split(",")
+    Tags = {}
+    for item in EventList:
+        if len(item) > 0 and Event.objects.filter(id = item).count() > 0:
+            currentEvent = Event.objects.get(id = item)
+            Event_tags = currentEvent.tags.split(",")
+            for tag in Event_tags:
+                if tag in Tags:
+                    Tags[tag] = Tags[tag] + 1
+                else:
+                    Tags[tag] = 1
+    HostedList = user.hosted.split(",")
+    for item in HostedList:
+        if len(item) > 0 and Event.objects.filter(id = item).count() > 0:
+            currentEvent = Event.objects.get(id = item)
+            Event_tags = currentEvent.tags.split(",")
+            for tag in Event_tags:
+                if tag in Tags:
+                    Tags[tag] = Tags[tag] + 1
+                else:
+                    Tags[tag] = 1
+    top = ""
+    sec = ""
+    count = 0
+    # return JsonResponse(Tags, safe=False)
+    for tag in Tags:
+        if count == 0:
+            count = 1
+            top = tag
+            continue
+        if count == 1:
+            count == 2
+            if Tags[top] < Tags[tag]:
+                sec = top
+                top = tag
+            else:
+                sec = tag
+            continue
+        if Tags[tag] > Tags[top]:
+            sec = top
+            top = tag
+        elif Tags[tag] > Tags[sec]:
+            sec = tag
+    if len(top) == 0 or len(sec) == 0:
+        return HttpResponse("not enough events joined")
+    values = Event.objects.filter(Q(tags = top) | Q(tags = sec))
+    values = values.exclude(numberJoined = F('capacity'))
+    values = values.filter(startDate__gt =  datetime.datetime.now()).values()
+    values_list = list(values)
+    return JsonResponse(values_list, safe=False)
 
 def clearAll(request):
     User.objects.all().delete()

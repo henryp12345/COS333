@@ -118,7 +118,7 @@ export default class EventDetail extends Component {
               </Text>
             </View>
             <TouchableOpacity style={styles.joinButton} onPress={() => {
-              fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
+              fetch("https://posterapp333.herokuapp.com/leave/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
               .then(() => {
                 alert("Event joined");
                 navigation.goBack();
@@ -157,7 +157,7 @@ export default class EventDetail extends Component {
               </Text>
             </View>
             <TouchableOpacity style={styles.joinButton} onPress={() => {
-              fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
+              fetch("https://posterapp333.herokuapp.com/delete/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
               .then(() => {
                 alert("Event joined");
                 navigation.goBack();

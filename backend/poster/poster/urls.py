@@ -29,5 +29,8 @@ urlpatterns = [
     path('addUser/<str:username>/', views.addUser),
     path('notifications/<str:username>/', views.notifications),
     path('newMessages/<str:username>/', views.newMessages),
+    path('leave/<str:username>/<str:idString>/', views.leave),
+    path('delete/<str:username>/<str:idString>', views.delete),
+    path('recs/<str:username>/', views.recommendations),
     path('admin/', admin.site.urls),
 ]

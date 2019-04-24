@@ -1,10 +1,10 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://yu-zfg.anonymous.poster.exp.direct",
-  "packagerNgrokUrl": "https://packager.yu-zfg.anonymous.poster.exp.direct",
-  "ngrokPid": 78633,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": "https://5d-vqb.anonymous.poster.exp.direct",
+  "packagerNgrokUrl": "https://packager.5d-vqb.anonymous.poster.exp.direct",
+  "ngrokPid": 67391,
   "devToolsPort": 19002,
-  "packagerPort": 19006,
-  "packagerPid": 78602,
+  "packagerPort": null,
+  "packagerPid": null,
   "webpackServerPort": null
 }

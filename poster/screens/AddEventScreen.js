@@ -73,6 +73,7 @@ export default class FormGenerator extends Component {
     }
 
     login(items) {
+      
         const formValues = this.formGenerator.getValues();
         var chatId;
         const manager = new ChatManager({
@@ -132,15 +133,14 @@ export default class FormGenerator extends Component {
                 />
                 <Text style={styles.labelText}>Tags</Text>
         <TagSelect
-          value={[arrayOfString]}
           data={arrayOfString}
           ref={(tag) => {
-            this.tagString = tag;
+            this.tag = tag;
           }}
         />
                 </View>
                 <View style={styles.submitButton}>
-                <Button block onPress={() => this.login(this.tagString.itemsSelected)}>
+                <Button block onPress={() => this.login(this.tag.itemsSelected)}>
                 <Text>Submit</Text>
                 </Button>
                 </View>
