@@ -12,7 +12,7 @@ import dateutil.parser
 import pytz
 
 # Create your views here.
-# retest
+# test
 def default(request):
     return HttpResponse("")
 
