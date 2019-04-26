@@ -4,11 +4,45 @@ import Dimensions from 'Dimensions';
 import {StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity } from 'react-native';
 import { NavigationActions } from "react-navigation";
 import { iOSUIKit } from 'react-native-typography'
+import GenerateForm from 'react-native-form-builder';
+import { sha256 } from 'react-native-sha256';
 
 import bgSrc from '../images/wallpaper.jpg';
 import logoImg from '../images/windows.png';
 
+const fields = [
+                 {
+                   type: 'text',
+                   name: 'username',
+                   required: true,
+                   label: 'Username',
+                 },
+                 {
+                   type: 'text',
+                   props: {secureTextEntry: true},
+                   name: 'password',
+                   required: true,
+                   label: 'Password',
+                 },
+               ];
+
 export default class Login extends Component {
+  login() {
+    const { navigate } = this.props.navigation;
+    const formValues = this.formGenerator.getValues();
+    sha256(formValues.password)
+      .then((hash) => {
+        fetch("https://posterapp333.herokuapp.com/authUser/" + formValues.username + "/" + hash + "/")
+          .then((response) => {
+            if (response == 'OK') {
+              navigate("Dashboard", {userId: formValues.username});
+            }
+            else
+              alert("Invalid username or password");
+          });
+      });
+  }
+
   render() {
     const { navigate } = this.props.navigation;
 

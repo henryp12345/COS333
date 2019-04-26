@@ -18,20 +18,22 @@ from django.urls import include, path
 from posterApp import views
 
 urlpatterns = [
-	  path('', views.default),
-	  path('event/', views.event),
+    path('', views.default),
+    path('event/', views.event),
     path('event/<str:eventString>/', views.eventId),
     path('hosted/<str:username>/', views.hosted),
     path('addHosted/<str:username>/<str:idString>/', views.addHosted),
     path('joined/<str:username>/', views.joined),
     path('addJoined/<str:username>/<str:idString>/', views.addJoined),
-	  path('clear/', views.clearAll),
-    path('addUser/<str:username>/', views.addUser),
+    path('clear/', views.clearAll),
+    path('addUser/<str:username>/<str:passHash>/', views.addUser),
     path('notifications/<str:username>/', views.notifications),
     path('newMessages/<str:username>/', views.newMessages),
     path('leave/<str:username>/<str:idString>/', views.leave),
     path('delete/<str:username>/<str:idString>/', views.delete),
     path('recs/<str:username>/', views.recommendations),
     path('addMessage/<str:username>/<str:roomId>/', views.addMessage),
+    path('getUser/<str:username>/', views.getUser),
+    path('authUser/<str:username>/<str:passHash>/', views.authUser),
     path('admin/', admin.site.urls),
 ]

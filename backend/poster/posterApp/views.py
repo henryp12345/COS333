@@ -85,10 +85,13 @@ def addJoined(request, username, idString):
             currentUser.save()
     return HttpResponse(idString)
 
-def addUser(request, username):
-    newUser = User(username = username, hosted = "", joined = "", notifications = "", newMessages = "")
-    newUser.save()
-    return HttpResponse("OK")
+def addUser(request, username, passHash):
+    if (User.objects.filter(username = username).count() == 0):
+        newUser = User(username = username, hosted = "", joined = "", notifications = "", newMessages = "", passHash = passHash)
+        newUser.save()
+        return HttpResponse("OK")
+    else:
+        return HttpResponse("User taken")
 
 def notifications(request, username):
     user = User.objects.get(username = username)
@@ -181,6 +184,17 @@ def recommendations(request, username):
     values = values.filter(startDate__gt =  datetime.datetime.now()).values()
     values_list = list(values)
     return JsonResponse(values_list, safe=False)
+
+def getUser(request, username):
+    user = User.objects.get(username = username)
+    userDict = model_to_dict(user)
+    return JsonResponse(userDict, safe=False)
+
+def authUser(request, username, passHash):
+    if (User.objects.filter(username = username, passHash = passHash).count() == 0):
+        return HttpResponse("Incorrect username/password")
+    else:
+        return HttpResponse("OK")
 
 def clearAll(request):
     User.objects.all().delete()

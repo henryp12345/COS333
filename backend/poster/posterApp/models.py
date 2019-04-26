@@ -20,3 +20,4 @@ class User(models.Model):
     joined = models.CharField(max_length=200)
     notifications = models.CharField(max_length=200)
     newMessages = models.CharField(max_length=200)
+    passHash = models.CharField(max_length = 50, default = '')

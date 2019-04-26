@@ -23,7 +23,7 @@ export default class EventDetail extends Component {
                    numberJoined: 0,
                    tags: '',
                    host: '',
-                   whichButton: 2,
+                   whichButton: 0,
                    chatroom: ''
     };
   }
@@ -59,6 +59,16 @@ export default class EventDetail extends Component {
     .then(currentUser => {
       this.currentUser = currentUser;
     });
+    fetch("https://posterapp333.herokuapp.com/getUser" + this.props.screenProps.userId + "/")
+      .then((response) => {
+        response.json()
+          .then((responseJson) => {
+            if (responseJson.joined.search(this.state.id) >= 0)
+              this.setState({whichButton: 1})
+            else if (responseJson.hosted.search(this.state.id) >= 0)
+              this.setState({whichButton: 2})
+          });
+      });
   }
   
 	render() {
@@ -88,9 +98,15 @@ export default class EventDetail extends Component {
             </View>
             <TouchableOpacity style={styles.joinButton} onPress={() => {
               fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
-              .then(() => {
-                alert("Event joined");
-                navigation.goBack();
+              .then((response) => {
+                if (response._bodyText == 'Alreay joined') {
+                    alert('You have already joined this event');
+                    navigation.goBack();
+                }
+                else {
+                  alert("Event joined");
+                  navigation.goBack();
+                }
               });
               }}>
         <Text style={styles.name}>join event</Text>

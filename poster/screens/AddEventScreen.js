@@ -29,7 +29,7 @@ const fields = [
                 label: 'What is your event?',
                 },
                 {type: 'text',
-                props: {multiline: true, secureTextEntry: true},
+                props: {multiline: true},
                 name: 'description',
                 required: true,
                 label: 'Describe your event',
