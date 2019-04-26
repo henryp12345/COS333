@@ -109,8 +109,10 @@ export default class FormGenerator extends Component {
             })
             .then(response => alert(response._bodyText))
             console.log('FORM VALUES', formValues);
+            this.formGenerator.resetForm();
           });
         });
+      this.props.navigation.navigate("HomeScreen")
     }
   
     render() {
