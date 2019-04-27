@@ -1,67 +1,58 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Alert, ScrollView } from 'react-native';
+import { ImageBackground, AppRegistry, Image, StyleSheet, Alert, ScrollView } from 'react-native';
 import { View, Text, Button } from 'native-base';
 import GenerateForm from 'react-native-form-builder';
 import { TagSelect } from 'react-native-tag-select';
+import { iOSUIKit } from 'react-native-typography'
 import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
 
-const styles = {
-wrapper: {
-flex: 1,
-marginTop: 50,
-},
-submitButton: {
-paddingHorizontal: 10,
-paddingTop: 20,
-},
-name:{
-    fontSize:22,
-    color:"#000000",
-    fontWeight:'600',
-    padding:20
-  },
-};
+import bgForm from '../images/new-event.png';
+
 // These Fields will create a login form with three fields
 const fields = [
-                {type: 'text',
-                name: 'event',
-                required: true,
-                label: 'What is your event?',
-                },
-                {type: 'text',
-                props: {multiline: true},
-                name: 'description',
-                required: true,
-                label: 'Describe your event',
+                {
+                	type: 'text',
+                	name: 'event',
+                	required: true,
+                	label: 'What is your event?',
                 },
                 {
-                type: 'date',
-                name: 'startdate',
-                mode: 'datetime',
-                minDate: 'Today',
-                required: true,
-                label: 'When is the event starting?',
+                	type: 'text',
+                	name: 'description',
+                	label: 'event details',
+                	required: true,
+                	props: {
+                		multiline: true,
+                		numberOfLines: 5,
+                	},
+            	},
+                {
+                	type: 'date',
+                	name: 'startdate',
+                	mode: 'datetime',
+                	minDate: 'Today',
+                	required: true,
+                	label: 'When does your event start?',
                 },
                 {
-                type: 'date',
-                name: 'enddate',
-                mode: 'datetime',
-                minDate: 'Today',
-                required: true,
-                label: 'When does the event end?',
+                	type: 'date',
+                	name: 'enddate',
+                	mode: 'datetime',
+                	minDate: 'Today',
+                	required: true,
+                	label: 'When does your event end?',
                 },
                 {
-                type: 'number',
-                name: 'count',
-                required: true,
-                label: 'How many people are you looking for?',
+                	type: 'number',
+                	name: 'count',
+                	required: true,
+                	label: 'How many people do you need?',
                 },
-
                 {
-                type: 'text',
-                name: 'location',
-                required: false,
-                label: 'Where will this be held?',
+                	type: 'text',
+                	name: 'location',
+                	required: false,
+                	label: 'Where will this be held?',
                 },
                 ];
 
@@ -119,36 +110,125 @@ export default class FormGenerator extends Component {
         const arrayOfString = ['Sports', 'Study', 'Gaming', 'Shopping', 'Transport', 'Campus Activity', 'Project', 'Other']
 
         return (
+        	<ImageBackground style={styles.picture} source={bgForm}>
+        		{this.props.children}
                 <ScrollView style={styles.wrapper}>
                 <Text style={styles.name}>Create Event</Text>
                 <View>
                 
-                <GenerateForm
+                <GenerateForm style={styles.submit}
                 ref={(c) => {
                 this.formGenerator = c;
                 }}
                 fields={fields}
                 />
                 <Text style={styles.labelText}>Tags</Text>
+        <View style={styles.container}>
         <TagSelect
           data={arrayOfString}
           ref={(tag) => {
             this.tag = tag;
           }}
+          itemStyle={styles.item}
+          itemLabelStyle={styles.label}
         />
+        </View>
                 </View>
                 <View style={styles.submitButton}>
                 <Button block onPress={() => this.login(this.tag.itemsSelected)}>
-                <Text>Submit</Text>
+                <Text style={styles.submit}>Submit</Text>
                 </Button>
                 </View>
                 
 
 
                 </ScrollView>
+                </ImageBackground>
                 );
     }
 }
 
-AppRegistry.registerComponent('FormGenerator', () => FormGenerator);
+const styles = StyleSheet.create({
+	container: {
+		marginTop: 50,
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	date: {
+		...iOSUIKit.largeTitleEmphasizedObject,
+		fontSize: 17,
+		textAlign: "center",
+		color: "#f5fffa",
+		lineHeight: 17,
+	},
+	joinButton: {
+		marginTop:100,
+   		height:40,
+    	flexDirection: 'row',
+    	justifyContent: 'center',
+    	alignItems: 'center',
+    	alignSelf:'center',
+    	marginBottom:20,
+    	width:200,
+    	borderRadius:20,
+    	backgroundColor: "#ff1493",
+	},
+	welcome: {
+		...iOSUIKit.largeTitleEmphasizedObject,
+		fontSize: 45,
+    	lineHeight:46,
+		textAlign: "center",
+		margin: 10,
+		color: 'white',
+	},
+   picture: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover',
+  },
+  image: {
+    width: 80,
+    height: 120,
+  },
+  wrapper: {
+	flex: 1,
+	marginTop: 50,
+  },
+  submitButton: {
+	paddingHorizontal: 160,
+	paddingTop: 15,
+	padding:20,
+  },
+  submit: {
+  	...iOSUIKit.subheadEmphasizedObject,
+  	color: 'white',
+  },
+  name:{
+	...iOSUIKit.largeTitleEmphasizedObject,
+    fontSize: 28,
+    color:'white',
+    padding:20
+  },
+  labelText:{
+  	...iOSUIKit.subheadEmphasizedObject,
+  	fontSize: 20,
+    padding:20,
+    color: 'white',
+  },
+  item: {
+    borderWidth: 1,   
+    backgroundColor: '#FFF',
+  },
+  label: {
+    color: '#333',
+    fontSize: 15,
+  },
+  container: {
+  	flex: 1,
+  	marginLeft: 20,
+  }
+});
 
+AppRegistry.registerComponent('FormGenerator', () => FormGenerator);
