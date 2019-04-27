@@ -50,7 +50,7 @@ export default class NotificationScreen extends Component {
             data={this.state.notifications}
             renderItem={ (data) => (
               <TouchableHighlight
-                style={styles.rowFront}
+                style={styles.rowFrontJoin}
                 underlayColor={'#ffffff'}>
                 <View>
                   <View style={{ flexDirection:"row" }}>
@@ -78,7 +78,7 @@ export default class NotificationScreen extends Component {
             data={this.state.newMessages}
             renderItem={ (data) => (
               <TouchableHighlight
-                style={styles.rowFront}
+                style={styles.rowFrontChat}
                 underlayColor={'#ffffff'}>
                 <View>
                 <View style={{ flexDirection:"row" }}>
@@ -87,7 +87,7 @@ export default class NotificationScreen extends Component {
                   type='feather'
                   size = {20}
                   />
-                  <Text>  You have a new message in the {data.item.title} chat</Text>
+                  <Text>  You have a new message in the group chat for {data.item.title}</Text>
                 </View>
                 </View>
               </TouchableHighlight>
@@ -124,8 +124,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1
   },
-  rowFront: {
+  rowFrontJoin: {
     backgroundColor: '#ffe066',
+    justifyContent: 'center',
+    padding: 10,
+    height: 50,
+    borderRadius: 10,
+    marginVertical: 5
+  },
+  rowFrontChat: {
+    backgroundColor: '#f58a00',
     justifyContent: 'center',
     padding: 10,
     height: 50,
