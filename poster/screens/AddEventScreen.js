@@ -19,8 +19,8 @@ const fields = [
                 {
                 	type: 'text',
                 	name: 'description',
-                	label: 'event details',
-                	required: true,
+                	label: 'Describe Your Event: \n\n\n',
+                	required: false,
                 	props: {
                 		multiline: true,
                 		numberOfLines: 5,
