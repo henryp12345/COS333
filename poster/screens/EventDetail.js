@@ -99,7 +99,7 @@ export default class EventDetail extends Component {
             <TouchableOpacity style={styles.joinButton} onPress={() => {
               fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
               .then((response) => {
-                if (response._bodyText == 'Alreay joined') {
+                if (response._bodyText == 'Already joined') {
                     alert('You have already joined this event');
                     navigation.goBack();
                 }
@@ -271,6 +271,10 @@ const styles = StyleSheet.create({
     fontSize:15,
     fontWeight: 'bold',
     color: "white",
-  }
+  },
+  image: {
+    width: 80,
+    height: 120,
+  },
 
 });
