@@ -52,7 +52,7 @@ export default class Login extends Component {
         <View style={styles.container}>
         <Image source={logoImg} style={styles.image} />
         <Text style={styles.title}>p o s t e r</Text>
-       
+        <KeyboardAvoidingView>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
               placeholder="Email"
@@ -65,6 +65,7 @@ export default class Login extends Component {
               secureTextEntry={true}
               underlineColorAndroid='transparent'/>
         </View>
+        </KeyboardAvoidingView>
 
      <TouchableOpacity style={styles.container2} onPress={() => navigate("Dashboard", {userId: 'Henry'})}>
       <Text style={styles.name}>LOG IN</Text>
