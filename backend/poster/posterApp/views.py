@@ -10,9 +10,10 @@ import json
 import datetime
 import dateutil.parser
 import pytz
+import hashlib
 
 # Create your views here.
-# test
+# retest
 def default(request):
     return HttpResponse("")
 
@@ -85,9 +86,10 @@ def addJoined(request, username, idString):
             currentUser.save()
     return HttpResponse(idString)
 
-def addUser(request, username, passHash):
+def addUser(request, username, passHash, first, last):
+    passHash = hashlib.sha256(passHash.encode('utf8')).hexdigest()
     if (User.objects.filter(username = username).count() == 0):
-        newUser = User(username = username, hosted = "", joined = "", notifications = "", newMessages = "", passHash = passHash)
+        newUser = User(username = username, hosted = "", joined = "", notifications = "", newMessages = "", passHash = passHash, firstName = first, lastName = last)
         newUser.save()
         return HttpResponse("OK")
     else:
@@ -141,6 +143,8 @@ def recommendations(request, username):
             currentEvent = Event.objects.get(id = item)
             Event_tags = currentEvent.tags.split(",")
             for tag in Event_tags:
+                if len(tag) == 0:
+                    continue
                 if tag in Tags:
                     Tags[tag] = Tags[tag] + 1
                 else:
@@ -151,6 +155,8 @@ def recommendations(request, username):
             currentEvent = Event.objects.get(id = item)
             Event_tags = currentEvent.tags.split(",")
             for tag in Event_tags:
+                if len(tag) == 0:
+                    continue
                 if tag in Tags:
                     Tags[tag] = Tags[tag] + 1
                 else:
@@ -158,7 +164,6 @@ def recommendations(request, username):
     top = ""
     sec = ""
     count = 0
-    # return JsonResponse(Tags, safe=False)
     for tag in Tags:
         if count == 0:
             count = 1
@@ -178,10 +183,12 @@ def recommendations(request, username):
         elif Tags[tag] > Tags[sec]:
             sec = tag
     if len(top) == 0 or len(sec) == 0:
-        return HttpResponse("not enough events joined")
-    values = Event.objects.filter(Q(tags = top) | Q(tags = sec))
-    values = values.exclude(numberJoined = F('capacity'))
-    values = values.filter(startDate__gt =  datetime.datetime.now()).values()
+        return HttpResponse("not enough events joined or hosted")
+    values = Event.objects.filter(tags = top)
+        #values = Event.objects.filter(Q(tags = 'transport') | Q(tags = sec))
+    # values = values.exclude(numberJoined = F('capacity'))
+    # filtered = values.filter(startDate__gt =  datetime.datetime.now()).values()
+    # except Event.DoesNotExist:
     values_list = list(values)
     return JsonResponse(values_list, safe=False)
 
@@ -191,6 +198,7 @@ def getUser(request, username):
     return JsonResponse(userDict, safe=False)
 
 def authUser(request, username, passHash):
+    passHash = hashlib.sha256(passHash.encode('utf-8')).hexdigest()
     if (User.objects.filter(username = username, passHash = passHash).count() == 0):
         return HttpResponse("Incorrect username/password")
     else:

@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19007,
-  "packagerPid": 55465,
-  "expoServerNgrokUrl": "https://5d-vqb.anonymous.poster.exp.direct",
-  "packagerNgrokUrl": "https://packager.5d-vqb.anonymous.poster.exp.direct",
-  "ngrokPid": 55498
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

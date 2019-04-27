@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
-import { TextInput, KeyboardAvoidingView, StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity } from 'react-native';
+import { TextInput, KeyboardAvoidingView, StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity, Platform } from 'react-native';
 import { NavigationActions } from "react-navigation";
 import { iOSUIKit } from 'react-native-typography'
 import GenerateForm from 'react-native-form-builder';
-import { sha256 } from 'react-native-sha256';
-
+import CryptoJS from 'react-native-crypto-js';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import bgSrc from '../images/wallpaper.jpg';
 import logoImg from '../images/windows.png';
 
@@ -27,20 +27,27 @@ const fields = [
                ];
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {username: '', password: ''};
+  }
+
   login() {
     const { navigate } = this.props.navigation;
-    const formValues = this.formGenerator.getValues();
-    sha256(formValues.password)
-      .then((hash) => {
-        fetch("https://posterapp333.herokuapp.com/authUser/" + formValues.username + "/" + hash + "/")
-          .then((response) => {
-            if (response == 'OK') {
-              navigate("Dashboard", {userId: formValues.username});
-            }
-            else
-              alert("Invalid username or password");
-          });
+    if (this.state.username.length == 0 || this.state.password.length == 0)
+      alert("Please enter a username and password");
+    else {
+      fetch("https://posterapp333.herokuapp.com/authUser/" + this.state.username + "/" + this.state.password + "/")
+        .then((response) => {
+          if (response._bodyText == 'OK') {
+            var userId = this.state.username;
+            this.setState({username: '', password: ''});
+            navigate("Dashboard", {userId: userId});
+          }
+          else
+            alert("Invalid username or password");
       });
+    }
   }
 
   render() {
@@ -55,19 +62,25 @@ export default class Login extends Component {
         <KeyboardAvoidingView>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
-              placeholder="Email"
+              placeholder="Username"
               keyboardType="email-address"
-              underlineColorAndroid='transparent'/>
+              underlineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({username: text})}
+              />
+              {Platform.OS === 'android' ? <KeyboardSpacer topSpacing={-50}/> : null}
         </View>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
               placeholder="Password"
               secureTextEntry={true}
-              underlineColorAndroid='transparent'/>
+              underlineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({password: text})}
+              />
+              {Platform.OS === 'android' ? <KeyboardSpacer topSpacing={-50}/> : null}
         </View>
         </KeyboardAvoidingView>
 
-     <TouchableOpacity style={styles.container2} onPress={() => navigate("Dashboard", {userId: 'Henry'})}>
+     <TouchableOpacity style={styles.container2} onPress={() => this.login()}>
       <Text style={styles.name}>LOG IN</Text>
       </TouchableOpacity> 
            <TouchableOpacity onPress={() => navigate("createUser")}>

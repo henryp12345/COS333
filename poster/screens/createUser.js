@@ -34,27 +34,29 @@ const fields = [
 ];
 
 export default class createUser extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {username: '', password: '', confirm: '', first: '', last: ''}
+  }
   
   // Call this function when the create button is pressed
   createUser() {
-    const formValues = this.formGenerator.getValues();
     const {navigate} = this.props.navigation;
-    if (formValues.password != formValues.confirmPassword)
+    if (this.state.password != this.state.confirm)
       alert("Passwords do not match");
-    else if (formValues.password.length < 6)
+    else if (this.state.last.length == 0 || this.state.first.length == 0)
+      alert("Please enter your name")
+    else if (this.state.password.length < 6)
       alert("Password must be longer than 6 characters");
     else {
-      sha256(formValues.password)
-        .then((hash) => {
-          fetch("https://posterapp333.herokuapp.com/addUser/" + formValues.username + "/" + hash + "/")
-            .then((response) => {
-              if (response._bodyText == "OK") {
-                alert('Thanks for joining Poster!');
-                navigate("Dashboard", {userId: formValues.username});
-              }
-              else
-                alert('Username already taken');
-            });
+      fetch("https://posterapp333.herokuapp.com/addUser/" + this.state.username + "/" + this.state.password + "/" + this.state.first + "/" + this.state.last + "/")
+        .then((response) => {
+          if (response._bodyText == "OK") {
+            alert('Thanks for joining Poster!');
+            navigate("Dashboard", {userId: this.state.username});
+          }
+          else
+            alert('Username already taken');
         });
     }
   }
@@ -71,25 +73,40 @@ export default class createUser extends Component {
         <KeyboardAvoidingView>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
-              placeholder="Email"
+              placeholder="Username"
               keyboardType="email-address"
-              underlineColorAndroid='transparent'/>
+              underlineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({username: text})}/>
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+              placeholder="First Name"
+              underlineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({first: text})}/>
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+              placeholder="Last Name"
+              underlineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({last: text})}/>
         </View>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
               placeholder="Password"
               secureTextEntry={true}
-              underlineColorAndroid='transparent'/>
+              underlineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({password: text})}/>
         </View>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
               placeholder="Confirm Password"
               secureTextEntry={true}
-              underlineColorAndroid='transparent'/>
+              underlineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({confirm: text})}/>
         </View>
         </KeyboardAvoidingView>
 
-     <TouchableOpacity style={styles.container2} onPress={() => navigate("Dashboard", {userId: 'Henry'})}>
+     <TouchableOpacity style={styles.container2} onPress={() => this.createUser()}>
       <Text style={styles.name}>SIGN UP</Text>
       </TouchableOpacity> 
            <TouchableOpacity onPress={() => navigate('Login')}>
