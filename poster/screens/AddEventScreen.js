@@ -17,15 +17,18 @@ const fields = [
                 	label: 'What is your event?',
                 },
                 {
-                	type: 'text',
-                	name: 'description',
-                	label: 'Describe Your Event: \n\n\n',
-                	required: false,
-                	props: {
-                		multiline: true,
-                		numberOfLines: 5,
-                	},
-            	},
+                	type: 'group',
+                  name: 'description',
+                  label: 'Event Summary:',
+                  required: false,
+                  fields: [
+                  {
+                    type: 'text',
+                    name: 'deets',
+                    label: '(optional)',
+                  },
+                  ]
+            	  },
                 {
                 	type: 'date',
                 	name: 'startdate',
