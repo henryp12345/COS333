@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { ImageBackground, AppRegistry, Image, StyleSheet, Alert, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, Platform, ImageBackground, AppRegistry, Image, StyleSheet, Alert, ScrollView } from 'react-native';
 import { View, Text, Button, Fonts } from 'native-base';
 import GenerateForm from 'react-native-form-builder';
 import { TagSelect } from 'react-native-tag-select';
 import { iOSUIKit } from 'react-native-typography'
-import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
+import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
+import AppLoading from 'expo';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import bgForm from '../images/new-event.png';
 
@@ -60,9 +62,11 @@ const fields = [
                 ];
 
 export default class FormGenerator extends Component {
-	componentWillMount() {
-    	this.loadFonts();
-  	}
+	constructor(props) {
+    	super(props);
+    	const {navigation} = this.props;
+      	this.state = {loading: true, userId: this.props.screenProps.userId};
+    }
   
   	async componentWillMount() {
     	await Expo.Font.loadAsync({
@@ -72,12 +76,6 @@ export default class FormGenerator extends Component {
     	});
     	this.setState({ loading: false });
   	}
-
-    constructor(props) {
-      super(props);
-      const {navigation} = this.props;
-      this.state = {userId: this.props.screenProps.userId};
-    }
 
     login(items) {
       
@@ -122,15 +120,17 @@ export default class FormGenerator extends Component {
       this.props.navigation.navigate("HomeScreen")
     }
   
-    if (this.state.loading) {
-      return <Expo.AppLoading />;
-    }
     render() {
+    	if (this.state.loading) {
+      		return <Expo.AppLoading />;
+    	}
+
         const arrayOfString = ['Sports', 'Study', 'Gaming', 'Shopping', 'Transport', 'Campus Activity', 'Project', 'Other']
 
         return (
         	<ImageBackground style={styles.picture} source={bgForm}>
         		{this.props.children}
+        		<KeyboardAvoidingView style={styles.container} behavior="position">
                 <ScrollView style={styles.wrapper}>
                 <Text style={styles.name}>Create Event</Text>
                 <View>
@@ -159,9 +159,8 @@ export default class FormGenerator extends Component {
                 </Button>
                 </View>
                 
-
-
                 </ScrollView>
+                </KeyboardAvoidingView>
                 </ImageBackground>
                 );
     }
@@ -216,7 +215,7 @@ const styles = StyleSheet.create({
 	marginTop: 50,
   },
   submitButton: {
-	paddingHorizontal: 160,
+	paddingHorizontal: 100,
 	paddingTop: 15,
 	padding:20,
   },
