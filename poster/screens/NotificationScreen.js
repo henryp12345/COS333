@@ -28,7 +28,13 @@ export default class NotificationScreen extends Component {
     return (
        <View style={styles.viewStyle}>
        <ScrollView>
+          <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customTitle}>Notifications</Text>
+<TouchableOpacity>
+<Text style={styles.customSubtitle2}>Refresh</Text>
+</TouchableOpacity>
+</View>
+
           <FlatList
             data={this.state.notifications}
             renderItem={ (data) => (
@@ -104,6 +110,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: 5
   },
+  customSubtitle2: {
+  ...iOSUIKit.title3Object,
+  fontSize: 14,
+      marginTop: 10
+},
   rowFrontChat: {
     backgroundColor: '#f58a00',
     justifyContent: 'center',
