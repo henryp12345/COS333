@@ -42,7 +42,13 @@ export default class DiscoverScreen extends Component {
     return (
       <ScrollView>
       <View style={styles.viewStyle}>
+      <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
 <Text style={styles.customTitle}>Top Picks For You</Text>  
+<TouchableOpacity>
+<Text style={styles.customSubtitle2}>Refresh</Text>
+</TouchableOpacity>
+</View>
+
        <ScrollView horizontal={true}
        showsHorizontalScrollIndicator={false}> 
        
@@ -159,6 +165,11 @@ const styles = StyleSheet.create({
   fontSize: 28,
 },
 
+  customTitle2: {
+  ...iOSUIKit.largeTitleEmphasizedObject,
+  fontSize: 10,
+},
+
 eventTitle: {
   ...iOSUIKit.subheadEmphasizedObject,
   fontSize: 18,
@@ -174,6 +185,12 @@ recSubtitle: {
   ...iOSUIKit.subheadObject,
   fontSize: 18,
   marginBottom: 5,
+},
+
+customSubtitle2: {
+  ...iOSUIKit.title3Object,
+  fontSize: 14,
+      marginTop: 10
 },
 
 recDetails: {

@@ -49,7 +49,13 @@ class Profile extends Component {
       <View style={styles.viewStyle}>
       <Text style={styles.customTitle}>{"Welcome back, "}{this.state.userId}.</Text>
       <ScrollView>
+            <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customSubtitle}>Events You are Hosting</Text>
+<TouchableOpacity>
+<Text style={styles.customSubtitle2}>Refresh</Text>
+</TouchableOpacity>
+</View>
+
       <FlatList
         data={this.state.hosted}
         renderItem={({ item }) => (
@@ -179,11 +185,14 @@ const styles = StyleSheet.create({
 customSubtitle: {
   ...iOSUIKit.subheadEmphasizedObject,
   fontSize: 20,
+    marginTop: 10
+
 },
 
 customSubtitle2: {
   ...iOSUIKit.title3Object,
   fontSize: 14,
+      marginTop: 10
 },
 
 eventTitle: {
