@@ -54,7 +54,10 @@ def addHosted(request, username, idString):
     idList = idString.split(",")
     user = User.objects.get(username = username)
     currentHosted = user.hosted
-    currentHosted = currentHosted + "," + idString
+    if currentHosted == "":
+        currentHosted = "," + idString + ","
+    else:
+        currentHosted = currenthosted + idString + ","
     user.hosted = currentHosted
     user.save()
     return HttpResponse("OK")
@@ -67,26 +70,33 @@ def joined(request, username):
 def addJoined(request, username, idString):
     idList = idString.split(",")
     user = User.objects.get(username = username)
-    currentJoined = user.joined
-    currentJoined = currentJoined + "," + idString
-    user.joined = currentJoined
-    user.save()
+    for item in idList:
+        if item in user.joined or item in user.hosted:
+            return HttpResponse("Already joined")
     # Updates numberJoined for the events
     for item in idList:
         if len(item) > 0 and Event.objects.filter(id = item).count() > 0:
             currentEvent = Event.objects.get(id = item)
-            currentJoined = currentEvent.numberJoined
-            currentJoined = currentJoined + 1
-            currentEvent.numberJoined = currentJoined
-            currentEvent.save()
-            currentUser = User.objects.get(username = currentEvent.host)
-            if item in currentUser.joined or item in currentUser.hosted:
-                return HttpResponse("Already joined")
-            currentNotifications = currentUser.notifications
-            currentNotifications = currentNotifications + "," + item
-            currentUser.notifications = currentNotifications
-            currentUser.save()
-    return HttpResponse(idString)
+            if currentEvent.numberJoined < currentEvent.capacity:
+                currentJoined = currentEvent.numberJoined
+                currentJoined = currentJoined + 1
+                currentEvent.numberJoined = currentJoined
+                currentEvent.save()
+                currentUser = User.objects.get(username = currentEvent.host)
+                currentNotifications = currentUser.notifications
+                currentNotifications = currentNotifications + "," + item
+                currentUser.notifications = currentNotifications
+                currentUser.save()
+            else:
+                return HttpResponse("Event is full")
+    currentJoined = user.joined
+    if currentJoined == "":
+        currentJoined = "," + idString + ","
+    else:
+        currentJoined = currentJoined + idString + ","
+    user.joined = currentJoined
+    user.save()
+    return HttpResponse(currentJoined)
 
 def addUser(request, username, passHash, first, last):
     passHash = hashlib.sha256(passHash.encode('utf8')).hexdigest()
@@ -124,15 +134,24 @@ def addMessage(request, username, roomId):
 def leave(request, username, idString):
     # Delete from users events string
     user = User.objects.get(username = username)
-    user.joined.strip(idString)
+    x = user.joined.replace(idString, '')
+    user.joined = x;
     user.save()
-    return HttpResponse("OK")
+    idList = idString.split(",")
+    for item in idList:
+        if len(item) > 0 and Event.objects.filter(id = item).count() > 0:
+            currentEvent = Event.objects.get(id = item)
+            currentEvent.numberJoined = currentEvent.numberJoined - 1
+            currentEvent.save()
+    return HttpResponse(x)
 
 def delete(request, username, idString):
     # Remove from users' joined string
     users = User.objects.all().filter(joined__contains = idString).values()
     for user in users:
-        user.joined.strip(idString)
+        x = user.joined.replace(idString, '')
+        user.joined = x
+        user.save()
     # Remove from events database
     event = Event.objects.get(id = idString)
     event.delete()
@@ -174,7 +193,7 @@ def recommendations(request, username):
             top = tag
             continue
         if count == 1:
-            count == 2
+            count = 2
             if Tags[top] < Tags[tag]:
                 sec = top
                 top = tag
@@ -186,13 +205,19 @@ def recommendations(request, username):
             top = tag
         elif Tags[tag] > Tags[sec]:
             sec = tag
-    if len(top) == 0 or len(sec) == 0:
-        return HttpResponse("not enough events joined or hosted")
-    values = Event.objects.filter(tags = top)
-        #values = Event.objects.filter(Q(tags = 'transport') | Q(tags = sec))
-    # values = values.exclude(numberJoined = F('capacity'))
-    # filtered = values.filter(startDate__gt =  datetime.datetime.now()).values()
-    # except Event.DoesNotExist:
+    values = Event.objects.filter(Q(tags__contains = top) | Q(tags__contains = sec))
+    values = values.exclude(numberJoined = F('capacity'))
+    values = values.filter(startDate__gt =  datetime.datetime.now()).values()
+    values_list = list(values)
+    return JsonResponse(values_list, safe=False)
+
+def today(request, username):
+    values = Event.objects.filter(startDate__gte = datetime.date.today()).filter(startDate__lt = datetime.date.today() + datetime.timedelta(days = 1)).exclude(numberJoined = F('capacity')).values()
+    values_list = list(values)
+    return JsonResponse(values_list, safe = False)
+
+def tomorrow(request, username):
+    values = Event.objects.filter(startDate__gte = datetime.date.today() + datetime.timedelta(days = 1)).filter(startDate__lt = datetime.date.today() + datetime.timedelta(days = 2)).exclude(numberJoined = F('capacity')).values()
     values_list = list(values)
     return JsonResponse(values_list, safe=False)
 

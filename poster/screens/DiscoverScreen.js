@@ -12,11 +12,16 @@ export default class DiscoverScreen extends Component {
     const { navigation } = this.props;
     this.state = { recs: [], userId: this.props.screenProps.userId };
   }
+  
   componentDidMount() {
     fetch("https://posterapp333.herokuapp.com/recs/" + this.state.userId + "/")
-    .then((response) => response.json())
-      .then((responseJson) => this.setState({recs: responseJson}));
-    }
+    .then((response) => {
+      if (response._bodyText == "not enough events joined or hosted")
+        alert("Join or host more events to see reccomendations");
+      else
+        response.json().then((responseJson) => this.setState({recs: responseJson}));
+    });
+  }
 
 
   ListViewItemSeparator = () => {

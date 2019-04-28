@@ -32,6 +32,8 @@ urlpatterns = [
     path('leave/<str:username>/<str:idString>/', views.leave),
     path('delete/<str:username>/<str:idString>/', views.delete),
     path('recs/<str:username>/', views.recommendations),
+    path('today/<str:username>/', views.today),
+    path('tomorrow/<str:username>/', views.tomorrow),
     path('addMessage/<str:username>/<str:roomId>/', views.addMessage),
     path('getUser/<str:username>/', views.getUser),
     path('authUser/<str:username>/<str:passHash>/', views.authUser),

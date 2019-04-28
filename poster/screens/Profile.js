@@ -6,8 +6,10 @@ import Feather from 'react-native-vector-icons/Feather';
 import { iOSUIKit } from 'react-native-typography'
 import { Card } from 'native-base';
 import { LinearGradient } from 'expo';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import Chatroom from './Chatroom'
 
-export default class Profile extends Component {
+class Profile extends Component {
 
   constructor(props) {
     super(props)
@@ -247,3 +249,12 @@ label: {
 }
 
 });
+
+const AppNavigator = createStackNavigator({
+  Home: {screen: Profile},
+  Room: {screen: Chatroom},
+  },
+  {headerMode: 'none'}
+  );
+
+export default createAppContainer(AppNavigator);
