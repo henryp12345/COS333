@@ -79,13 +79,24 @@ class Profile extends Component {
 
               <View style={styles.label}>
 
-              <TouchableOpacity style={styles.textStyle}
+ <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
+      <TouchableOpacity style={styles.textStyle}
+              onPress={() => this.props.navigation.navigate("Detail", {topic: "React Navigation", userId: this.state.userId, eventId: item.id})}>
+                <Icon name='info'
+                      type='feather'
+                      color='#6495ed'
+                      size={30}/>
+              </TouchableOpacity>
+               <TouchableOpacity style={styles.textStyle}
               onPress={() => this.props.navigation.navigate("Room", {topic: "React Navigation", roomId: item.chatroom, userId: this.state.userId})}>
               <Icon name='message-square'
                     type='feather'
                     color='#6495ed'
                     size={30}/>
               </TouchableOpacity>
+</View>
+
+             
 
               </View>
               </View>
@@ -125,21 +136,22 @@ class Profile extends Component {
 
               <View style={styles.label}>
               
-              <TouchableOpacity style={styles.textStyle}
+             <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
+      <TouchableOpacity style={styles.textStyle}
               onPress={() => this.props.navigation.navigate("Detail", {topic: "React Navigation", userId: this.state.userId, eventId: item.id})}>
                 <Icon name='info'
                       type='feather'
                       color='#6495ed'
-                      size={20}/>
+                      size={30}/>
               </TouchableOpacity>
-
-              <TouchableOpacity style={styles.textStyle}
+               <TouchableOpacity style={styles.textStyle}
               onPress={() => this.props.navigation.navigate("Room", {topic: "React Navigation", roomId: item.chatroom, userId: this.state.userId})}>
               <Icon name='message-square'
                     type='feather'
                     color='#6495ed'
-                    size={20}/>
+                    size={30}/>
               </TouchableOpacity>
+</View>
 
               </View>
               </View>
