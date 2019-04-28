@@ -74,7 +74,7 @@ export default class createUser extends Component {
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
               placeholder="Username"
-              keyboardType="email-address"
+              autoCapitalize="none"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({username: text})}/>
         </View>
@@ -94,6 +94,7 @@ export default class createUser extends Component {
           <TextInput style={styles.inputs}
               placeholder="Password"
               secureTextEntry={true}
+              autoCapitalize="none"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({password: text})}/>
         </View>
@@ -101,6 +102,7 @@ export default class createUser extends Component {
           <TextInput style={styles.inputs}
               placeholder="Confirm Password"
               secureTextEntry={true}
+              autoCapitalize="none"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({confirm: text})}/>
         </View>

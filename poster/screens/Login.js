@@ -63,7 +63,7 @@ export default class Login extends Component {
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
               placeholder="Username"
-              keyboardType="email-address"
+              autoCapitalize="none"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({username: text})}
               />
@@ -73,6 +73,7 @@ export default class Login extends Component {
           <TextInput style={styles.inputs}
               placeholder="Password"
               secureTextEntry={true}
+              autoCapitalize="none"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({password: text})}
               />

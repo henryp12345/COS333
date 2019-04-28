@@ -101,7 +101,7 @@ export default class FormGenerator extends Component {
                        chatId: chatId,
                   }),
             })
-            .then(response => alert(response._bodyText))
+            .then(response => alert("Success! You have posted your event."))
             console.log('FORM VALUES', formValues);
             this.formGenerator.resetForm();
           });
