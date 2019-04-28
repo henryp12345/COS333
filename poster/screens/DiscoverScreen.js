@@ -10,18 +10,20 @@ export default class DiscoverScreen extends Component {
   constructor(props) {
     super(props);
     const { navigation } = this.props;
-    this.state = { recs: [], userId: this.props.screenProps.userId };
+    this.state = { recs: [], today: [], tomorrow: [], userId: this.props.screenProps.userId};
   }
-  
   componentDidMount() {
     fetch("https://posterapp333.herokuapp.com/recs/" + this.state.userId + "/")
-    .then((response) => {
-      if (response._bodyText == "not enough events joined or hosted")
-        alert("Join or host more events to see reccomendations");
-      else
-        response.json().then((responseJson) => this.setState({recs: responseJson}));
-    });
-  }
+    .then((response) => response.json())
+      .then((responseJson) => this.setState({recs: responseJson}));
+     fetch("https://posterapp333.herokuapp.com/today/" + this.state.userId + "/")
+    .then((response) => response.json())
+      .then((responseJson) => this.setState({today: responseJson}));
+      fetch("https://posterapp333.herokuapp.com/tomorrow/" + this.state.userId + "/")
+    .then((response) => response.json())
+      .then((responseJson) => this.setState({tomorrow: responseJson}));
+
+    }
 
 
   ListViewItemSeparator = () => {
@@ -37,23 +39,24 @@ export default class DiscoverScreen extends Component {
   };
 
   render() {
-    const { navigation } = this.props;
     return (
       <ScrollView>
       <View style={styles.viewStyle}>
-      <Text style={styles.customTitle}>Top Picks For You</Text>  
+<Text style={styles.customTitle}>Top Picks For You</Text>  
        <ScrollView horizontal={true}
        showsHorizontalScrollIndicator={false}> 
        
        <FlatList
        horizontal={true}
-      data={this.state.recs}
-      renderItem={({ item }) => (
+data={this.state.recs}
+renderItem={({ item }) => (
+
+<TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
 
     <LinearGradient
     colors={['#47e5bc', '#a2efdb']}
-    height={280}
-    width={260}
+    height={220}
+    width={240}
     style={{
      marginHorizontal: 5,
      borderRadius: 10,
@@ -74,41 +77,12 @@ export default class DiscoverScreen extends Component {
       size = {15}
       />
     <Text style = {styles.recDetails}>{"  "}{item.capacity-item.numberJoined} of {item.capacity} slots available</Text>
-    </View>
+             </View>
 
-       <TouchableOpacity onPress={() => {
-              fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
-              .then((response) => {
-                if (response._bodyText == 'Already joined') {
-                    alert('You have already joined this event');
-                    navigation.goBack();
-                }
-                else {
-                  alert("Event joined");
-                  navigation.goBack();
-                }
-              });
-              }}>
-       <LinearGradient
-    colors={['#333333', '#5a5454']}
-    height={40}
-    width={180}
-    style={{
-      marginTop:10,
-     borderRadius: 20,
-     marginBottom:20,
-     flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      alignSelf:'center',
-   }}>
-        <Text style={styles.recDetailsWhite}>join event</Text>
-  </LinearGradient>
-
-        </TouchableOpacity>
      </View>
 
   </LinearGradient>
+  </TouchableOpacity>
 )}
 enableEmptySections={true}
 style={{ marginTop: 5, marginBottom: 20}}
@@ -120,7 +94,7 @@ keyExtractor={(item, index) => index.toString()}
       
        <FlatList
        horizontal={true}
-data={this.state.dataSource}
+data={this.state.today}
 renderItem={({ item }) => (
     <TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
        <LinearGradient
@@ -146,7 +120,7 @@ keyExtractor={(item, index) => index.toString()}
          <Text style={styles.customTitle}>Tomorrow</Text> 
        <FlatList
        horizontal={true}
-    data={this.state.dataSource}
+    data={this.state.tomorrow}
     renderItem={({ item }) => (
     <TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
     <LinearGradient
