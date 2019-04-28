@@ -6,26 +6,38 @@ import { iOSUIKit } from 'react-native-typography'
 import { Card } from 'native-base';
 import { LinearGradient } from 'expo';
 
-export default class Profile extends Component {
-
+export default class DiscoverScreen extends Component {
   constructor(props) {
-    super(props)
-    const {navigation} = this.props;
-    this.state = { hosted: [], joined: [], userId: this.props.screenProps.userId }
+    super(props);
+    this.state = { isLoading: true, search: ''};
+    this.arrayholder = [];
   }
-  
   componentDidMount() {
-    fetch("https://posterapp333.herokuapp.com/hosted/" + this.state.userId + "/")
-      .then(response => response.json())
-      .then(responseJson => this.setState({hosted: responseJson}));
-    fetch("https://posterapp333.herokuapp.com/joined/" + this.state.userId + "/")
-      .then(response => response.json())
-      .then(responseJson => this.setState({joined: responseJson}));
+    return fetch('https://posterapp333.herokuapp.com/event')
+    .then(response => response.json())
+    .then(responseJson => {
+      this.setState(
+      {
+        isLoading: false,
+        dataSource: responseJson,
+      },
+      function() {
+        this.arrayholder = responseJson;
+      }
+      );
+    })
+    .catch(error => {
+      console.error(error);
+    });
   }
-  
-  componentDidUpdate() {
-    
-  }
+
+  search = text => {
+    console.log(text);
+  };
+  clear = () => {
+    this.search.clear();
+  };
+
 
   ListViewItemSeparator = () => {
     return (
@@ -38,139 +50,142 @@ export default class Profile extends Component {
       />
       );
   };
-  
+
   render() {
     return (
-      //ListView to show with textinput used as search bar
-      <View style={styles.viewStyle}>
-      <Text style={styles.customTitle}>{"Welcome back, "}{this.state.userId}.</Text>
       <ScrollView>
-      <Text style={styles.customSubtitle}>Events You are Hosting</Text>
-      <FlatList
-        data={this.state.hosted}
-        renderItem={({ item }) => (
-          <Card style={{borderRadius: 10}}>
-        <View style={styles.itemContent}>
-        <View style={styles.iconContainer}>
-          <Text style={styles.dateText}>{item.startDate.substring(5,7)}/{item.startDate.substring(8,10)}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.eventTitle}>{item.title}</Text>
-            <Text style={{marginRight: 10}}>Posted by {item.host}</Text>
-            <Text style={{marginRight: 10}}>{item.capacity-item.numberJoined} of {item.capacity} slots available</Text>
-          </View>
+      <View style={styles.viewStyle}>
+<Text style={styles.customTitle}>Top Picks For You</Text>  
+       <ScrollView horizontal={true}
+       showsHorizontalScrollIndicator={false}> 
+       
+       <FlatList
+       horizontal={true}
+data={this.state.dataSource}
+renderItem={({ item }) => (
 
-          <View style={styles.downTextContainer}>
-            <View style={styles.downTextContainerInner}>
-              <View style={styles.downText}>
-                <View style={styles.priceText}>
-                </View>
 
-              <View style={styles.label}>
+    <LinearGradient
+    colors={['#47e5bc', '#a2efdb']}
+    height={280}
+    width={260}
+    style={{
+     marginHorizontal: 5,
+     borderRadius: 10,
+     alignItems: 'center',
+     padding: 30
+   }}>
+   <View style={styles.container}>
+   <Text style={styles.recTitle}>{item.title}</Text>
+   <Text style = {styles.recSubtitle}> {item.startDate.substring(5,7)}/{item.startDate.substring(8,10)}
+   {"  ║  ◷ "}{item.startDate.substring(11,16)}</Text>
+   <Text style = {styles.recDetails}>{"meet @ "} {item.location} </Text>
+   <Text style = {styles.recDetails}> {item.desc} </Text>
+   <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+  <Icon
+      name='users'
+      type='feather'
+      color='black'
+      size = {15}
+      />
+    <Text style = {styles.recDetails}>{"  "}{item.capacity-item.numberJoined} of {item.capacity} slots available</Text>
+             </View>
 
-              <TouchableOpacity style={styles.textStyle}
-              onPress={() => this.props.navigation.navigate("Room", {topic: "React Navigation", roomId: item.chatroom, userId: this.state.userId})}>
-              <Icon name='comment'
-                    type='font-awesome'
-                    color='#00bfff'
-                    size={30}/>
-              </TouchableOpacity>
+       <TouchableOpacity>
+       <LinearGradient
+    colors={['#333333', '#5a5454']}
+    height={40}
+    width={180}
+    style={{
+      marginTop:10,
+     borderRadius: 20,
+     marginBottom:20,
+     flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf:'center',
+   }}>
+        <Text style={styles.recDetailsWhite}>join event</Text>
+  </LinearGradient>
 
-              </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        </View>
-        </Card>
-        )}
-        enableEmptySections={true}
-        style={{ marginTop: 10 }}
-        keyExtractor={(item, index) => index.toString()}/>
+        </TouchableOpacity>
+     </View>
+
+  </LinearGradient>
+)}
+enableEmptySections={true}
+style={{ marginTop: 5, marginBottom: 20}}
+keyExtractor={(item, index) => index.toString()}
+/>
+        </ScrollView>
+
+      <Text style={styles.customTitle}>Today</Text> 
       
-      <Text style={styles.customSubtitle}>Events You Have Joined</Text>
-
-      <FlatList
-        data={this.state.joined}
-        renderItem={({ item }) => (
-
-        <Card style={{borderRadius: 10}}>
-        <View style={styles.itemContent}>
-        <View style={styles.iconContainer}>
-          <Text style={styles.dateText}>{item.startDate.substring(5,7)}/{item.startDate.substring(8,10)}</Text>
-        </View>
-        <View style={styles.textContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.eventTitle}>{item.title}</Text>
-            <Text style={{marginRight: 10}}>Posted by {item.host}</Text>
-            <Text style={{marginRight: 10}}>{item.capacity-item.numberJoined} of {item.capacity} slots available</Text>
-          </View>
-
-          <View style={styles.downTextContainer}>
-            <View style={styles.downTextContainerInner}>
-              <View style={styles.downText}>
-                <View style={styles.priceText}>
-                </View>
-
-              <View style={styles.label}>
-
-              <TouchableOpacity style={styles.textStyle}
-              onPress={() => this.props.navigation.navigate("Room", {topic: "React Navigation", roomId: item.chatroom, userId: this.state.userId})}>
-              <Icon name='comment'
-                    type='font-awesome'
-                    color='#00bfff'
-                    size={30}/>
-              </TouchableOpacity>
-
-              </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        </View>
-        </Card>
-        )}
-        enableEmptySections={true}
-        style={{ marginTop: 10 }}
-        keyExtractor={(item, index) => index.toString()}/>
-
-      </ScrollView>
+       <FlatList
+       horizontal={true}
+data={this.state.dataSource}
+renderItem={({ item }) => (
+    <TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
+       <LinearGradient
+    colors={['#6bc9f4', '#b0e4fc']}
+    minHeight={10}
+    minWidth={10}
+    style={{
+     marginHorizontal: 5,
+     borderRadius: 10,
+     alignItems: 'center',
+     padding: 15
+   }}>
+   <Text style={styles.eventTitle}>{item.title}</Text>
+    <Text>{item.location}</Text>
+   <Text>◷ {item.startDate.substring(11,16)}</Text>
+  </LinearGradient>
+  </TouchableOpacity>
+)}
+enableEmptySections={true}
+style={{ marginTop: 5, marginBottom: 20}}
+keyExtractor={(item, index) => index.toString()}
+/>
+         <Text style={styles.customTitle}>Tomorrow</Text> 
+       <FlatList
+       horizontal={true}
+    data={this.state.dataSource}
+    renderItem={({ item }) => (
+    <TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
+    <LinearGradient
+    colors={['#6bc9f4', '#b0e4fc']}
+    minHeight={10}
+    minWidth={10}
+    style={{
+     marginHorizontal: 5,
+     borderRadius: 10,
+     alignItems: 'center',
+     padding: 15
+   }}>
+   <Text style={styles.eventTitle}>{item.title}</Text>
+    <Text>{item.location}</Text>
+   <Text>◷ {item.startDate.substring(11,16)}</Text>
+  </LinearGradient>
+  </TouchableOpacity>
+)}
+enableEmptySections={true}
+style={{ marginTop: 5}}
+keyExtractor={(item, index) => index.toString()}
+/>    
       </View>
+            </ScrollView>
+
+
     );
-  }
+
+}
 }
 
 const styles = StyleSheet.create({
-  viewStyle: {
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    flex: 1,
-    margin: 20,
-    margin: 15,
-    textAlign: 'center',
-  },
-  TextViewStyle:
-  {
-   borderWidth: 1, 
-   borderRadius: 10,
-   borderColor: '#E91E63',
-   width: '80%',
-   padding: 5,
-   backgroundColor: '#FFEB3B'
- },
- customTitle: {
+
+  customTitle: {
   ...iOSUIKit.largeTitleEmphasizedObject,
   fontSize: 28,
-},
-customSubtitle: {
-  ...iOSUIKit.subheadEmphasizedObject,
-  fontSize: 20,
-},
-
-customSubtitle2: {
-  ...iOSUIKit.title3Object,
-  fontSize: 14,
 },
 
 eventTitle: {
@@ -178,71 +193,101 @@ eventTitle: {
   fontSize: 18,
 },
 
-dateText: {
-  ...iOSUIKit.subheadEmphasizedObject,
+recTitle: {
+  ...iOSUIKit.largeTitleEmphasizedObject,
+  fontSize: 22,
+  marginBottom: 10,
+},
+
+recSubtitle: {
+  ...iOSUIKit.subheadObject,
   fontSize: 18,
-  color: 'white',
-  textAlign: 'center',
-
+  marginBottom: 5,
 },
 
-textStyle: {
-  padding: 5,
-  textAlign: 'left',
+recDetails: {
+  ...iOSUIKit.subheadObject,
+  fontSize: 16,
+  marginBottom: 5,
+  textAlign: 'center'
 },
 
-rightText: {
-  textAlign: 'right',
-},
-container: {
-  marginBottom: 15,
-},
-
-itemContent:  {
- flexDirection: 'row',
- borderBottomWidth: 1,
- borderColor: '#e5e5e5',
- minHeight: 75
+recDetailsWhite: {
+  ...iOSUIKit.subheadObject,
+  fontSize: 16,
+  marginBottom: 5,
+  color: 'white'
 },
 
-iconContainer: {
-  padding: 5,
-  flex: 1,
-  borderRadius: 5,
-  backgroundColor: '#558fed',
-  justifyContent: 'center',
-},
+joinButton: {
+    marginTop:10,
+      height:40,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf:'center',
+      marginBottom:20,
+      width:200,
+      borderRadius:20,
+      backgroundColor: "#ff1493",
+  },
 
-textContainer: {
-  padding: 10,
-  flex: 5,
-},
+  viewStyle: {
+    flex: 1,
+    backgroundColor: 'white',
+    margin: 20,
+    margin: 15,
+    textAlign: 'center',
+ 
+  },
 
-downTextContainer: {
-  flex: 6,
-  position: 'relative',
-},
+  textStyle: {
+    padding: 10,
+    alignItems: 'flex-start',
+    padding:30,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 
-downTextContainerInner: {
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  right: 0,
-},
+  itemContent:  {
+     flexDirection: 'row',
+     borderBottomWidth: 1,
+     borderColor: '#e5e5e5'
+  },
 
-downText: {
-  marginTop: 10,
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-},
+  iconContainer: {
+    padding: 10,
+    flex: 1,
+  },
 
-priceText: {
-  flexDirection: 'row',
-},
+  icon: {
+    width: 40,
+    height: 40
+  },
 
-label: {
-  textAlign: 'right',
-  padding: 3
-}
+  textContainer: {
+    backgroundColor: 'whitesmoke',
+    flex: 1,
+    padding: 5
+  },
+
+  downText: {
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+
+  priceText: {
+    flexDirection: 'row',
+  },
+
+  label: {
+    textAlign: 'right',
+    backgroundColor: 'yellow',
+    padding: 3
+  }
 
 });
