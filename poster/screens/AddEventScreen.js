@@ -122,6 +122,9 @@ export default class FormGenerator extends Component {
       this.props.navigation.navigate("HomeScreen")
     }
   
+    if (this.state.loading) {
+      return <Expo.AppLoading />;
+    }
     render() {
         const arrayOfString = ['Sports', 'Study', 'Gaming', 'Shopping', 'Transport', 'Campus Activity', 'Project', 'Other']
 
