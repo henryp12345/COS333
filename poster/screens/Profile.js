@@ -41,11 +41,10 @@ export default class Profile extends Component {
   
   render() {
     return (
-      <View style={styles.viewStyle}>
-      <ScrollView>
       //ListView to show with textinput used as search bar
       <View style={styles.viewStyle}>
       <Text style={styles.customTitle}>{"Welcome back, "}{"Henry"}.</Text>
+      <ScrollView>
       <Text style={styles.customSubtitle}>Events You are Hosting</Text>
       <FlatList
         data={this.state.hosted}
