@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Animated, AppRegistry, Dimensions, ListView, StyleSheet, Text, TouchableOpacity, TouchableHighlight, View, ScrollView } from 'react-native';
+import { Animated, AppRegistry, Dimensions, ListView, StyleSheet, Text, TouchableOpacity, TouchableHighlight, View, ScrollView, FlatList } from 'react-native';
 import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { iOSUIKit } from 'react-native-typography';
@@ -24,29 +24,12 @@ export default class NotificationScreen extends Component {
       .then((responseJson) => this.setState({newMessages: responseJson}));
   }
 
-  deleteNotificationRow(rowKey) {
-    const newData = [...this.state.notifications];
-    // const prevIndex = this.state.notifications.findIndex(item => item.key === rowKey);
-    const prevIndex = newData.indexOf(rowKey);
-    newData.splice(prevIndex, 1);
-    this.setState({notifications: newData});
-  }
-
-  deleteMessagesRow(rowKey) {
-    const newData = [...this.state.messages];
-    // const prevIndex = this.state.notifications.findIndex(item => item.key === rowKey);
-    const prevIndex = newData.indexOf(rowKey);
-    newData.splice(prevIndex, 1);
-    this.setState({messages: newData});
-  }
-
   render() {
     return (
        <View style={styles.viewStyle}>
        <ScrollView>
       <Text style={styles.customTitle}>Notifications</Text>
-          <SwipeListView
-            useFlatList
+          <FlatList
             data={this.state.notifications}
             renderItem={ (data) => (
               <TouchableHighlight
@@ -64,17 +47,11 @@ export default class NotificationScreen extends Component {
                 </View>
               </TouchableHighlight>
             )}
-            renderHiddenItem={ (data) => (
-              <View style={styles.rowBack}>
-                <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ _ => this.deleteNotificationRow(data.item.key)}>
-                <Text style = {{textAlign: 'center', color: 'white'}}>Clear</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-            rightOpenValue={-75}
+            enableEmptySections={true}
+style={{ marginTop: 10 }}
+keyExtractor={(item, index) => index.toString()}
           />
-          <SwipeListView
-            useFlatList
+          <FlatList
             data={this.state.newMessages}
             renderItem={ (data) => (
               <TouchableHighlight
@@ -92,14 +69,9 @@ export default class NotificationScreen extends Component {
                 </View>
               </TouchableHighlight>
             )}
-            renderHiddenItem={ (data) => (
-              <View style={styles.rowBack}>
-                <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={ _ => this.deleteMessagesRow(data.item.key)}>
-                <Text style = {{textAlign: 'center', color: 'white'}}>Clear</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-            rightOpenValue={-75}
+            enableEmptySections={true}
+style={{ marginTop: 10 }}
+keyExtractor={(item, index) => index.toString()}
           />
           </ScrollView>
       </View>
@@ -139,31 +111,5 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     marginVertical: 5
-  },
-  rowBack: {
-    textAlign: 'center',
-    alignItems: 'center',
-    backgroundColor: '#DDD',
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    borderRadius: 10,
-    marginVertical: 5
-
-  },
-  backRightBtn: {
-    bottom: 0,
-    textAlign: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    top: 0,
-    width: 75,
-    borderRadius: 10
-  },
-  backRightBtnRight: {
-    textAlign: 'center',
-    backgroundColor: 'red',
-    right: 0,
-    borderRadius: 10
   },
 });
