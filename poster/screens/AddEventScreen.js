@@ -130,7 +130,7 @@ export default class FormGenerator extends Component {
         return (
         	<ImageBackground style={styles.picture} source={bgForm}>
         		{this.props.children}
-        		<KeyboardAvoidingView style={styles.container} behavior="position">
+        		<KeyboardAvoidingView style={styles.container} behavior="padding">
                 <ScrollView style={styles.wrapper}>
                 <Text style={styles.name}>Create Event</Text>
                 <View>
