@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import { SearchBar, Button, Icon } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Card} from 'native-base';
@@ -10,9 +10,11 @@ import { iOSUIKit } from 'react-native-typography'
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isLoading: true, search: '' };
+    this.state = { isLoading: true, search: '', refreshing: false };
     this.arrayholder = [];
   }
+  
+
   componentDidMount() {
     return fetch('https://posterapp333.herokuapp.com/event')
     .then(response => response.json())
@@ -38,6 +40,27 @@ export default class HomeScreen extends React.Component {
   clear = () => {
     this.search.clear();
   };
+
+   _onRefresh = () => {
+    this.setState({refreshing: true});
+    fetch('https://posterapp333.herokuapp.com/event')
+    .then(response => response.json())
+    .then(responseJson => {
+      this.setState(
+      {
+        isLoading: false,
+        dataSource: responseJson,
+        refreshing: false,
+      },
+      function() {
+        this.arrayholder = responseJson;
+      }
+      );
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
 
   SearchFilterFunction(text) {
     const newData = this.arrayholder.filter(function(item) {
@@ -395,6 +418,13 @@ color="#558fed"
 
 </Card>
 )}
+refreshControl={
+        <RefreshControl
+        refreshing = {this.state.refreshing}
+        onRefresh={this._onRefresh}
+        />
+      }
+
 enableEmptySections={true}
 style={{ marginTop: 10 }}
 keyExtractor={(item, index) => index.toString()}
