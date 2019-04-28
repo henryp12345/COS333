@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ImageBackground, AppRegistry, Image, StyleSheet, Alert, ScrollView } from 'react-native';
-import { View, Text, Button } from 'native-base';
+import { View, Text, Button, Fonts } from 'native-base';
 import GenerateForm from 'react-native-form-builder';
 import { TagSelect } from 'react-native-tag-select';
 import { iOSUIKit } from 'react-native-typography'
@@ -60,6 +60,19 @@ const fields = [
                 ];
 
 export default class FormGenerator extends Component {
+	componentWillMount() {
+    	this.loadFonts();
+  	}
+  
+  	async componentWillMount() {
+    	await Expo.Font.loadAsync({
+      		Roboto: require("native-base/Fonts/Roboto.ttf"),
+      		Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+      		Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf"),
+    	});
+    	this.setState({ loading: false });
+  	}
+
     constructor(props) {
       super(props);
       const {navigation} = this.props;
