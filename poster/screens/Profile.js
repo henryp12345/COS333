@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity, ScrollView, ImageBackGround } from 'react-native';
 import { SearchBar, Button, Icon } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 import { iOSUIKit } from 'react-native-typography'
 import { Card } from 'native-base';
 import { LinearGradient } from 'expo';
@@ -71,9 +72,9 @@ export default class Profile extends Component {
 
               <TouchableOpacity style={styles.textStyle}
               onPress={() => this.props.navigation.navigate("Room", {topic: "React Navigation", roomId: item.chatroom, userId: this.state.userId})}>
-              <Icon name='comment'
-                    type='font-awesome'
-                    color='#00bfff'
+              <Icon name='message-square'
+                    type='feather'
+                    color='#6495ed'
                     size={30}/>
               </TouchableOpacity>
 
@@ -117,9 +118,9 @@ export default class Profile extends Component {
 
               <TouchableOpacity style={styles.textStyle}
               onPress={() => this.props.navigation.navigate("Room", {topic: "React Navigation", roomId: item.chatroom, userId: this.state.userId})}>
-              <Icon name='comment'
-                    type='font-awesome'
-                    color='#00bfff'
+              <Icon name='message-square'
+                    type='feather'
+                    color='#6495ed'
                     size={30}/>
               </TouchableOpacity>
 
