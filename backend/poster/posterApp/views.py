@@ -5,6 +5,8 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from django.db.models import F
+from pusher_chatkit import PusherChatKit
+from pusher_chatkit.backends import RequestsBackend
 from .models import User, Event
 import json
 import datetime
@@ -91,6 +93,8 @@ def addUser(request, username, passHash, first, last):
     if (User.objects.filter(username = username).count() == 0):
         newUser = User(username = username, hosted = "", joined = "", notifications = "", newMessages = "", passHash = passHash, firstName = first, lastName = last)
         newUser.save()
+        chatkit = PusherChatKit(instance_locator = 'v1:us1:d8ae0067-3c87-4ca0-b2a0-5af6e602488e', api_key = '2ff7c102-14e2-4dd6-9414-bfa3f5c66e41:ZiwVYEh7mWf5zmxuZHKq1jyQ7bO5Z5iGSHyg4SDBDUQ=')
+        chatkit.create_user(user_id = username, name = first)
         return HttpResponse("OK")
     else:
         return HttpResponse("User taken")
