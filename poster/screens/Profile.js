@@ -8,6 +8,7 @@ import { Card } from 'native-base';
 import { LinearGradient } from 'expo';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Chatroom from './Chatroom'
+import EventDetail from './EventDetail'
 
 class Profile extends Component {
 
@@ -117,13 +118,21 @@ class Profile extends Component {
                 </View>
 
               <View style={styles.label}>
+              
+              <TouchableOpacity style={styles.textStyle}
+              onPress={() => this.props.navigation.navigate("Detail", {topic: "React Navigation", userId: this.state.userId, eventId: item.id})}>
+                <Icon name='info'
+                      type='feather'
+                      color='#6495ed'
+                      size={20}/>
+              </TouchableOpacity>
 
               <TouchableOpacity style={styles.textStyle}
               onPress={() => this.props.navigation.navigate("Room", {topic: "React Navigation", roomId: item.chatroom, userId: this.state.userId})}>
               <Icon name='message-square'
                     type='feather'
                     color='#6495ed'
-                    size={30}/>
+                    size={20}/>
               </TouchableOpacity>
 
               </View>
@@ -160,7 +169,8 @@ const styles = StyleSheet.create({
    borderColor: '#E91E63',
    width: '80%',
    padding: 5,
-   backgroundColor: '#FFEB3B'
+   backgroundColor: '#FFEB3B',
+   flexDirection: 'row'
  },
  customTitle: {
   ...iOSUIKit.largeTitleEmphasizedObject,
@@ -253,6 +263,7 @@ label: {
 const AppNavigator = createStackNavigator({
   Home: {screen: Profile},
   Room: {screen: Chatroom},
+  Detail: {screen: EventDetail},
   },
   {headerMode: 'none'}
   );
