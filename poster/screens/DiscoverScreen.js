@@ -74,7 +74,7 @@ renderItem={({ item }) => (
    <Text style = {styles.recSubtitle}> {item.startDate.substring(5,7)}/{item.startDate.substring(8,10)}
    {"  ║  ◷ "}{item.startDate.substring(11,16)}</Text>
    <Text style = {styles.recDetails}>{"meet @ "} {item.location} </Text>
-   <Text style = {styles.recDetails}> {item.desc} </Text>
+   <Text style = {styles.recDetails}> {item.desc.substring(11,item.desc.length-2)} </Text>
    <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
   <Icon
       name='users'
