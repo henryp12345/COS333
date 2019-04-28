@@ -125,7 +125,7 @@ export default class FormGenerator extends Component {
                 }}
                 fields={fields}
                 />
-                <Text style={styles.labelText}>Tags</Text>
+                <Text style={styles.labelText}>What kind of event is this?</Text>
         <View style={styles.container}>
         <TagSelect
           data={arrayOfString}
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   },
   labelText:{
   	...iOSUIKit.subheadEmphasizedObject,
-  	fontSize: 20,
+  	fontSize: 17,
     padding:20,
     color: 'white',
   },

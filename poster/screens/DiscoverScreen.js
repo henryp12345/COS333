@@ -9,34 +9,14 @@ import { LinearGradient } from 'expo';
 export default class DiscoverScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = { isLoading: true, search: ''};
-    this.arrayholder = [];
+    const { navigation } = this.props;
+    this.state = { recs: [], userId: this.props.screenProps.userId };
   }
   componentDidMount() {
-    return fetch('https://posterapp333.herokuapp.com/event')
-    .then(response => response.json())
-    .then(responseJson => {
-      this.setState(
-      {
-        isLoading: false,
-        dataSource: responseJson,
-      },
-      function() {
-        this.arrayholder = responseJson;
-      }
-      );
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  }
-
-  search = text => {
-    console.log(text);
-  };
-  clear = () => {
-    this.search.clear();
-  };
+    fetch("https://posterapp333.herokuapp.com/recs/" + this.state.userId + "/")
+    .then((response) => response.json())
+      .then((responseJson) => this.setState({recs: responseJson}));
+    }
 
 
   ListViewItemSeparator = () => {
@@ -52,18 +32,18 @@ export default class DiscoverScreen extends Component {
   };
 
   render() {
+    const { navigation } = this.props;
     return (
       <ScrollView>
       <View style={styles.viewStyle}>
-<Text style={styles.customTitle}>Top Picks For You</Text>  
+      <Text style={styles.customTitle}>Top Picks For You</Text>  
        <ScrollView horizontal={true}
        showsHorizontalScrollIndicator={false}> 
        
        <FlatList
        horizontal={true}
-data={this.state.dataSource}
-renderItem={({ item }) => (
-
+      data={this.state.recs}
+      renderItem={({ item }) => (
 
     <LinearGradient
     colors={['#47e5bc', '#a2efdb']}
@@ -89,9 +69,21 @@ renderItem={({ item }) => (
       size = {15}
       />
     <Text style = {styles.recDetails}>{"  "}{item.capacity-item.numberJoined} of {item.capacity} slots available</Text>
-             </View>
+    </View>
 
-       <TouchableOpacity>
+       <TouchableOpacity onPress={() => {
+              fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
+              .then((response) => {
+                if (response._bodyText == 'Already joined') {
+                    alert('You have already joined this event');
+                    navigation.goBack();
+                }
+                else {
+                  alert("Event joined");
+                  navigation.goBack();
+                }
+              });
+              }}>
        <LinearGradient
     colors={['#333333', '#5a5454']}
     height={40}

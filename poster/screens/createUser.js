@@ -43,11 +43,11 @@ export default class createUser extends Component {
   createUser() {
     const {navigate} = this.props.navigation;
     if (this.state.password != this.state.confirm)
-      alert("Passwords do not match");
+      alert("Passwords do not match.");
     else if (this.state.last.length == 0 || this.state.first.length == 0)
       alert("Please enter your name")
     else if (this.state.password.length < 6)
-      alert("Password must be longer than 6 characters");
+      alert("Password must be longer than 6 characters.");
     else {
       fetch("https://posterapp333.herokuapp.com/addUser/" + this.state.username + "/" + this.state.password + "/" + this.state.first + "/" + this.state.last + "/")
         .then((response) => {
@@ -56,7 +56,7 @@ export default class createUser extends Component {
             navigate("Dashboard", {userId: this.state.username});
           }
           else
-            alert('Username already taken');
+            alert('Username already taken.');
         });
     }
   }

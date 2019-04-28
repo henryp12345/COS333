@@ -76,7 +76,7 @@ export default class HomeScreen extends React.Component {
       return (
       //ListView to show with textinput used as search bar
       <View style={styles.viewStyle}>
-      <Text style={styles.customTitle}>Browse Events</Text>
+      <Text style={styles.customTitle}>Explore Events</Text>
 
       <SearchBar
       round
@@ -347,7 +347,7 @@ Campus Events
 <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
 <Text style={styles.customSubtitle}>Happenings</Text>
 <TouchableOpacity onPress={text => this.SearchFilterFunction('')}>
-<Text style={styles.customSubtitle2}>See All</Text>
+<Text style={styles.customSubtitle2}>Refresh</Text>
 </TouchableOpacity>
 </View>
 <FlatList

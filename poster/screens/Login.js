@@ -35,7 +35,7 @@ export default class Login extends Component {
   login() {
     const { navigate } = this.props.navigation;
     if (this.state.username.length == 0 || this.state.password.length == 0)
-      alert("Please enter a username and password");
+      alert("Please enter a username and password.");
     else {
       fetch("https://posterapp333.herokuapp.com/authUser/" + this.state.username + "/" + this.state.password + "/")
         .then((response) => {
@@ -45,7 +45,7 @@ export default class Login extends Component {
             navigate("Dashboard", {userId: userId});
           }
           else
-            alert("Invalid username or password");
+            alert("The username or password is incorrect. Try again.");
       });
     }
   }
