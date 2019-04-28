@@ -41,7 +41,7 @@ export default class HomeScreen extends React.Component {
     this.search.clear();
   };
 
-   _onRefresh = () => {
+   refresh() {
     this.setState({refreshing: true});
     fetch('https://posterapp333.herokuapp.com/event')
     .then(response => response.json())
@@ -51,15 +51,9 @@ export default class HomeScreen extends React.Component {
         isLoading: false,
         dataSource: responseJson,
         refreshing: false,
-      },
-      function() {
-        this.arrayholder = responseJson;
-      }
-      );
-    })
-    .catch(error => {
-      console.error(error);
+      });
     });
+    this.forceUpdate();
   }
 
   SearchFilterFunction(text) {
@@ -115,7 +109,7 @@ export default class HomeScreen extends React.Component {
       <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customSubtitle}>Popular Categories</Text>
 <TouchableOpacity onPress={text => this.SearchFilterFunction('')}>
-<Text style={styles.customSubtitle2}>Clear All</Text>
+<Text style={styles.customSubtitle2}>Clear all</Text>
 </TouchableOpacity>
 </View>
       <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
@@ -369,7 +363,7 @@ Campus Events
 </View>
 <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
 <Text style={styles.customSubtitle}>Happenings</Text>
-<TouchableOpacity onPress={text => this.SearchFilterFunction('')}>
+<TouchableOpacity onPress={text => this.refresh()}>
 <Text style={styles.customSubtitle2}>Refresh</Text>
 </TouchableOpacity>
 </View>
