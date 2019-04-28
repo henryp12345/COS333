@@ -37,7 +37,7 @@ export default class EventDetail extends Component {
         var endDate = new Date(eventData.enddate)
         this.setState({ id: eventData.id,
                         title: eventData.title,
-                        desc: eventData.desc,
+                        desc: eventData.desc.substring(11,eventData.desc.length-2),
                         location: eventData.location,
                         startDate: startDate,
                         startdate: eventData.startDate,
