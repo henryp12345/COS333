@@ -41,7 +41,7 @@ export default class HomeScreen extends React.Component {
     this.search.clear();
   };
 
-   _onRefresh = () => {
+   refresh() {
     this.setState({refreshing: true});
     fetch('https://posterapp333.herokuapp.com/event')
     .then(response => response.json())
@@ -51,15 +51,9 @@ export default class HomeScreen extends React.Component {
         isLoading: false,
         dataSource: responseJson,
         refreshing: false,
-      },
-      function() {
-        this.arrayholder = responseJson;
-      }
-      );
-    })
-    .catch(error => {
-      console.error(error);
+      });
     });
+    this.forceUpdate();
   }
 
   SearchFilterFunction(text) {
@@ -115,11 +109,11 @@ export default class HomeScreen extends React.Component {
       <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customSubtitle}>Popular Categories</Text>
 <TouchableOpacity onPress={text => this.SearchFilterFunction('')}>
-<Text style={styles.customSubtitle2}>Clear All</Text>
+<Text style={styles.customSubtitle2}>Clear all</Text>
 </TouchableOpacity>
 </View>
       <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
-      <TouchableOpacity 
+      <TouchableOpacity
       onPress ={() => {
         const newData = this.arrayholder.filter(function(item) {
           const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
@@ -160,7 +154,7 @@ export default class HomeScreen extends React.Component {
 
       </TouchableOpacity>
 
-      <TouchableOpacity 
+      <TouchableOpacity
       onPress ={() => {
         const newData = this.arrayholder.filter(function(item) {
           const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
@@ -187,7 +181,7 @@ export default class HomeScreen extends React.Component {
      type='font-awesome'
      color='#ffffff'
      size = {30}
-     /> 
+     />
      <Text
      style={{
       backgroundColor: 'transparent',
@@ -201,7 +195,7 @@ export default class HomeScreen extends React.Component {
 
     </TouchableOpacity>
 
-    <TouchableOpacity 
+    <TouchableOpacity
     onPress ={() => {
       const newData = this.arrayholder.filter(function(item) {
         const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
@@ -228,7 +222,7 @@ export default class HomeScreen extends React.Component {
    type='ionicon'
    color='#ffffff'
    size = {30}
-   /> 
+   />
    <Text
    style={{
     backgroundColor: 'transparent',
@@ -244,7 +238,7 @@ export default class HomeScreen extends React.Component {
   </View>
 
   <View style={{ paddingBottom: 20, flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
-  <TouchableOpacity 
+  <TouchableOpacity
   onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
       const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
@@ -271,7 +265,7 @@ export default class HomeScreen extends React.Component {
  type='font-awesome'
  color='#ffffff'
  size = {30}
- /> 
+ />
  <Text
  style={{
   backgroundColor: 'transparent',
@@ -285,7 +279,7 @@ Transport
 
 </TouchableOpacity>
 
-<TouchableOpacity 
+<TouchableOpacity
 onPress ={() => {
   const newData = this.arrayholder.filter(function(item) {
     const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
@@ -312,7 +306,7 @@ name='shopping-cart'
 type='weloveiconfonts'
 color='#ffffff'
 size = {30}
-/> 
+/>
 <Text
 style={{
   backgroundColor: 'transparent',
@@ -326,7 +320,7 @@ Bulk Orders
 
 </TouchableOpacity>
 
-<TouchableOpacity 
+<TouchableOpacity
 onPress ={() => {
   const newData = this.arrayholder.filter(function(item) {
     const itemData = item.tags ? item.tags.toUpperCase() : ''.toUpperCase();
@@ -353,7 +347,7 @@ name='comments'
 type='font-awesome'
 color='#ffffff'
 size = {30}
-/> 
+/>
 <Text
 style={{
   backgroundColor: 'transparent',
@@ -369,7 +363,7 @@ Campus Events
 </View>
 <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
 <Text style={styles.customSubtitle}>Happenings</Text>
-<TouchableOpacity onPress={text => this.SearchFilterFunction('')}>
+<TouchableOpacity onPress={text => this.refresh()}>
 <Text style={styles.customSubtitle2}>Refresh</Text>
 </TouchableOpacity>
 </View>
@@ -448,7 +442,7 @@ const styles = StyleSheet.create({
   },
   TextViewStyle:
   {
-   borderWidth: 1, 
+   borderWidth: 1,
    borderRadius: 10,
    borderColor: '#E91E63',
    width: '80%',
@@ -542,3 +536,4 @@ label: {
 }
 
 });
+
