@@ -23,6 +23,16 @@ export default class NotificationScreen extends Component {
     .then((response) => response.json())
       .then((responseJson) => this.setState({newMessages: responseJson}));
   }
+  
+  refresh() {
+    fetch("https://posterapp333.herokuapp.com/notifications/" + this.state.userId + "/")
+    .then((response) => response.json())
+      .then((responseJson) => this.setState({notifications: responseJson}));
+   fetch("https://posterapp333.herokuapp.com/newMessages/" + this.state.userId + "/")
+    .then((response) => response.json())
+      .then((responseJson) => this.setState({newMessages: responseJson}));
+    this.forceUpdate();
+  }
 
   render() {
     return (
@@ -30,7 +40,7 @@ export default class NotificationScreen extends Component {
        <ScrollView>
           <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customTitle}>Notifications</Text>
-<TouchableOpacity>
+<TouchableOpacity onPress = {() => this.refresh()}>
 <Text style={styles.customSubtitle2}>Refresh</Text>
 </TouchableOpacity>
 </View>

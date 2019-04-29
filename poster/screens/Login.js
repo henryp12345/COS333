@@ -59,33 +59,31 @@ export default class Login extends Component {
         <View style={styles.container}>
         <Image source={logoImg} style={styles.image} />
         <Text style={styles.title}>p o s t e r</Text>
-        <KeyboardAvoidingView>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
+        <KeyboardAvoidingView
+          behavior = 'padding'
+          keyboardVerticalOffset= {50}
+        >
+          <TextInput style={styles.inputContainer}
               placeholder="Username"
               autoCapitalize="none"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({username: text})}
               />
-              {Platform.OS === 'android' ? <KeyboardSpacer topSpacing={-50}/> : null}
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
+          <TextInput style={styles.inputContainer}
               placeholder="Password"
               secureTextEntry={true}
               autoCapitalize="none"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({password: text})}
               />
-              {Platform.OS === 'android' ? <KeyboardSpacer topSpacing={-50}/> : null}
-        </View>
         </KeyboardAvoidingView>
 
      <TouchableOpacity style={styles.container2} onPress={() => this.login()}>
       <Text style={styles.name}>LOG IN</Text>
-      </TouchableOpacity> 
-           <TouchableOpacity onPress={() => navigate("createUser")}>
-        <Text>Don't have an account? Sign Up</Text>
+      </TouchableOpacity>
+      <Text> Don't have an account? </Text>
+       <TouchableOpacity onPress={() => navigate("createUser")}>
+        <Text style={styles.text}>Sign Up</Text>
         </TouchableOpacity>
         </View>
         </ImageBackground>
@@ -97,16 +95,17 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   inputContainer: {
     height:40,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf:'center',
+    textAlign: 'center',
     marginBottom:10,
     width:250,
-    borderRadius:20,
+    borderRadius:30,
     backgroundColor: "#ffffff",
     borderColor: '#ff1493',
-    borderWidth: 0.5
+    borderWidth: 0.5,
   },
   inputs:{
       height:45,
@@ -142,11 +141,11 @@ const styles = StyleSheet.create({
     height: 120,
   },
   text: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: '#6495ed',
+    fontWeight: 'normal',
     backgroundColor: 'transparent',
-    marginTop: 20,
-    fontSize:20
+    marginTop: 15,
+    fontSize:15
   },
   title: {
     ...iOSUIKit.subheadEmphasizedObject,

@@ -70,49 +70,43 @@ export default class createUser extends Component {
         <View style={styles.container}>
         <Image source={logoImg} style={styles.image} />
         <Text style={styles.title}>REGISTER</Text>
-        <KeyboardAvoidingView>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
+        <KeyboardAvoidingView
+          behavior='padding'
+          keyboardVerticalOffset = {135}
+        >
+          <TextInput style={styles.inputContainer}
               placeholder="Username"
               autoCapitalize="none"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({username: text})}/>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
+          <TextInput style={styles.inputContainer}
               placeholder="First Name"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({first: text})}/>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
+          <TextInput style={styles.inputContainer}
               placeholder="Last Name"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({last: text})}/>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
+          <TextInput style={styles.inputContainer}
               placeholder="Password"
               secureTextEntry={true}
               autoCapitalize="none"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({password: text})}/>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
+          <TextInput style={styles.inputContainer}
               placeholder="Confirm Password"
               secureTextEntry={true}
               autoCapitalize="none"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({confirm: text})}/>
-        </View>
         </KeyboardAvoidingView>
 
      <TouchableOpacity style={styles.container2} onPress={() => this.createUser()}>
       <Text style={styles.name}>SIGN UP</Text>
-      </TouchableOpacity> 
+      </TouchableOpacity>
+      <Text> Have an account?</Text>
            <TouchableOpacity onPress={() => navigate('Login')}>
-        <Text>Have an account? Log In</Text>
+        <Text style={styles.text}>Log In</Text>
         </TouchableOpacity>
         </View>
         </ImageBackground>
@@ -128,9 +122,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf:'center',
+    textAlign: 'center',
     marginBottom:10,
     width:250,
-    borderRadius:20,
+    borderRadius:30,
     backgroundColor: "#ffffff",
     borderColor: '#ff1493',
     borderWidth: 0.5
@@ -139,7 +134,6 @@ const styles = StyleSheet.create({
       height:45,
       marginLeft:16,
       borderBottomColor: '#FFFFFF',
-      flex:1,
   },
  
   container2: {
@@ -169,11 +163,11 @@ const styles = StyleSheet.create({
     height: 120,
   },
   text: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: '#6495ed',
+    fontWeight: 'normal',
     backgroundColor: 'transparent',
-    marginTop: 20,
-    fontSize:20
+    marginTop: 12,
+    fontSize:15
   },
   title: {
   ...iOSUIKit.largeTitleEmphasizedObject,

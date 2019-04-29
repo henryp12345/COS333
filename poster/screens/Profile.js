@@ -27,8 +27,14 @@ class Profile extends Component {
       .then(responseJson => this.setState({joined: responseJson}));
   }
   
-  componentDidUpdate() {
-    
+  refresh() {
+    fetch("https://posterapp333.herokuapp.com/hosted/" + this.state.userId + "/")
+      .then(response => response.json())
+      .then(responseJson => this.setState({hosted: responseJson}));
+    fetch("https://posterapp333.herokuapp.com/joined/" + this.state.userId + "/")
+      .then(response => response.json())
+      .then(responseJson => this.setState({joined: responseJson}));
+    this.forceUpdate();
   }
 
   ListViewItemSeparator = () => {
@@ -51,10 +57,10 @@ class Profile extends Component {
       <ScrollView>
             <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customSubtitle}>Events You are Hosting</Text>
-<TouchableOpacity>
-<Text style={styles.customSubtitle2}>Refresh</Text>
-</TouchableOpacity>
-</View>
+      <TouchableOpacity onPress={text => this.refresh()}>
+        <Text style={styles.customSubtitle2}>Refresh</Text>
+      </TouchableOpacity>
+      </View>
 
       <FlatList
         data={this.state.hosted}

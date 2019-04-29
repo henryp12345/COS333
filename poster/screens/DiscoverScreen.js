@@ -24,6 +24,19 @@ export default class DiscoverScreen extends Component {
       .then((responseJson) => this.setState({tomorrow: responseJson}));
 
     }
+  
+  refresh() {
+    fetch("https://posterapp333.herokuapp.com/recs/" + this.state.userId + "/")
+    .then((response) => response.json())
+      .then((responseJson) => this.setState({recs: responseJson}));
+    fetch("https://posterapp333.herokuapp.com/today/" + this.state.userId + "/")
+    .then((response) => response.json())
+      .then((responseJson) => this.setState({today: responseJson}));
+    fetch("https://posterapp333.herokuapp.com/tomorrow/" + this.state.userId + "/")
+    .then((response) => response.json())
+      .then((responseJson) => this.setState({tomorrow: responseJson}));
+    this.forceUpdate();
+  }
 
 
   ListViewItemSeparator = () => {
@@ -44,7 +57,7 @@ export default class DiscoverScreen extends Component {
       <View style={styles.viewStyle}>
       <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
 <Text style={styles.customTitle}>Top Picks For You</Text>  
-<TouchableOpacity>
+<TouchableOpacity onPress={text => this.refresh()}>
 <Text style={styles.customSubtitle2}>Refresh</Text>
 </TouchableOpacity>
 </View>
