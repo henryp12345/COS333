@@ -19,9 +19,9 @@ const TabNav = createBottomTabNavigator(
     },
     DiscoverScreen: {
       screen: Discover,
-      navigationOptions: {
+      navigationOptions: ({
         tabBarIcon: ({ tintColor }) => <Icon name="Discover" color={tintColor} />
-      }
+      }),
     },
     AddEventScreen: {
       screen: Add,

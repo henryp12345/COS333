@@ -22,7 +22,7 @@ def default(request):
 @csrf_exempt
 def event(request):
     if request.method == 'GET':
-        values = Event.objects.all().filter(endDate__gt = datetime.datetime.now()).values()
+        values = Event.objects.filter(endDate__gt = datetime.datetime.now()).values()
         values_list = list(values)
         return JsonResponse(values_list, safe=False)
     elif request.method == 'POST':
@@ -100,6 +100,7 @@ def addJoined(request, username, idString):
 
 def addUser(request, username, passHash, first, last):
     passHash = hashlib.sha256(passHash.encode('utf8')).hexdigest()
+    username = username.lower()
     if (User.objects.filter(username = username).count() == 0):
         newUser = User(username = username, hosted = "", joined = "", notifications = "", newMessages = "", passHash = passHash, firstName = first, lastName = last)
         newUser.save()
@@ -147,7 +148,7 @@ def leave(request, username, idString):
 
 def delete(request, username, idString):
     # Remove from users' joined string
-    users = User.objects.all().filter(joined__contains = idString).values()
+    users = User.objects.all().filter(joined__contains = idString)
     for user in users:
         x = user.joined.replace(idString, '')
         user.joined = x
@@ -222,12 +223,14 @@ def tomorrow(request, username):
     return JsonResponse(values_list, safe=False)
 
 def getUser(request, username):
+    username = username.lower()
     user = User.objects.get(username = username)
     userDict = model_to_dict(user)
     return JsonResponse(userDict, safe=False)
 
 def authUser(request, username, passHash):
     passHash = hashlib.sha256(passHash.encode('utf-8')).hexdigest()
+    username = username.lower()
     if (User.objects.filter(username = username, passHash = passHash).count() == 0):
         return HttpResponse("Incorrect username/password")
     else:

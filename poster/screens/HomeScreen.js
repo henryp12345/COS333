@@ -14,9 +14,14 @@ export default class HomeScreen extends React.Component {
     this.arrayholder = [];
   }
   
-
+  
   componentDidMount() {
-    return fetch('https://posterapp333.herokuapp.com/event')
+    this.load();
+    this.props.navigation.addListener('willFocus', () => this.load());
+  }
+
+  load() {
+    return fetch('https://posterapp333.herokuapp.com/event/')
     .then(response => response.json())
     .then(responseJson => {
       this.setState(
@@ -40,21 +45,6 @@ export default class HomeScreen extends React.Component {
   clear = () => {
     this.search.clear();
   };
-
-   refresh() {
-    this.setState({refreshing: true});
-    fetch('https://posterapp333.herokuapp.com/event')
-    .then(response => response.json())
-    .then(responseJson => {
-      this.setState(
-      {
-        isLoading: false,
-        dataSource: responseJson,
-        refreshing: false,
-      });
-    });
-    this.forceUpdate();
-  }
 
   SearchFilterFunction(text) {
     const newData = this.arrayholder.filter(function(item) {

@@ -19,22 +19,17 @@ class Profile extends Component {
   }
   
   componentDidMount() {
-    fetch("https://posterapp333.herokuapp.com/hosted/" + this.state.userId + "/")
-      .then(response => response.json())
-      .then(responseJson => this.setState({hosted: responseJson}));
-    fetch("https://posterapp333.herokuapp.com/joined/" + this.state.userId + "/")
-      .then(response => response.json())
-      .then(responseJson => this.setState({joined: responseJson}));
+    this.reload();
+    this.props.navigation.addListener('willFocus', () => this.reload());
   }
   
-  refresh() {
+  reload() {
     fetch("https://posterapp333.herokuapp.com/hosted/" + this.state.userId + "/")
       .then(response => response.json())
       .then(responseJson => this.setState({hosted: responseJson}));
     fetch("https://posterapp333.herokuapp.com/joined/" + this.state.userId + "/")
       .then(response => response.json())
       .then(responseJson => this.setState({joined: responseJson}));
-    this.forceUpdate();
   }
 
   ListViewItemSeparator = () => {

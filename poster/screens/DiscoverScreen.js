@@ -12,7 +12,13 @@ export default class DiscoverScreen extends Component {
     const { navigation } = this.props;
     this.state = { recs: [], today: [], tomorrow: [], userId: this.props.screenProps.userId};
   }
+  
   componentDidMount() {
+    this.reload();
+    this.props.navigation.addListener('willFocus', () => this.reload());
+  }
+  
+  reload() {
     fetch("https://posterapp333.herokuapp.com/recs/" + this.state.userId + "/")
     .then((response) => response.json())
       .then((responseJson) => this.setState({recs: responseJson}));
@@ -24,19 +30,6 @@ export default class DiscoverScreen extends Component {
       .then((responseJson) => this.setState({tomorrow: responseJson}));
 
     }
-  
-  refresh() {
-    fetch("https://posterapp333.herokuapp.com/recs/" + this.state.userId + "/")
-    .then((response) => response.json())
-      .then((responseJson) => this.setState({recs: responseJson}));
-    fetch("https://posterapp333.herokuapp.com/today/" + this.state.userId + "/")
-    .then((response) => response.json())
-      .then((responseJson) => this.setState({today: responseJson}));
-    fetch("https://posterapp333.herokuapp.com/tomorrow/" + this.state.userId + "/")
-    .then((response) => response.json())
-      .then((responseJson) => this.setState({tomorrow: responseJson}));
-    this.forceUpdate();
-  }
 
 
   ListViewItemSeparator = () => {

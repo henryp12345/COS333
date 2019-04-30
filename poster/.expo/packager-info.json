@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://ue-dch.hpeters.poster.exp.direct",
+  "packagerNgrokUrl": "https://packager.ue-dch.hpeters.poster.exp.direct",
+  "ngrokPid": 5003
 }

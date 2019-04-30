@@ -55,7 +55,7 @@ export default class EventDetail extends Component {
     .then(currentUser => {
       this.currentUser = currentUser;
     });
-    fetch("https://posterapp333.herokuapp.com/getUser" + "/" + this.props.screenProps.userId + "/")
+    fetch("https://posterapp333.herokuapp.com/getUser/" + this.props.screenProps.userId + "/")
       .then((response) => {
         response.json()
           .then((responseJson) => {

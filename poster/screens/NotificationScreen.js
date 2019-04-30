@@ -14,24 +14,19 @@ export default class NotificationScreen extends Component {
       userId: this.props.screenProps.userId
     };
   }
-
+  
   componentDidMount() {
+    this.reload();
+    this.props.navigation.addListener('willFocus', () => this.reload());
+  }
+
+  reload() {
    fetch("https://posterapp333.herokuapp.com/notifications/" + this.state.userId + "/")
     .then((response) => response.json())
       .then((responseJson) => this.setState({notifications: responseJson}));
    fetch("https://posterapp333.herokuapp.com/newMessages/" + this.state.userId + "/")
     .then((response) => response.json())
       .then((responseJson) => this.setState({newMessages: responseJson}));
-  }
-  
-  refresh() {
-    fetch("https://posterapp333.herokuapp.com/notifications/" + this.state.userId + "/")
-    .then((response) => response.json())
-      .then((responseJson) => this.setState({notifications: responseJson}));
-   fetch("https://posterapp333.herokuapp.com/newMessages/" + this.state.userId + "/")
-    .then((response) => response.json())
-      .then((responseJson) => this.setState({newMessages: responseJson}));
-    this.forceUpdate();
   }
 
   render() {
