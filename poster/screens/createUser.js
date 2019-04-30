@@ -134,6 +134,7 @@ export default class createUser extends Component {
           <TextInput style={{paddingLeft:10}}
               placeholder="Password"
               autoCapitalize="none"
+              secureTextEntry={true}
               placeholderTextColor="#b0b7c1"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({password: text})}/>
@@ -149,6 +150,7 @@ export default class createUser extends Component {
           <TextInput style={{paddingLeft:10}}
               placeholder="Confirm Password"
               autoCapitalize="none"
+              secureTextEntry={true}
               placeholderTextColor="#b0b7c1"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({confirm: text})}/>
