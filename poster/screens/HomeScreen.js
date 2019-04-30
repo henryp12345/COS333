@@ -5,15 +5,16 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Card} from 'native-base';
 import { LinearGradient } from 'expo';
 import { iOSUIKit } from 'react-native-typography'
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import Chatroom from './Chatroom'
+import EventDetail from './EventDetail'
 
-
-export default class HomeScreen extends React.Component {
+class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = { isLoading: true, search: '', refreshing: false };
     this.arrayholder = [];
   }
-  
   
   componentDidMount() {
     this.load();
@@ -379,7 +380,7 @@ renderItem={({ item }) => (
 
 <View style={styles.label}>
 
-<TouchableOpacity onPress={() => this.props.navigation.navigate("EventDetail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
+<TouchableOpacity onPress={() => this.props.navigation.navigate("Detail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
 <Icon
 name='plus-circle'
 type='font-awesome'
@@ -521,6 +522,14 @@ label: {
   textAlign: 'right',
   padding: 3
 }
-
 });
 
+const AppNavigator = createStackNavigator({
+  Home: {screen: HomeScreen},
+  Room: {screen: Chatroom},
+  Detail: {screen: EventDetail},
+  },
+  {headerMode: 'none'}
+  );
+
+export default createAppContainer(AppNavigator);

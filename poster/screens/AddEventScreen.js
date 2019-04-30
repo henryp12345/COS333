@@ -23,6 +23,7 @@ const fields = [
                   name: 'description',
                   label: 'Event Summary:',
                   required: false,
+                  multiline: true, 
                   fields: [
                   {
                     type: 'text',
@@ -155,7 +156,7 @@ export default class FormGenerator extends Component {
                 </View>
                 <View style={styles.submitButton}>
                 <Button block onPress={() => this.login(this.tag.itemsSelected)}>
-                <Text style={styles.submit}>Submit</Text>
+                <Text style={styles.submit}>SUBMIT</Text>
                 </Button>
                 </View>
                 
