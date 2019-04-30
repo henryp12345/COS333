@@ -9,6 +9,7 @@ import CryptoJS from 'react-native-crypto-js';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import bgSrc from '../images/wallpaper.jpg';
 import logoImg from '../images/windows.png';
+import { Icon } from 'react-native-elements';
 
 const fields = [
                  {
@@ -63,27 +64,45 @@ export default class Login extends Component {
           behavior = 'padding'
           keyboardVerticalOffset= {50}
         >
-          <TextInput style={styles.inputContainer}
+        <View style={styles.inputContainer}>
+        <Icon
+   name='user'
+   type='feather'
+   color='#b0b7c1'
+   size = {14}
+   />
+          <TextInput style={{paddingLeft:10}}
               placeholder="Username"
               autoCapitalize="none"
+              placeholderTextColor="#b0b7c1"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({username: text})}
               />
-          <TextInput style={styles.inputContainer}
+              </View>
+
+        <View style={styles.inputContainer}>
+        <Icon
+   name='lock'
+   type='feather'
+   color='#b0b7c1'
+   size = {14}
+   />
+          <TextInput style={{paddingLeft:10}}
               placeholder="Password"
               secureTextEntry={true}
               autoCapitalize="none"
+              placeholderTextColor="#b0b7c1"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({password: text})}
               />
+              </View>
         </KeyboardAvoidingView>
 
      <TouchableOpacity style={styles.container2} onPress={() => this.login()}>
       <Text style={styles.name}>LOG IN</Text>
       </TouchableOpacity>
-      <Text> Don't have an account? </Text>
        <TouchableOpacity onPress={() => navigate("createUser")}>
-        <Text style={styles.text}>Sign Up</Text>
+        <Text style={styles.text}>Don't have an account? Sign Up</Text>
         </TouchableOpacity>
         </View>
         </ImageBackground>
@@ -95,12 +114,13 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   inputContainer: {
     height:40,
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     alignSelf:'center',
     textAlign: 'center',
     marginBottom:10,
+    paddingLeft: 20,
     width:250,
     borderRadius:30,
     backgroundColor: "#ffffff",
@@ -144,7 +164,6 @@ const styles = StyleSheet.create({
     color: '#6495ed',
     fontWeight: 'normal',
     backgroundColor: 'transparent',
-    marginTop: 15,
     fontSize:15
   },
   title: {

@@ -6,6 +6,7 @@ import { NavigationActions } from "react-navigation";
 import { iOSUIKit } from 'react-native-typography'
 import GenerateForm from 'react-native-form-builder';
 import { sha256 } from 'react-native-sha256';
+import { Icon } from 'react-native-elements';
 
 import bgSrc from '../images/wallpaper.jpg';
 import logoImg from '../images/windows.png';
@@ -74,39 +75,91 @@ export default class createUser extends Component {
           behavior='padding'
           keyboardVerticalOffset = {135}
         >
-          <TextInput style={styles.inputContainer}
+
+        <View style={styles.inputContainer}>
+        <Icon
+        name='user'
+        type='feather'
+        color='#b0b7c1'
+        size = {14}
+        />
+          <TextInput style={{paddingLeft:10}}
               placeholder="Username"
               autoCapitalize="none"
+              placeholderTextColor="#b0b7c1"
               underlineColorAndroid='transparent'
-              onChangeText={(text) => this.setState({username: text})}/>
-          <TextInput style={styles.inputContainer}
+              onChangeText={(text) => this.setState({username: text})}
+              />
+            </View>
+
+        <View style={styles.inputContainer}>
+            <Icon
+        name='edit-3'
+        type='feather'
+        color='#b0b7c1'
+        size = {14}
+        />
+          <TextInput style={{paddingLeft:10}}
               placeholder="First Name"
-              underlineColorAndroid='transparent'
-              onChangeText={(text) => this.setState({first: text})}/>
-          <TextInput style={styles.inputContainer}
-              placeholder="Last Name"
-              underlineColorAndroid='transparent'
-              onChangeText={(text) => this.setState({last: text})}/>
-          <TextInput style={styles.inputContainer}
-              placeholder="Password"
-              secureTextEntry={true}
               autoCapitalize="none"
+              placeholderTextColor="#b0b7c1"
+              underlineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({first: text})}
+              />
+            </View>
+
+        <View style={styles.inputContainer}>
+        <Icon
+        name='edit-3'
+        type='feather'
+        color='#b0b7c1'
+        size = {14}
+        />
+          <TextInput style={{paddingLeft:10}}
+              placeholder="Last Name"
+              autoCapitalize="none"
+              placeholderTextColor="#b0b7c1"
+              underlineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({last: text})}
+              />
+            </View>
+
+          <View style={styles.inputContainer}>
+        <Icon
+        name='lock'
+        type='feather'
+        color='#b0b7c1'
+        size = {14}
+        />
+          <TextInput style={{paddingLeft:10}}
+              placeholder="Password"
+              autoCapitalize="none"
+              placeholderTextColor="#b0b7c1"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({password: text})}/>
-          <TextInput style={styles.inputContainer}
+            </View>
+
+        <View style={styles.inputContainer}>
+        <Icon
+        name='lock'
+        type='feather'
+        color='#b0b7c1'
+        size = {14}
+        />
+          <TextInput style={{paddingLeft:10}}
               placeholder="Confirm Password"
-              secureTextEntry={true}
               autoCapitalize="none"
+              placeholderTextColor="#b0b7c1"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({confirm: text})}/>
+            </View>
         </KeyboardAvoidingView>
 
      <TouchableOpacity style={styles.container2} onPress={() => this.createUser()}>
       <Text style={styles.name}>SIGN UP</Text>
       </TouchableOpacity>
-      <Text> Have an account?</Text>
            <TouchableOpacity onPress={() => navigate('Login')}>
-        <Text style={styles.text}>Log In</Text>
+        <Text style={styles.text}>Have an account? Log In</Text>
         </TouchableOpacity>
         </View>
         </ImageBackground>
@@ -119,16 +172,17 @@ const styles = StyleSheet.create({
   inputContainer: {
     height:40,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     alignSelf:'center',
     textAlign: 'center',
     marginBottom:10,
+    paddingLeft: 20,
     width:250,
     borderRadius:30,
     backgroundColor: "#ffffff",
     borderColor: '#ff1493',
-    borderWidth: 0.5
+    borderWidth: 0.5,
   },
   inputs:{
       height:45,
@@ -166,7 +220,6 @@ const styles = StyleSheet.create({
     color: '#6495ed',
     fontWeight: 'normal',
     backgroundColor: 'transparent',
-    marginTop: 12,
     fontSize:15
   },
   title: {
