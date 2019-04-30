@@ -35,9 +35,6 @@ export default class NotificationScreen extends Component {
        <ScrollView>
           <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customTitle}>Notifications</Text>
-<TouchableOpacity onPress = {() => this.refresh()}>
-<Text style={styles.customSubtitle2}>Refresh</Text>
-</TouchableOpacity>
 </View>
 
           <FlatList

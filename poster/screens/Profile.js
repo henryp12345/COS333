@@ -52,9 +52,6 @@ class Profile extends Component {
       <ScrollView>
             <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customSubtitle}>Events You are Hosting</Text>
-      <TouchableOpacity onPress={text => this.refresh()}>
-        <Text style={styles.customSubtitle2}>Refresh</Text>
-      </TouchableOpacity>
       </View>
 
       <FlatList

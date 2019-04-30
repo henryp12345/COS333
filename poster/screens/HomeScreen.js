@@ -353,9 +353,6 @@ Campus Events
 </View>
 <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
 <Text style={styles.customSubtitle}>Happenings</Text>
-<TouchableOpacity onPress={text => this.refresh()}>
-<Text style={styles.customSubtitle2}>Refresh</Text>
-</TouchableOpacity>
 </View>
 <FlatList
 data={this.state.dataSource}

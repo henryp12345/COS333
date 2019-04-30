@@ -50,9 +50,6 @@ export default class DiscoverScreen extends Component {
       <View style={styles.viewStyle}>
       <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
 <Text style={styles.customTitle}>Top Picks For You</Text>  
-<TouchableOpacity onPress={text => this.refresh()}>
-<Text style={styles.customSubtitle2}>Refresh</Text>
-</TouchableOpacity>
 </View>
 
        <ScrollView horizontal={true}
