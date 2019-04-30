@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
-import { TextInput, KeyboardAvoidingView, StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity } from 'react-native';
+import { TouchableWithoutFeedback, Keyboard, TextInput, KeyboardAvoidingView, StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity } from 'react-native';
 import { NavigationActions } from "react-navigation";
 import { iOSUIKit } from 'react-native-typography'
 import GenerateForm from 'react-native-form-builder';
@@ -68,6 +68,7 @@ export default class createUser extends Component {
     return (
       <ImageBackground style={styles.picture} source={bgSrc}>
         {this.props.children}
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
         <Image source={logoImg} style={styles.image} />
         <Text style={styles.title}>REGISTER</Text>
@@ -164,6 +165,7 @@ export default class createUser extends Component {
         <Text style={styles.text}>Have an account? Log In</Text>
         </TouchableOpacity>
         </View>
+        </TouchableWithoutFeedback>
         </ImageBackground>
 
     );

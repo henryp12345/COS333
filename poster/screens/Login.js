@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
-import { TextInput, KeyboardAvoidingView, StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity, Platform } from 'react-native';
+import { TouchableWithoutFeedback, Keyboard, TextInput, KeyboardAvoidingView, StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity, Platform } from 'react-native';
 import { NavigationActions } from "react-navigation";
 import { iOSUIKit } from 'react-native-typography'
 import GenerateForm from 'react-native-form-builder';
@@ -51,12 +51,14 @@ export default class Login extends Component {
     }
   }
 
+
   render() {
     const { navigate } = this.props.navigation;
 
     return (
       <ImageBackground style={styles.picture} source={bgSrc}>
         {this.props.children}
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
         <Image source={logoImg} style={styles.image} />
         <Text style={styles.title}>p o s t e r</Text>
@@ -88,7 +90,7 @@ export default class Login extends Component {
    size = {14}
    />
           <TextInput style={{paddingLeft:10}}
-              placeholder="Password"
+              placeholder="Password            "
               secureTextEntry={true}
               autoCapitalize="none"
               placeholderTextColor="#b0b7c1"
@@ -105,6 +107,7 @@ export default class Login extends Component {
         <Text style={styles.text}>Don't have an account? Sign Up</Text>
         </TouchableOpacity>
         </View>
+                </TouchableWithoutFeedback>
         </ImageBackground>
 
     );
