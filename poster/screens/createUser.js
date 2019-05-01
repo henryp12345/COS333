@@ -161,11 +161,12 @@ export default class createUser extends Component {
      <TouchableOpacity style={styles.container2} onPress={() => this.createUser()}>
       <Text style={styles.name}>SIGN UP</Text>
       </TouchableOpacity>
-           <TouchableOpacity onPress={() => navigate('Login')}>
         <View style={styles.contsign}>
-        <Text style={styles.text}>Have an account? </Text><Text style={styles.text1}>Log In</Text>
-        </View>
+        <Text style={styles.text}>Have an account? </Text>
+        <TouchableOpacity onPress={() => navigate('Login')}>
+        <Text style={styles.text1}>Log In</Text>
         </TouchableOpacity>
+        </View>
         </View>
         </TouchableWithoutFeedback>
         </ImageBackground>
@@ -232,13 +233,13 @@ const styles = StyleSheet.create({
     height: 120,
   },
   text: {
-    color: '#6495ed',
+    color: 'black',
     fontWeight: 'normal',
     backgroundColor: 'transparent',
     fontSize:15
   },
   text1: {
-    color: '#6495ed',
+    color: 'black',
     fontWeight: 'normal',
     backgroundColor: 'transparent',
     fontSize:15,
