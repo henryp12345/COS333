@@ -174,13 +174,13 @@ const styles = StyleSheet.create({
     height: 120,
   },
   text: {
-    color: '#6495ed',
+    color: 'black',
     fontWeight: 'normal',
     backgroundColor: 'transparent',
     fontSize:15
   },
   text1: {
-    color: '#6495ed',
+    color: 'black',
     fontWeight: 'normal',
     backgroundColor: 'transparent',
     fontSize:15,
