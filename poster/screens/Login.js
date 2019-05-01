@@ -103,11 +103,12 @@ export default class Login extends Component {
      <TouchableOpacity style={styles.container2} onPress={() => this.login()}>
       <Text style={styles.name}>LOG IN</Text>
       </TouchableOpacity>
-       <TouchableOpacity onPress={() => navigate("createUser")}>
        <View style={styles.contsign}>
-        <Text style={styles.text}>Don't have an account? </Text><Text style={styles.text1}>Sign Up</Text>
-        </View>
+        <Text style={styles.text}>Don't have an account? </Text>
+        <TouchableOpacity onPress={() => navigate("createUser")}>
+        <Text style={styles.text1}>Sign Up</Text>
         </TouchableOpacity>
+        </View>
         </View>
         </TouchableWithoutFeedback>
         </ImageBackground>
