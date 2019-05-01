@@ -51,7 +51,7 @@ class Profile extends Component {
       <Text style={styles.customTitle}>{"Welcome back, "}{this.state.userId}.</Text>
       <ScrollView>
             <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
-      <Text style={styles.customSubtitle}>Events You are Hosting</Text>
+      <Text style={styles.customSubtitle}>Events You Are Hosting</Text>
       </View>
 
       <FlatList
