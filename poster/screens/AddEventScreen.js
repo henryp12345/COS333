@@ -16,7 +16,7 @@ const fields = [
                 	type: 'text',
                 	name: 'event',
                 	required: true,
-                	label: 'What is your event?',
+                	label: '(e.g. bball, split uber, etc) - 15 chars max',
                 },
                 {
                 	type: 'group',
@@ -129,13 +129,14 @@ export default class FormGenerator extends Component {
         const arrayOfString = ['Sports', 'Study', 'Gaming', 'Shopping', 'Transport', 'Campus Activity', 'Project', 'Other']
 
         return (
-        	<ImageBackground style={styles.picture} source={bgForm}>
-        		{this.props.children}
+          <View style={styles.viewStyle}>
+            <Text style={styles.customTitle}>Create Event</Text>
+            <ImageBackground style={styles.picture} source={bgForm}>
+            {this.props.children}
         		<KeyboardAvoidingView style={styles.container} behavior="padding">
                 <ScrollView style={styles.wrapper}>
-                <Text style={styles.name}>Create Event</Text>
                 <View>
-                
+                <Text style={styles.labelEvent}> What is your event? </Text>
                 <GenerateForm style={styles.submit}
                 ref={(c) => {
                 this.formGenerator = c;
@@ -163,17 +164,29 @@ export default class FormGenerator extends Component {
                 </ScrollView>
                 </KeyboardAvoidingView>
                 </ImageBackground>
+                </View>
                 );
     }
 }
 
 const styles = StyleSheet.create({
+  viewStyle: {
+    justifyContent: 'center',
+    flex: 1,
+    margin: 20,
+    margin: 15,
+    textAlign: 'center',
+  },
 	container: {
 		marginTop: 50,
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
 	},
+  customTitle: {
+  ...iOSUIKit.largeTitleEmphasizedObject,
+  fontSize: 28,
+  },
 	date: {
 		...iOSUIKit.largeTitleEmphasizedObject,
 		fontSize: 17,
@@ -213,12 +226,12 @@ const styles = StyleSheet.create({
   },
   wrapper: {
 	flex: 1,
-	marginTop: 50,
+	marginTop: 20,
   },
   submitButton: {
-	paddingHorizontal: 100,
+	paddingHorizontal: 90,
 	paddingTop: 15,
-	padding:20,
+	padding:10,
   },
   submit: {
   	...iOSUIKit.subheadEmphasizedObject,
@@ -227,20 +240,26 @@ const styles = StyleSheet.create({
   name:{
 	...iOSUIKit.largeTitleEmphasizedObject,
     fontSize: 28,
-    color:'white',
+    color:'black',
     padding:20
   },
   labelText:{
   	...iOSUIKit.subheadEmphasizedObject,
   	fontSize: 17,
-    padding:20,
+    padding:10,
     color: 'white',
   },
   labelTextb:{
   	...iOSUIKit.subheadEmphasizedObject,
   	fontSize: 17,
-    padding:20,
+    padding:15,
     color: 'black',
+  },
+  labelEvent:{
+    ...iOSUIKit.subheadEmphasizedObject,
+    fontSize: 22,
+    padding:10,
+    color: 'white',
   },
   item: {
     borderWidth: 1,   
@@ -252,7 +271,7 @@ const styles = StyleSheet.create({
   },
   container: {
   	flex: 1,
-  	marginLeft: 20,
+  	marginLeft: 15,
   }
 });
 
