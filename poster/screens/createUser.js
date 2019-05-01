@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
-import { TouchableWithoutFeedback, Keyboard, TextInput, KeyboardAvoidingView, StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity } from 'react-native';
+import { Alert, TouchableWithoutFeedback, Keyboard, TextInput, KeyboardAvoidingView, StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity } from 'react-native';
 import { NavigationActions } from "react-navigation";
 import { iOSUIKit } from 'react-native-typography'
 import GenerateForm from 'react-native-form-builder';
@@ -44,20 +44,20 @@ export default class createUser extends Component {
   createUser() {
     const {navigate} = this.props.navigation;
     if (this.state.password != this.state.confirm)
-      alert("Passwords do not match.");
+      Alert.alert("Passwords do not match.");
     else if (this.state.last.length == 0 || this.state.first.length == 0)
-      alert("Please enter your name")
+      Alert.alert("Please enter your name")
     else if (this.state.password.length < 6)
-      alert("Password must be longer than 6 characters.");
+      Alert.alert("Password must be longer than 6 characters.");
     else {
       fetch("https://posterapp333.herokuapp.com/addUser/" + this.state.username + "/" + this.state.password + "/" + this.state.first + "/" + this.state.last + "/")
         .then((response) => {
           if (response._bodyText == "OK") {
-            alert('Thanks for joining Poster!');
+            Alert.alert('Success','Thanks for joining Poster!');
             navigate("Dashboard", {userId: this.state.username});
           }
           else
-            alert('Username already taken.');
+            Alert.alert('Username already taken.');
         });
     }
   }

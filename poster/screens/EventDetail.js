@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
-import { ImageBackground, StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
+import { Alert, ImageBackground, StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import { iOSUIKit } from 'react-native-typography'
 import { Icon } from 'react-native-elements'
 import { ChatManager, TokenProvider} from '@pusher/chatkit-client'
@@ -96,11 +96,11 @@ export default class EventDetail extends Component {
               fetch("https://posterapp333.herokuapp.com/addJoined/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
               .then((response) => {
                 if (response._bodyText == 'Already joined') {
-                    alert('You have already joined this event');
+                    Alert.alert('You have already joined this event');
                     navigation.goBack();
                 }
                 else {
-                  alert("Event joined");
+                  Alert.alert("Event joined");
                   navigation.goBack();
                 }
               });
@@ -140,7 +140,7 @@ export default class EventDetail extends Component {
             <TouchableOpacity style={styles.joinButton} onPress={() => {
               fetch("https://posterapp333.herokuapp.com/leave/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
               .then(() => {
-                alert("Event left");
+                Alert.alert("Event left");
                 navigation.goBack();
               });
               this.currentUser.leaveRoom({roomId: this.state.chatroom});
@@ -180,7 +180,7 @@ export default class EventDetail extends Component {
             <TouchableOpacity style={styles.joinButton} onPress={() => {
               fetch("https://posterapp333.herokuapp.com/delete/" + navigation.getParam('userId') + "/" + navigation.getParam('eventId') + "/")
               .then(() => {
-                alert("Event deleted");
+                Alert.alert("Event deleted");
                 navigation.goBack();
               });
               this.currentUser.deleteRoom({roomId: this.state.chatroom});

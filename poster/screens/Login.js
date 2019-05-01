@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
-import { TouchableWithoutFeedback, Keyboard, TextInput, KeyboardAvoidingView, StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity, Platform } from 'react-native';
+import { Alert, TouchableWithoutFeedback, Keyboard, TextInput, KeyboardAvoidingView, StyleSheet, ImageBackground, View, Text, Image, TouchableOpacity, Platform } from 'react-native';
 import { NavigationActions } from "react-navigation";
 import { iOSUIKit } from 'react-native-typography'
 import GenerateForm from 'react-native-form-builder';
@@ -36,7 +36,7 @@ export default class Login extends Component {
   login() {
     const { navigate } = this.props.navigation;
     if (this.state.username.length == 0 || this.state.password.length == 0)
-      alert("Please enter a username and password.");
+      Alert.alert("Please enter a username and password.");
     else {
       fetch("https://posterapp333.herokuapp.com/authUser/" + this.state.username + "/" + this.state.password + "/")
         .then((response) => {
@@ -46,7 +46,7 @@ export default class Login extends Component {
             navigate("Dashboard", {userId: userId});
           }
           else
-            alert("The username or password is incorrect. Try again.");
+            Alert.alert("The username or password is incorrect. Try again.");
       });
     }
   }
