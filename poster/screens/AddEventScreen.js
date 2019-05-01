@@ -8,7 +8,7 @@ import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
 import AppLoading from 'expo';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
-import bgForm from '../images/new-event.png';
+import bgForm from '../images/event-wall.png';
 
 // These Fields will create a login form with three fields
 const fields = [
@@ -142,7 +142,7 @@ export default class FormGenerator extends Component {
                 }}
                 fields={fields}
                 />
-                <Text style={styles.labelText}>What kind of event is this?</Text>
+                <Text style={styles.labelTextb}>What kind of event is this?</Text>
         <View style={styles.container}>
         <TagSelect
           data={arrayOfString}
@@ -235,6 +235,12 @@ const styles = StyleSheet.create({
   	fontSize: 17,
     padding:20,
     color: 'white',
+  },
+  labelTextb:{
+  	...iOSUIKit.subheadEmphasizedObject,
+  	fontSize: 17,
+    padding:20,
+    color: 'black',
   },
   item: {
     borderWidth: 1,   
