@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
 	flex: 1,
-	marginTop: 20,
+	marginTop: 35,
   },
   submitButton: {
 	paddingHorizontal: 90,
@@ -252,13 +252,14 @@ const styles = StyleSheet.create({
   labelTextb:{
   	...iOSUIKit.subheadEmphasizedObject,
   	fontSize: 17,
-    padding:15,
+    padding: 0,
+    paddingVertical: 15,
     color: 'black',
   },
   labelEvent:{
     ...iOSUIKit.subheadEmphasizedObject,
     fontSize: 22,
-    padding:10,
+    padding:0,
     color: 'white',
   },
   item: {
