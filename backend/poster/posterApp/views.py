@@ -46,11 +46,13 @@ def eventId(request, eventString):
     return JsonResponse(event_list, safe=False)
 
 def hosted(request, username):
+    username = username.lower()
     user = User.objects.get(username = username)
     eventsHosted = user.hosted
     return eventId(request, eventsHosted)
 
 def addHosted(request, username, idString):
+    username = username.lower()
     idList = idString.split(",")
     user = User.objects.get(username = username)
     currentHosted = user.hosted
@@ -63,11 +65,13 @@ def addHosted(request, username, idString):
     return HttpResponse("OK")
 
 def joined(request, username):
+    username = username.lower()
     user = User.objects.get(username = username)
     eventsJoined = user.joined
     return eventId(request, eventsJoined)
 
 def addJoined(request, username, idString):
+    username = username.lower()
     idList = idString.split(",")
     user = User.objects.get(username = username)
     for item in idList:
@@ -99,6 +103,7 @@ def addJoined(request, username, idString):
     return HttpResponse(currentJoined)
 
 def addUser(request, username, passHash, first, last):
+    username = username.lower()
     passHash = hashlib.sha256(passHash.encode('utf8')).hexdigest()
     username = username.lower()
     if (User.objects.filter(username = username).count() == 0):
@@ -111,6 +116,7 @@ def addUser(request, username, passHash, first, last):
         return HttpResponse("User taken")
 
 def notifications(request, username):
+    username = username.lower()
     user = User.objects.get(username = username)
     notificationString = user.notifications
     user.notifications = ""
@@ -118,6 +124,7 @@ def notifications(request, username):
     return eventId(request, notificationString)
 
 def newMessages(request, username):
+    username = username.lower()
     user = User.objects.get(username = username)
     messageString = user.newMessages
     returnValue = eventId(request, messageString)
@@ -126,6 +133,7 @@ def newMessages(request, username):
     return returnValue
 
 def addMessage(request, username, roomId):
+    username = username.lower()
     user = User.objects.get(username = username)
     if roomId not in user.newMessages:
         user.newMessages = user.newMessages + roomId + ","
@@ -133,6 +141,7 @@ def addMessage(request, username, roomId):
     return HttpResponse("OK")
 
 def leave(request, username, idString):
+    username = username.lower()
     # Delete from users events string
     user = User.objects.get(username = username)
     x = user.joined.replace(idString, '')
@@ -147,6 +156,7 @@ def leave(request, username, idString):
     return HttpResponse(x)
 
 def delete(request, username, idString):
+    username = username.lower()
     # Remove from users' joined string
     users = User.objects.all().filter(joined__contains = idString)
     for user in users:
@@ -159,6 +169,7 @@ def delete(request, username, idString):
     return HttpResponse("OK")
 
 def recommendations(request, username):
+    username = username.lower()
     user = User.objects.get(username = username)
     EventList = user.joined.split(",")
     Tags = {}
@@ -213,11 +224,13 @@ def recommendations(request, username):
     return JsonResponse(values_list, safe=False)
 
 def today(request, username):
+    username = username.lower()
     values = Event.objects.filter(startDate__gte = datetime.date.today()).filter(startDate__lt = datetime.date.today() + datetime.timedelta(days = 1)).exclude(numberJoined = F('capacity')).values()
     values_list = list(values)
     return JsonResponse(values_list, safe = False)
 
 def tomorrow(request, username):
+    username = username.lower()
     values = Event.objects.filter(startDate__gte = datetime.date.today() + datetime.timedelta(days = 1)).filter(startDate__lt = datetime.date.today() + datetime.timedelta(days = 2)).exclude(numberJoined = F('capacity')).values()
     values_list = list(values)
     return JsonResponse(values_list, safe=False)
@@ -229,6 +242,7 @@ def getUser(request, username):
     return JsonResponse(userDict, safe=False)
 
 def authUser(request, username, passHash):
+    username = username.lower()
     passHash = hashlib.sha256(passHash.encode('utf-8')).hexdigest()
     username = username.lower()
     if (User.objects.filter(username = username, passHash = passHash).count() == 0):
