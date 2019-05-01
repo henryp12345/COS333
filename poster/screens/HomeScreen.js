@@ -381,6 +381,7 @@ Campus Events
 data={this.state.dataSource}
 renderItem={({ item }) => (
 
+<TouchableOpacity onPress={() => this.props.navigation.navigate("Detail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
 <Card style={{borderRadius: 10}}>
 <View style={styles.itemContent}>
 <View style={styles.iconContainer}>
@@ -410,7 +411,6 @@ size={28}
 color="#558fed"
 />
 </TouchableOpacity>
-
 </View>
 </View>
 </View>
@@ -421,6 +421,8 @@ color="#558fed"
 
 
 </Card>
+</TouchableOpacity>
+
 )}
 refreshControl={
         <RefreshControl
