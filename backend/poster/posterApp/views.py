@@ -20,9 +20,18 @@ def default(request):
     return HttpResponse("")
 
 @csrf_exempt
-def event(request):
+def event(request, username):
     if request.method == 'GET':
-        values = Event.objects.filter(endDate__gt = datetime.datetime.now()).values()
+        username = username.lower()
+        user = User.objects.get(username = username)
+        EventList = user.joined.split(",")
+        for i in user.hosted.split(","):
+            EventList.append(i)
+        values = Event.objects.filter(endDate__gt = datetime.datetime.now())
+        for thing in EventList:
+            if len(thing) > 0:
+                values = values.exclude(id = thing)
+        values = values.values()
         values_list = list(values)
         return JsonResponse(values_list, safe=False)
     elif request.method == 'POST':
@@ -52,14 +61,13 @@ def hosted(request, username):
     return eventId(request, eventsHosted)
 
 def addHosted(request, username, idString):
-    username = username.lower()
     idList = idString.split(",")
     user = User.objects.get(username = username)
     currentHosted = user.hosted
     if currentHosted == "":
         currentHosted = "," + idString + ","
     else:
-        currentHosted = currenthosted + idString + ","
+        currentHosted = currentHosted + idString + ","
     user.hosted = currentHosted
     user.save()
     return HttpResponse("OK")
@@ -105,7 +113,6 @@ def addJoined(request, username, idString):
 def addUser(request, username, passHash, first, last):
     username = username.lower()
     passHash = hashlib.sha256(passHash.encode('utf8')).hexdigest()
-    username = username.lower()
     if (User.objects.filter(username = username).count() == 0):
         newUser = User(username = username, hosted = "", joined = "", notifications = "", newMessages = "", passHash = passHash, firstName = first, lastName = last)
         newUser.save()
@@ -151,7 +158,8 @@ def leave(request, username, idString):
     for item in idList:
         if len(item) > 0 and Event.objects.filter(id = item).count() > 0:
             currentEvent = Event.objects.get(id = item)
-            currentEvent.numberJoined = currentEvent.numberJoined - 1
+            if currentEvent.numberJoined > 0:
+                currentEvent.numberJoined = currentEvent.numberJoined - 1
             currentEvent.save()
     return HttpResponse(x)
 
@@ -218,8 +226,14 @@ def recommendations(request, username):
         elif Tags[tag] > Tags[sec]:
             sec = tag
     values = Event.objects.filter(Q(tags__contains = top) | Q(tags__contains = sec))
-    values = values.exclude(numberJoined = F('capacity'))
-    values = values.filter(startDate__gt =  datetime.datetime.now()).values()
+    values = values.filter(startDate__gt =  datetime.datetime.now())
+    for item in EventList:
+        if len(item) > 0:
+            values = values.exclude(id = item)
+    for item in HostedList:
+        if len(item) > 0:
+            values = values.exclude(id = item)
+    values = values.exclude(numberJoined = F('capacity')).values()
     values_list = list(values)
     return JsonResponse(values_list, safe=False)
 
@@ -244,7 +258,6 @@ def getUser(request, username):
 def authUser(request, username, passHash):
     username = username.lower()
     passHash = hashlib.sha256(passHash.encode('utf-8')).hexdigest()
-    username = username.lower()
     if (User.objects.filter(username = username, passHash = passHash).count() == 0):
         return HttpResponse("Incorrect username/password")
     else:

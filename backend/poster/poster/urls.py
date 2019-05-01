@@ -19,7 +19,7 @@ from posterApp import views
 
 urlpatterns = [
     path('', views.default),
-    path('event/', views.event),
+    path('events/<str:username>/', views.event),
     path('event/<str:eventString>/', views.eventId),
     path('hosted/<str:username>/', views.hosted),
     path('addHosted/<str:username>/<str:idString>/', views.addHosted),
