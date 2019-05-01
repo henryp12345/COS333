@@ -12,10 +12,20 @@ import EventDetail from './EventDetail'
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = { isLoading: true, search: '', refreshing: false };
+    this.state = { 
+      isLoading: true, 
+      search: '', 
+      refreshing: false, 
+      selectedSports: false, 
+      selectedStudy: false,
+      selectedGaming: false,
+      selectedTransport: false, 
+      selectedShopping: false,
+      selectedCampus: false,
+       };
     this.arrayholder = [];
   }
-  
+
   componentDidMount() {
     this.load();
     this.props.navigation.addListener('willFocus', () => this.load());
@@ -57,6 +67,12 @@ class HomeScreen extends Component {
     this.setState({
       dataSource: newData,
       search: text,
+      selectedSports: false, 
+      selectedStudy: false,
+      selectedGaming: false,
+      selectedTransport: false, 
+      selectedShopping: false,
+      selectedCampus: false,
     });
   }
 
@@ -82,7 +98,6 @@ class HomeScreen extends Component {
         );
       }
       return (
-      //ListView to show with textinput used as search bar
       <View style={styles.viewStyle}>
       <Text style={styles.customTitle}>Explore Events</Text>
 
@@ -99,11 +114,12 @@ class HomeScreen extends Component {
       <ScrollView>
       <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customSubtitle}>Popular Categories</Text>
-<TouchableOpacity onPress={text => this.SearchFilterFunction('')}>
+<TouchableOpacity onPress ={text => this.SearchFilterFunction('')}>
 <Text style={styles.customSubtitle2}>Clear all</Text>
 </TouchableOpacity>
 </View>
       <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
+
       <TouchableOpacity
       onPress ={() => {
         const newData = this.arrayholder.filter(function(item) {
@@ -114,8 +130,15 @@ class HomeScreen extends Component {
         this.setState({
           dataSource: newData,
           search: "",
+          selectedSports: true, 
+      selectedStudy: false,
+      selectedGaming: false,
+      selectedTransport: false, 
+      selectedShopping: false,
+      selectedCampus: false,
         });
       }}>
+
       <LinearGradient
       colors={['#f42e78', '#c17afc']}
       height={100}
@@ -129,20 +152,14 @@ class HomeScreen extends Component {
       <Icon
       name='ios-basketball'
       type='ionicon'
-      color='#ffffff'
+      color={this.state.selectedSports ? '#ffff75' : '#ffffff'}
       size = {30}
       />
       <Text
-      style={{
-        backgroundColor: 'transparent',
-        fontSize: 14,
-        color: '#ffffff',
-        textAlign: 'left'
-      }}>
+      style={this.state.selectedSports ? styles.btn1 : styles.btn2}>
       Sports
       </Text>
       </LinearGradient>
-
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -155,6 +172,12 @@ class HomeScreen extends Component {
         this.setState({
           dataSource: newData,
           search: "",
+          selectedSports: false, 
+      selectedStudy: true,
+      selectedGaming: false,
+      selectedTransport: false, 
+      selectedShopping: false,
+      selectedCampus: false,
         });
       }}>
       <LinearGradient
@@ -170,16 +193,11 @@ class HomeScreen extends Component {
      <Icon
      name='book'
      type='font-awesome'
-     color='#ffffff'
+     color={this.state.selectedStudy ? '#ffff75' : '#ffffff'}
      size = {30}
      />
      <Text
-     style={{
-      backgroundColor: 'transparent',
-      fontSize: 14,
-      color: '#ffffff',
-      textAlign: 'left'
-    }}>
+     style={this.state.selectedStudy ? styles.btn1 : styles.btn2}>
     Study
     </Text>
     </LinearGradient>
@@ -196,6 +214,12 @@ class HomeScreen extends Component {
       this.setState({
         dataSource: newData,
         search: "",
+        selectedSports: false, 
+      selectedStudy: false,
+      selectedGaming: true,
+      selectedTransport: false, 
+      selectedShopping: false,
+      selectedCampus: false,
       });
     }}>
     <LinearGradient
@@ -211,16 +235,11 @@ class HomeScreen extends Component {
    <Icon
    name='logo-game-controller-b'
    type='ionicon'
-   color='#ffffff'
+   color={this.state.selectedGaming ? '#ffff75' : '#ffffff'}
    size = {30}
    />
    <Text
-   style={{
-    backgroundColor: 'transparent',
-    fontSize: 14,
-    color: '#ffffff',
-    textAlign: 'left'
-  }}>
+   style={this.state.selectedGaming ? styles.btn1 : styles.btn2}>
   Gaming
   </Text>
   </LinearGradient>
@@ -239,6 +258,12 @@ class HomeScreen extends Component {
     this.setState({
       dataSource: newData,
       search: "",
+      selectedSports: false, 
+      selectedStudy: false,
+      selectedGaming: false,
+      selectedTransport: true, 
+      selectedShopping: false,
+      selectedCampus: false,
     });
   }}>
   <LinearGradient
@@ -254,16 +279,11 @@ class HomeScreen extends Component {
  <Icon
  name='car'
  type='font-awesome'
- color='#ffffff'
+ color={this.state.selectedTransport ? '#ffff75' : '#ffffff'}
  size = {30}
  />
  <Text
- style={{
-  backgroundColor: 'transparent',
-  fontSize: 14,
-  color: '#ffffff',
-  textAlign: 'left'
-}}>
+ style={this.state.selectedTransport ? styles.btn1 : styles.btn2}>
 Transport
 </Text>
 </LinearGradient>
@@ -280,6 +300,12 @@ onPress ={() => {
   this.setState({
     dataSource: newData,
     search: "",
+    selectedSports: false, 
+      selectedStudy: false,
+      selectedGaming: false,
+      selectedTransport: false, 
+      selectedShopping: true,
+      selectedCampus: false,
   });
 }}>
 <LinearGradient
@@ -295,16 +321,11 @@ style={{
 <Icon
 name='shopping-cart'
 type='weloveiconfonts'
-color='#ffffff'
+color={this.state.selectedShopping ? '#ffff75' : '#ffffff'}
 size = {30}
 />
 <Text
-style={{
-  backgroundColor: 'transparent',
-  fontSize: 14,
-  color: '#ffffff',
-  textAlign: 'left'
-}}>
+style={this.state.selectedShopping ? styles.btn1 : styles.btn2}>
 Bulk Orders
 </Text>
 </LinearGradient>
@@ -321,6 +342,12 @@ onPress ={() => {
   this.setState({
     dataSource: newData,
     search: "",
+    selectedSports: false, 
+      selectedStudy: false,
+      selectedGaming: false,
+      selectedTransport: false, 
+      selectedShopping: false,
+      selectedCampus: true,
   });
 }}>
 <LinearGradient
@@ -336,16 +363,11 @@ style={{
 <Icon
 name='comments'
 type='font-awesome'
-color='#ffffff'
+color={this.state.selectedCampus ? '#ffff75' : '#ffffff'}
 size = {30}
 />
 <Text
-style={{
-  backgroundColor: 'transparent',
-  fontSize: 14,
-  color: '#ffffff',
-  textAlign: 'left'
-}}>
+style={this.state.selectedCampus ? styles.btn1 : styles.btn2}>
 Campus Events
 </Text>
 </LinearGradient>
@@ -499,6 +521,20 @@ textContainer: {
 downTextContainer: {
   flex: 6,
   position: 'relative',
+},
+
+btn1: {
+backgroundColor: 'transparent',
+        fontSize: 14,
+        color: '#ffff75',
+        textAlign: 'left'
+},
+
+btn2: {
+backgroundColor: 'transparent',
+        fontSize: 14,
+        color: '#ffffff',
+        textAlign: 'left'
 },
 
 downTextContainerInner: {
