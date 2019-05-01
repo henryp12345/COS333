@@ -162,7 +162,9 @@ export default class createUser extends Component {
       <Text style={styles.name}>SIGN UP</Text>
       </TouchableOpacity>
            <TouchableOpacity onPress={() => navigate('Login')}>
-        <Text style={styles.text}>Have an account? Log In</Text>
+        <View style={styles.contsign}>
+        <Text style={styles.text}>Have an account? </Text><Text style={styles.text1}>Log In</Text>
+        </View>
         </TouchableOpacity>
         </View>
         </TouchableWithoutFeedback>
@@ -216,6 +218,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  contsign: {
+    height:40,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom:10,
+    paddingLeft: 45,
+    width:250,
+  },
   image: {
     width: 80,
     height: 120,
@@ -225,6 +236,13 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     backgroundColor: 'transparent',
     fontSize:15
+  },
+  text1: {
+    color: '#6495ed',
+    fontWeight: 'normal',
+    backgroundColor: 'transparent',
+    fontSize:15,
+    textDecorationLine: 'underline'
   },
   title: {
   ...iOSUIKit.largeTitleEmphasizedObject,
