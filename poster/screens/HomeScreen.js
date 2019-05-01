@@ -115,7 +115,7 @@ class HomeScreen extends Component {
       <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customSubtitle}>Popular Categories</Text>
 <TouchableOpacity onPress ={text => this.SearchFilterFunction('')}>
-<Text style={styles.customSubtitle2}>Clear all</Text>
+<Text style={styles.customSubtitle2}>Clear</Text>
 </TouchableOpacity>
 </View>
       <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>

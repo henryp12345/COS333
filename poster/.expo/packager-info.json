@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": "https://ue-dch.hpeters.poster.exp.direct",
-  "packagerNgrokUrl": "https://packager.ue-dch.hpeters.poster.exp.direct",
-  "ngrokPid": 6711
+  "expoServerPort": 19000,
+  "packagerPort": 19011,
+  "packagerPid": 47971,
+  "expoServerNgrokUrl": "https://ue-dch.anonymous.poster.exp.direct",
+  "packagerNgrokUrl": "https://packager.ue-dch.anonymous.poster.exp.direct",
+  "ngrokPid": 48014
 }
