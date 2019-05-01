@@ -17,7 +17,6 @@ export default class NotificationScreen extends Component {
   
   componentDidMount() {
     this.reload();
-    this.props.navigation.addListener('willFocus', () => this.reload());
   }
 
   reload() {
