@@ -95,7 +95,7 @@ export default class FormGenerator extends Component {
             var tags = "";
             for (i = 0; i < items.length; i++)
                 tags = tags + items[i] + ",";
-            fetch("https://posterapp333.herokuapp.com/event/", {
+            fetch("https://posterapp333.herokuapp.com/events/" + this.state.userId + "/", {
                   method: 'POST',
                   headers: {
                   Accept: 'application/json',
