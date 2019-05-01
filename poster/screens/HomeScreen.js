@@ -32,7 +32,7 @@ class HomeScreen extends Component {
   }
 
   load() {
-    return fetch('https://posterapp333.herokuapp.com/event/' + this.props.screenProps.userId + '/')
+    return fetch('https://posterapp333.herokuapp.com/events/' + this.props.screenProps.userId + '/')
     .then(response => response.json())
     .then(responseJson => {
       this.setState(
