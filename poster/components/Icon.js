@@ -1,14 +1,13 @@
 import React, { SFC } from "react";
 import { Text, TextProps } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const iconMap = {
-  Home: "md-home",
-  Discover: "md-search",
-  Add: "md-add",
-  Profile: "md-calendar",
-  Notifications: "md-notifications",
-
+  Home: "home",
+  Discover: "location-on",
+  Add: "add-circle",
+  Profile: "chat",
+  Notifications: "notifications",
 };
 
 const Icon: SFC<
@@ -17,10 +16,10 @@ const Icon: SFC<
     color: string;
   } & TextProps > = ({ name, color, style, ...props }) => {
   return (
-    <Ionicons
+    <MaterialIcons
       name={iconMap[name]}
       color={color}
-      size={30}
+      size={32}
       style={style}
       {...props}
     />

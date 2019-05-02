@@ -44,6 +44,19 @@ export default class DiscoverScreen extends Component {
       );
   };
 
+    ListEmptyToday = () => {
+    return (
+        <Text>No events currently. Check back soon!</Text>
+    );
+  };
+
+  ListEmptyTomorrow = () => {
+    return (
+    <Text>No events currently. Check back soon!</Text>
+
+    );
+  };
+
   render() {
     return (
       <ScrollView>
@@ -76,7 +89,7 @@ renderItem={({ item }) => (
    <Text style={styles.recTitle}>{item.title}</Text>
    <Text style = {styles.recSubtitle}> {item.startDate.substring(5,7)}/{item.startDate.substring(8,10)}
    {"  ║  ◷ "}{item.startDate.substring(11,16)}</Text>
-   <Text style = {styles.recDetails}>{"meet @ "} {item.location} </Text>
+   <Text style = {styles.recDetails}>{"Meet at "} {item.location} </Text>
    <Text style = {styles.recDetails}> {item.desc.substring(11,item.desc.length-2)} </Text>
    <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
   <Icon
@@ -122,6 +135,7 @@ renderItem={({ item }) => (
   </LinearGradient>
   </TouchableOpacity>
 )}
+ListEmptyComponent={this.ListEmptyToday}
 enableEmptySections={true}
 style={{ marginTop: 5, marginBottom: 20}}
 keyExtractor={(item, index) => index.toString()}
@@ -148,6 +162,7 @@ keyExtractor={(item, index) => index.toString()}
   </LinearGradient>
   </TouchableOpacity>
 )}
+ListEmptyComponent={this.ListEmptyTomorrow}
 enableEmptySections={true}
 style={{ marginTop: 5}}
 keyExtractor={(item, index) => index.toString()}

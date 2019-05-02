@@ -29,14 +29,24 @@ export default class NotificationScreen extends Component {
       .then((responseJson) => this.setState({newMessages: responseJson}));
   }
 
+  ListEmptyEvents = () => {
+    return (
+        <Text>No new notifications from your events.</Text>
+    );
+  };
+
+  ListEmptyChats = () => {
+    return (
+        <Text>No new notifications from your chats.</Text>
+    );
+  };
+
   render() {
     return (
        <View style={styles.viewStyle}>
        <ScrollView>
-          <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customTitle}>Notifications</Text>
-</View>
-
+      <Text style={styles.customSubtitle}>About Your Events</Text>
           <FlatList
             data={this.state.notifications}
             renderItem={ (data) => (
@@ -55,10 +65,12 @@ export default class NotificationScreen extends Component {
                 </View>
               </TouchableHighlight>
             )}
+            ListEmptyComponent={this.ListEmptyEvents}
             enableEmptySections={true}
-style={{ marginTop: 10 }}
-keyExtractor={(item, index) => index.toString()}
+            style={{ marginTop: 10 }}
+            keyExtractor={(item, index) => index.toString()}
           />
+          <Text style={styles.customSubtitle2}>About Your Chats</Text>
           <FlatList
             data={this.state.newMessages}
             renderItem={ (data) => (
@@ -77,9 +89,10 @@ keyExtractor={(item, index) => index.toString()}
                 </View>
               </TouchableHighlight>
             )}
+            ListEmptyComponent={this.ListEmptyChats}
             enableEmptySections={true}
-style={{ marginTop: 10 }}
-keyExtractor={(item, index) => index.toString()}
+            style={{ marginTop: 10 }}
+            keyExtractor={(item, index) => index.toString()}
           />
           </ScrollView>
       </View>
@@ -113,11 +126,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: 5
   },
-  customSubtitle2: {
-  ...iOSUIKit.title3Object,
-  fontSize: 14,
-      marginTop: 10
+
+  customSubtitle: {
+  ...iOSUIKit.subheadEmphasizedObject,
+  fontSize: 20,
+  marginTop: 10
 },
+
+customSubtitle2: {
+  ...iOSUIKit.subheadEmphasizedObject,
+  fontSize: 20,
+  marginTop: 30
+},
+
   rowFrontChat: {
     backgroundColor: '#f58a00',
     justifyContent: 'center',

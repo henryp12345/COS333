@@ -43,15 +43,27 @@ class Profile extends Component {
       />
       );
   };
-  
+
+  ListEmptyPosted = () => {
+    return (
+        <Text>You have not posted any events.</Text>
+    );
+  };
+
+  ListEmptyJoined = () => {
+    return (
+        <Text>You have not posted any events.</Text>
+    );
+  };
+
   render() {
     return (
       //ListView to show with textinput used as search bar
       <View style={styles.viewStyle}>
       <Text style={styles.customTitle}>{"Welcome back, "}{this.state.userId}.</Text>
       <ScrollView>
-            <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
-      <Text style={styles.customSubtitle}>Events You Are Hosting</Text>
+      <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
+      <Text style={styles.customSubtitle}>Events You Have Posted</Text>
       </View>
 
       <FlatList
@@ -104,11 +116,12 @@ class Profile extends Component {
         </View>
         </Card>
         )}
+        ListEmptyComponent={this.ListEmptyPosted}
         enableEmptySections={true}
         style={{ marginTop: 10 }}
         keyExtractor={(item, index) => index.toString()}/>
       
-      <Text style={styles.customSubtitle}>Events You Have Joined</Text>
+      <Text style={styles.customSubtitle2}>Events You Have Joined</Text>
 
       <FlatList
         data={this.state.joined}
@@ -159,6 +172,7 @@ class Profile extends Component {
         </View>
         </Card>
         )}
+        ListEmptyComponent={this.ListEmptyJoined}
         enableEmptySections={true}
         style={{ marginTop: 10 }}
         keyExtractor={(item, index) => index.toString()}/>
@@ -196,14 +210,13 @@ const styles = StyleSheet.create({
 customSubtitle: {
   ...iOSUIKit.subheadEmphasizedObject,
   fontSize: 20,
-    marginTop: 10
-
+  marginTop: 10
 },
 
 customSubtitle2: {
-  ...iOSUIKit.title3Object,
-  fontSize: 14,
-      marginTop: 10
+  ...iOSUIKit.subheadEmphasizedObject,
+  fontSize: 20,
+  marginTop: 30
 },
 
 eventTitle: {
@@ -281,11 +294,16 @@ label: {
 });
 
 const AppNavigator = createStackNavigator({
-  Home: {screen: Profile},
-  Room: {screen: Chatroom},
-  Detail: {screen: EventDetail},
+  Home: {screen: Profile, 
+    navigationOptions: {
+      header: null}},
+  Room: {screen: Chatroom, 
+    navigationOptions:{
+        title:''}},
+  Detail: {screen: EventDetail, 
+    navigationOptions: {
+      header: null}},
   },
-  {headerMode: 'none'}
   );
 
 export default createAppContainer(AppNavigator);

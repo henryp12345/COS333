@@ -79,7 +79,7 @@ export default class EventDetail extends Component {
             <Text style={styles.date}> {this.state.startdate.substring(5,7)}{"/"}{this.state.startdate.substring(8,10)}
             {"  ║  ◷ "}{this.state.startdate.substring(11,16)}
             </Text>
-            <Text style={styles.params1}>{"meet @ "} {this.state.location} </Text>
+            <Text style={styles.params1}>{"Meet at"} {this.state.location} </Text>
             <Text style={styles.params2}> {this.state.desc} </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Icon
@@ -105,7 +105,7 @@ export default class EventDetail extends Component {
                 }
               });
               }}>
-        <Text style={styles.name}>join event</Text>
+        <Text style={styles.name}>JOIN EVENT</Text>
         </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={styles.link}>Go Back</Text>
@@ -145,7 +145,7 @@ export default class EventDetail extends Component {
               });
               this.currentUser.leaveRoom({roomId: this.state.chatroom});
             }}>
-        <Text style={styles.name}>leave event</Text>
+        <Text style={styles.name}>LEAVE EVENT</Text>
         </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={styles.link}>Go Back</Text>
@@ -164,7 +164,7 @@ export default class EventDetail extends Component {
             <Text style={styles.date}> {this.state.startdate.substring(5,7)}{"/"}{this.state.startdate.substring(8,10)}
             {"  ║  ◷ "}{this.state.startdate.substring(11,16)}
             </Text>
-            <Text style={styles.params1}>{"meet @ "} {this.state.location} </Text>
+            <Text style={styles.params1}>{"Meet at "} {this.state.location} </Text>
             <Text style={styles.params2}> {this.state.desc} </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Icon
@@ -185,7 +185,7 @@ export default class EventDetail extends Component {
               });
               this.currentUser.deleteRoom({roomId: this.state.chatroom});
             }}>
-        <Text style={styles.name}>cancel event</Text>
+        <Text style={styles.name}>CANCEL EVENT</Text>
         </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={styles.link}>Go Back</Text>
@@ -206,10 +206,10 @@ const styles = StyleSheet.create({
 	},
 	date: {
 		...iOSUIKit.largeTitleEmphasizedObject,
-		fontSize: 17,
+		fontSize: 20,
 		textAlign: "center",
 		color: "#f5fffa",
-		lineHeight: 17,
+		lineHeight: 20,
 	},
 	joinButton: {
 		marginTop:100,
@@ -234,20 +234,20 @@ const styles = StyleSheet.create({
 	},
 	params1: {
 		...iOSUIKit.largeTitleEmphasizedObject,
-		fontSize: 17,
+		fontSize: 20,
 		textAlign: "center",
-    lineHeight:17,
+    lineHeight:20,
 		margin: 17,
 		color: "#f5fffa",
 	},
 	params2: {
     ...iOSUIKit.largeTitleEmphasizedObject,
 		textAlign: "center",
-		fontSize: 15,
+		fontSize: 17,
 		margin: 10,
 	},
   params3: {
-    fontSize: 15,
+    fontSize: 17,
     textAlign: "center",
     color: 'white',
   },

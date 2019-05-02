@@ -88,6 +88,12 @@ class HomeScreen extends Component {
       );
   };
 
+  ListEmpty = () => {
+    return (
+        <Text>No event postings at this time. Check back soon!</Text>
+    );
+  };
+
   render() {
     var size = 100;
     if (this.state.isLoading) {
@@ -109,6 +115,7 @@ class HomeScreen extends Component {
       onChangeText={text => this.SearchFilterFunction(text)}
       onClear={text => this.SearchFilterFunction('')}
       placeholder="Search"
+      placeholderTextColor = 'black'
       value={this.state.search}
       />
       <ScrollView>
@@ -152,7 +159,7 @@ class HomeScreen extends Component {
       <Icon
       name='ios-basketball'
       type='ionicon'
-      color={this.state.selectedSports ? '#ffff75' : '#ffffff'}
+      color={this.state.selectedSports ? 'black' : '#ffffff'}
       size = {30}
       />
       <Text
@@ -193,7 +200,7 @@ class HomeScreen extends Component {
      <Icon
      name='book'
      type='font-awesome'
-     color={this.state.selectedStudy ? '#ffff75' : '#ffffff'}
+     color={this.state.selectedStudy ? 'black' : '#ffffff'}
      size = {30}
      />
      <Text
@@ -235,7 +242,7 @@ class HomeScreen extends Component {
    <Icon
    name='logo-game-controller-b'
    type='ionicon'
-   color={this.state.selectedGaming ? '#ffff75' : '#ffffff'}
+   color={this.state.selectedGaming ? 'black' : '#ffffff'}
    size = {30}
    />
    <Text
@@ -267,7 +274,7 @@ class HomeScreen extends Component {
     });
   }}>
   <LinearGradient
-  colors={['#f3dcfb', '#679fe4']}
+  colors={['#36D1DC', '#5B86E5']}
   height={100}
   width={120}
   style={{
@@ -279,7 +286,7 @@ class HomeScreen extends Component {
  <Icon
  name='car'
  type='font-awesome'
- color={this.state.selectedTransport ? '#ffff75' : '#ffffff'}
+ color={this.state.selectedTransport ? 'black' : '#ffffff'}
  size = {30}
  />
  <Text
@@ -321,7 +328,7 @@ style={{
 <Icon
 name='shopping-cart'
 type='weloveiconfonts'
-color={this.state.selectedShopping ? '#ffff75' : '#ffffff'}
+color={this.state.selectedShopping ? 'black' : '#ffffff'}
 size = {30}
 />
 <Text
@@ -361,9 +368,9 @@ style={{
  padding: 20
 }}>
 <Icon
-name='comments'
-type='font-awesome'
-color={this.state.selectedCampus ? '#ffff75' : '#ffffff'}
+name='school'
+type='MaterialIcons'
+color={this.state.selectedCampus ? 'black' : '#ffffff'}
 size = {30}
 />
 <Text
@@ -392,17 +399,9 @@ renderItem={({ item }) => (
 <Text style={styles.eventTitle}>{item.title}</Text>
 <Text style={{marginRight: 10}}>Posted by {item.host}</Text>
 <Text style={{marginRight: 10}}>{item.capacity-item.numberJoined} of {item.capacity} slots available</Text>
-
 </View>
-
-<View style={styles.downTextContainer}>
-<View style={styles.downTextContainerInner}>
-<View style={styles.downText}>
-<View style={styles.priceText}>
 </View>
-
-<View style={styles.label}>
-
+<View style={styles.iconContainer2}>
 <TouchableOpacity onPress={() => this.props.navigation.navigate("Detail", { topic: "React Navigation", eventId: item.id, userId: this.props.screenProps.userId})}>
 <Icon
 name='plus-circle'
@@ -413,13 +412,6 @@ color="#558fed"
 </TouchableOpacity>
 </View>
 </View>
-</View>
-</View>
-</View>
-</View>
-
-
-
 </Card>
 </TouchableOpacity>
 
@@ -430,7 +422,7 @@ refreshControl={
         onRefresh={this._onRefresh}
         />
       }
-
+ListEmptyComponent={this.ListEmpty}
 enableEmptySections={true}
 style={{ marginTop: 10 }}
 keyExtractor={(item, index) => index.toString()}
@@ -517,9 +509,16 @@ iconContainer: {
   justifyContent: 'center',
 },
 
+iconContainer2: {
+  padding: 5,
+  flex: 1,
+  backgroundColor: '#ffffff',
+  justifyContent: 'center',
+},
+
 textContainer: {
   padding: 10,
-  flex: 5,
+  flex: 4,
 },
 
 downTextContainer: {
@@ -530,7 +529,7 @@ downTextContainer: {
 btn1: {
 backgroundColor: 'transparent',
         fontSize: 14,
-        color: '#ffff75',
+        color: 'black',
         textAlign: 'left'
 },
 
