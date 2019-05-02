@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.db.models import F
 from pusher_chatkit import PusherChatKit
 from pusher_chatkit.backends import RequestsBackend
+from django.shortcuts import render_to_response
 from .models import User, Event
 import json
 import datetime
@@ -17,7 +18,7 @@ import hashlib
 # Create your views here.
 # retest
 def default(request):
-    return HttpResponse("")
+    return render_to_response('./privacy_policy.html')
 
 @csrf_exempt
 def event(request, username):
@@ -239,7 +240,7 @@ def recommendations(request, username):
 
 def today(request, username):
     username = username.lower()
-    values = Event.objects.filter(startDate__gte = datetime.date.today()).filter(startDate__lt = datetime.date.today() + datetime.timedelta(days = 1)).exclude(numberJoined = F('capacity')).values()
+    values = Event.objects.filter(endDate__gte = datetime.datetime.now()).filter(startDate__lt = datetime.date.today() + datetime.timedelta(days = 1)).exclude(numberJoined = F('capacity')).values()
     values_list = list(values)
     return JsonResponse(values_list, safe = False)
 
