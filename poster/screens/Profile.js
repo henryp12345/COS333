@@ -5,7 +5,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { iOSUIKit } from 'react-native-typography'
 import { Card } from 'native-base';
-import { LinearGradient } from 'expo';
+import { Constants, LinearGradient } from 'expo';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Chatroom from './Chatroom'
 import EventDetail from './EventDetail'
@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
     margin: 20,
     margin: 15,
     textAlign: 'center',
+    marginTop: Constants.statusBarHeight + 10
   },
   TextViewStyle:
   {

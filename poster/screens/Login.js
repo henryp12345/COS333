@@ -67,30 +67,19 @@ export default class Login extends Component {
           keyboardVerticalOffset= {50}
         >
         <View style={styles.inputContainer}>
-        <Icon
-   name='user'
-   type='feather'
-   color='#b0b7c1'
-   size = {14}
-   />
-          <TextInput style={{paddingLeft:10}}
+          <TextInput
               placeholder="Username"
               autoCapitalize="none"
               placeholderTextColor="#b0b7c1"
               underlineColorAndroid='transparent'
+              returnKeyType={'next'}
               onChangeText={(text) => this.setState({username: text})}
               />
               </View>
 
         <View style={styles.inputContainer}>
-        <Icon
-   name='lock'
-   type='feather'
-   color='#b0b7c1'
-   size = {14}
-   />
-          <TextInput style={{paddingLeft:10}}
-              placeholder="Password            "
+          <TextInput
+              placeholder="Password"
               secureTextEntry={true}
               autoCapitalize="none"
               placeholderTextColor="#b0b7c1"
@@ -120,17 +109,16 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   inputContainer: {
     height:40,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginBottom:10,
-    paddingLeft: 20,
     width:250,
+    paddingLeft: 20,
+    paddingTop: 10,
     borderRadius:30,
     backgroundColor: "#ffffff",
     borderColor: '#ff1493',
     borderWidth: 0.5,
+    marginBottom: 10,
   },
+
   inputs:{
       height:45,
       marginLeft:16,

@@ -5,7 +5,7 @@ import GenerateForm from 'react-native-form-builder';
 import { TagSelect } from 'react-native-tag-select';
 import { iOSUIKit } from 'react-native-typography'
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
-import AppLoading from 'expo';
+import { Constants, AppLoading } from 'expo';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import bgForm from '../images/event-wall.png';
@@ -176,6 +176,8 @@ const styles = StyleSheet.create({
     margin: 20,
     margin: 15,
     textAlign: 'center',
+    marginTop: Constants.statusBarHeight + 10
+
   },
 	container: {
 		marginTop: 50,
