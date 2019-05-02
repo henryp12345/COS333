@@ -4,6 +4,7 @@ import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { iOSUIKit } from 'react-native-typography';
 import { SearchBar, Button, Icon, Card } from 'react-native-elements';
+import { Constants } from 'expo';
 
 export default class NotificationScreen extends Component {
   constructor(props) {
@@ -98,6 +99,7 @@ const styles = StyleSheet.create({
     margin: 20,
     margin: 15,
     textAlign: 'center',
+    marginTop: Constants.statusBarHeight + 10
   },
   container: {
     backgroundColor: 'white',

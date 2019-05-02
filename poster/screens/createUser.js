@@ -78,13 +78,8 @@ export default class createUser extends Component {
         >
 
         <View style={styles.inputContainer}>
-        <Icon
-        name='user'
-        type='feather'
-        color='#b0b7c1'
-        size = {14}
-        />
-          <TextInput style={{paddingLeft:10}}
+      
+          <TextInput 
               placeholder="Username"
               autoCapitalize="none"
               placeholderTextColor="#b0b7c1"
@@ -94,13 +89,8 @@ export default class createUser extends Component {
             </View>
 
         <View style={styles.inputContainer}>
-            <Icon
-        name='edit-3'
-        type='feather'
-        color='#b0b7c1'
-        size = {14}
-        />
-          <TextInput style={{paddingLeft:10}}
+      
+          <TextInput 
               placeholder="First Name"
               autoCapitalize="none"
               placeholderTextColor="#b0b7c1"
@@ -110,13 +100,8 @@ export default class createUser extends Component {
             </View>
 
         <View style={styles.inputContainer}>
-        <Icon
-        name='edit-3'
-        type='feather'
-        color='#b0b7c1'
-        size = {14}
-        />
-          <TextInput style={{paddingLeft:10}}
+        
+          <TextInput 
               placeholder="Last Name"
               autoCapitalize="none"
               placeholderTextColor="#b0b7c1"
@@ -126,13 +111,8 @@ export default class createUser extends Component {
             </View>
 
           <View style={styles.inputContainer}>
-        <Icon
-        name='lock'
-        type='feather'
-        color='#b0b7c1'
-        size = {14}
-        />
-          <TextInput style={{paddingLeft:10}}
+        
+          <TextInput 
               placeholder="Password"
               autoCapitalize="none"
               secureTextEntry={true}
@@ -142,13 +122,8 @@ export default class createUser extends Component {
             </View>
 
         <View style={styles.inputContainer}>
-        <Icon
-        name='lock'
-        type='feather'
-        color='#b0b7c1'
-        size = {14}
-        />
-          <TextInput style={{paddingLeft:10}}
+        
+          <TextInput 
               placeholder="Confirm Password"
               autoCapitalize="none"
               secureTextEntry={true}
@@ -178,19 +153,16 @@ export default class createUser extends Component {
 const styles = StyleSheet.create({
   inputContainer: {
     height:40,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    alignSelf:'center',
-    textAlign: 'center',
-    marginBottom:10,
-    paddingLeft: 20,
     width:250,
+    paddingLeft: 20,
+    paddingTop: 10,
     borderRadius:30,
     backgroundColor: "#ffffff",
     borderColor: '#ff1493',
     borderWidth: 0.5,
+    marginBottom: 10,
   },
+
   inputs:{
       height:45,
       marginLeft:16,

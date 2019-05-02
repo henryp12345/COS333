@@ -4,7 +4,7 @@ import { SearchBar, Button, Icon } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { iOSUIKit } from 'react-native-typography'
 import { Card } from 'native-base';
-import { LinearGradient } from 'expo';
+import { Constants, LinearGradient } from 'expo';
 
 export default class DiscoverScreen extends Component {
   constructor(props) {
@@ -229,7 +229,7 @@ joinButton: {
     margin: 20,
     margin: 15,
     textAlign: 'center',
- 
+    marginTop: Constants.statusBarHeight + 10 
   },
 
   textStyle: {

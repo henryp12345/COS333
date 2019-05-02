@@ -176,6 +176,8 @@ const styles = StyleSheet.create({
     margin: 20,
     margin: 15,
     textAlign: 'center',
+    marginTop: Constants.statusBarHeight + 10
+
   },
 	container: {
 		marginTop: 50,

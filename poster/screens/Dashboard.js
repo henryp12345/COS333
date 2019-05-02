@@ -10,7 +10,8 @@ export default class Dashboard extends Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
 			title: 'p o s t e r',
-			headerLeft: null
+			// headerLeft: null
+			header: null
 		};
 	};
 

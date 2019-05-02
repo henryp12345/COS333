@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, Touchabl
 import { SearchBar, Button, Icon } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Card} from 'native-base';
-import { LinearGradient } from 'expo';
+import { Constants, LinearGradient } from 'expo';
 import { iOSUIKit } from 'react-native-typography'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Chatroom from './Chatroom'
@@ -32,7 +32,7 @@ class HomeScreen extends Component {
   }
 
   load() {
-    return fetch('https://posterapp333.herokuapp.com/events/' + this.props.screenProps.userId + '/')
+    return fetch('https://posterapp333.herokuapp.com/event/')
     .then(response => response.json())
     .then(responseJson => {
       this.setState(
@@ -451,6 +451,8 @@ const styles = StyleSheet.create({
     margin: 20,
     margin: 15,
     textAlign: 'center',
+    marginTop: Constants.statusBarHeight + 10
+
   },
   TextViewStyle:
   {

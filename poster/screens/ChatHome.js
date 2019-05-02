@@ -11,7 +11,7 @@ export default class ChatHome extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'p o s t e r',
-      headerLeft: null
+      header: null
     };
   };
 
