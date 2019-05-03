@@ -5,10 +5,10 @@ import GenerateForm from 'react-native-form-builder';
 import { TagSelect } from 'react-native-tag-select';
 import { iOSUIKit } from 'react-native-typography'
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
-import { Constants, AppLoading } from 'expo';
+import AppLoading from 'expo';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
-import bgForm from '../images/event-wall.png';
+import bgForm from '../images/wallpaper.jpg';
 
 // These Fields will create a login form with three fields
 const fields = [
@@ -129,10 +129,9 @@ export default class FormGenerator extends Component {
         const arrayOfString = ['Sports', 'Study', 'Gaming', 'Shopping', 'Transport', 'Campus Activity', 'Project', 'Other']
 
         return (
+          <ImageBackground style={styles.picture} source={bgForm}>
           <View style={styles.viewStyle}>
             <Text style={styles.customTitle}>Create Event</Text>
-            <ImageBackground style={styles.picture} source={bgForm}>
-            {this.props.children}
         		<KeyboardAvoidingView style={styles.container} behavior="padding">
                 <ScrollView style={styles.wrapper}>
                 <View>
@@ -163,8 +162,8 @@ export default class FormGenerator extends Component {
                 
                 </ScrollView>
                 </KeyboardAvoidingView>
-                </ImageBackground>
                 </View>
+                </ImageBackground>
                 );
     }
 }
@@ -176,8 +175,6 @@ const styles = StyleSheet.create({
     margin: 20,
     margin: 15,
     textAlign: 'center',
-    marginTop: Constants.statusBarHeight + 10
-
   },
 	container: {
 		marginTop: 50,
@@ -195,18 +192,6 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		color: "#f5fffa",
 		lineHeight: 17,
-	},
-	joinButton: {
-		marginTop:100,
-   		height:40,
-    	flexDirection: 'row',
-    	justifyContent: 'center',
-    	alignItems: 'center',
-    	alignSelf:'center',
-    	marginBottom:20,
-    	width:200,
-    	borderRadius:20,
-    	backgroundColor: "#ff1493",
 	},
 	welcome: {
 		...iOSUIKit.largeTitleEmphasizedObject,
@@ -262,7 +247,7 @@ const styles = StyleSheet.create({
     ...iOSUIKit.subheadEmphasizedObject,
     fontSize: 22,
     padding:0,
-    color: 'white',
+    color: 'black',
   },
   item: {
     borderWidth: 1,   
