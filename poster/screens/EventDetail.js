@@ -11,7 +11,7 @@ import bgEvent from '../images/event-wall.png';
 export default class EventDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = { id: '',
+    this.state = { id: this.props.navigation.getParam('eventId'),
                    title: '',
                    desc: '',
                    location: '',
@@ -30,10 +30,10 @@ export default class EventDetail extends Component {
 
   componentDidMount() {
   const { navigation } = this.props;
-    fetch("https://posterapp333.herokuapp.com/event/" + navigation.getParam('eventId', -1) + "/")
+    fetch("https://posterapp333.herokuapp.com/event/" + this.state.id + "/")
       .then((response) => {
         var eventData = JSON.parse(response._bodyText)[0];
-        this.setState({ id: eventData.id,
+        this.setState({
                         title: eventData.title,
                         desc: eventData.desc.substring(11,eventData.desc.length-2),
                         location: eventData.location,
@@ -59,10 +59,10 @@ export default class EventDetail extends Component {
       .then((response) => {
         response.json()
           .then((responseJson) => {
-            if (responseJson.joined.search("," + this.state.id + ",") >= 0)
-              this.setState({whichButton: 1})
-            else if (responseJson.hosted.search("," + this.state.id + ",") >= 0)
-              this.setState({whichButton: 2})
+            if (this.state.id != "" && responseJson.joined.search("," + this.state.id + ",") >= 0)
+              this.setState({whichButton: 1});
+            else if (this.state.id != "" && responseJson.hosted.search("," + this.state.id + ",") >= 0)
+              this.setState({whichButton: 2});
           });
       });
   }
@@ -70,7 +70,7 @@ export default class EventDetail extends Component {
 	render() {
     const { navigation } = this.props;
     // Put join button return stuff here
-    if (this.state.whichButton == 0) {
+    if (this.state.whichButton === 0) {
       return (
         <ImageBackground style={styles.picture} source={bgEvent}>
         {this.props.children}
@@ -115,7 +115,7 @@ export default class EventDetail extends Component {
       );
     }
     // Put leave button return stuff here
-    if (this.state.whichButton == 1) {
+    else if (this.state.whichButton === 1) {
       return (
         <ImageBackground style={styles.picture} source={bgEvent}>
         {this.props.children}

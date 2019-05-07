@@ -23,13 +23,14 @@
       "**/*"
     ],
     "ios": {
+      "buildNumber": "5",
       "supportsTablet": true,
       "bundleIdentifier": "com.herokuapp.posterapp333"
     },
     "android": {
       "permissions": [],
       "package": "com.herokuapp333.poseterapp333",
-      "versionCode": 3
+      "versionCode": 10
     }
   }
 }

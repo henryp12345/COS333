@@ -47,8 +47,8 @@ def eventId(request, eventString):
     for eventId in idList:
         if len(eventId) > 0 and Event.objects.filter(id = eventId).count() > 0:
             currentEvent = Event.objects.get(id = eventId)
-            utc = pytz.UTC
-            startDate = currentEvent.startDate.replace(tzinfo = utc)
+            est = pytz.timezone('US/Eastern')
+            startDate = currentEvent.startDate.replace(tzinfo = est)
             # startDate = utc.localize(startDate)
             if startDate > datetime.datetime.now(startDate.tzinfo):
                 eventDict = model_to_dict(currentEvent)
