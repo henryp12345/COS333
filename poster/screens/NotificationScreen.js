@@ -44,8 +44,8 @@ export default class NotificationScreen extends Component {
   render() {
     return (
        <View style={styles.viewStyle}>
-       <ScrollView>
       <Text style={styles.customTitle}>Notifications</Text>
+      <ScrollView>
       <Text style={styles.customSubtitle}>About Your Events</Text>
           <FlatList
             data={this.state.notifications}

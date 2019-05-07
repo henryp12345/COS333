@@ -105,7 +105,6 @@ class HomeScreen extends Component {
       }
       return (
       <View style={styles.viewStyle}>
-      <ScrollView>
       <Text style={styles.customTitle}>Explore Events</Text>
 
       <SearchBar
@@ -119,6 +118,7 @@ class HomeScreen extends Component {
       placeholderTextColor = 'black'
       value={this.state.search}
       />
+            <ScrollView>
       <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customSubtitle}>Popular Categories</Text>
 <TouchableOpacity onPress ={text => this.SearchFilterFunction('')}>
@@ -368,8 +368,8 @@ style={{
  padding: 20
 }}>
 <Icon
-name='school'
-type='MaterialIcons'
+name='building'
+type='font-awesome'
 color={this.state.selectedCampus ? 'black' : '#ffffff'}
 size = {30}
 />
