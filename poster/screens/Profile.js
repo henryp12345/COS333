@@ -60,8 +60,8 @@ class Profile extends Component {
     return (
       //ListView to show with textinput used as search bar
       <View style={styles.viewStyle}>
-      <Text style={styles.customTitle}>{"Welcome back, "}{this.state.userId}.</Text>
       <ScrollView>
+      <Text style={styles.customTitle}>{"Welcome back, "}{this.state.userId}.</Text>
       <View style={{ flexDirection:"row", justifyContent: 'space-between' }}>
       <Text style={styles.customSubtitle}>Events You Have Posted</Text>
       </View>
