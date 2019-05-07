@@ -132,7 +132,6 @@ export default class FormGenerator extends Component {
           <ImageBackground style={styles.picture} source={bgForm}>
           <View style={styles.viewStyle}>
             <Text style={styles.customTitle}>Create Event</Text>
-        		<KeyboardAvoidingView style={styles.container} behavior="padding">
                 <ScrollView style={styles.wrapper}>
                 <View>
                 <Text style={styles.labelEvent}> What is your event? </Text>
@@ -161,7 +160,6 @@ export default class FormGenerator extends Component {
                 </View>
                 
                 </ScrollView>
-                </KeyboardAvoidingView>
                 </View>
                 </ImageBackground>
                 );
