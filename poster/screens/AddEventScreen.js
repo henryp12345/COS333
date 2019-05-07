@@ -240,12 +240,14 @@ const styles = StyleSheet.create({
   	fontSize: 17,
     padding: 0,
     paddingVertical: 15,
+    marginLeft: 15,
     color: 'black',
   },
   labelEvent:{
     ...iOSUIKit.subheadEmphasizedObject,
     fontSize: 22,
     padding:0,
+    marginLeft: 15,
     color: 'black',
   },
   item: {
