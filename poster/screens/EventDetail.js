@@ -59,9 +59,9 @@ export default class EventDetail extends Component {
       .then((response) => {
         response.json()
           .then((responseJson) => {
-            if (responseJson.joined.search(this.state.id) >= 0)
+            if (responseJson.joined.search("," + this.state.id + ",") >= 0)
               this.setState({whichButton: 1})
-            else if (responseJson.hosted.search(this.state.id) >= 0)
+            else if (responseJson.hosted.search("," + this.state.id + ",") >= 0)
               this.setState({whichButton: 2})
           });
       });
