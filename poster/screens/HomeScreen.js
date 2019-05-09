@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
+import { Text, View, StyleSheet, FlatList, ActivityIndicator, Platform, TouchableOpacity, ScrollView, RefreshControl, Dimensions } from 'react-native';
 import { SearchBar, Button, Icon } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Card} from 'native-base';
@@ -125,7 +125,7 @@ class HomeScreen extends Component {
 <Text style={styles.customSubtitle2}>Clear</Text>
 </TouchableOpacity>
 </View>
-      <View style={{ flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
+      <View style={{ flex: 1, flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
 
       <TouchableOpacity
       onPress ={() => {
@@ -149,7 +149,7 @@ class HomeScreen extends Component {
       <LinearGradient
       colors={['#f42e78', '#c17afc']}
       height={100}
-      width={120}
+      width={Dimensions.get('window').width/3 - 20}
       style={{
         borderRadius: 5,
         alignItems: 'flex-start',
@@ -190,7 +190,7 @@ class HomeScreen extends Component {
       <LinearGradient
       colors={['#fec180', '#ff8993']}
       height={100}
-      width={120}
+      width={Dimensions.get('window').width/3 - 20}
       style={{
        borderRadius: 5,
        alignItems: 'flex-start',
@@ -232,7 +232,7 @@ class HomeScreen extends Component {
     <LinearGradient
     colors={['#6681ea', '#7e43aa']}
     height={100}
-    width={120}
+    width={Dimensions.get('window').width/3 - 20}
     style={{
      borderRadius: 5,
      alignItems: 'flex-start',
@@ -254,7 +254,7 @@ class HomeScreen extends Component {
   </TouchableOpacity>
   </View>
 
-  <View style={{ paddingBottom: 20, flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
+  <View style={{ flex: 1, paddingBottom: 20, flexDirection:"row", marginTop: 10, marginHorizontal: 5, justifyContent: 'space-between' }}>
   <TouchableOpacity
   onPress ={() => {
     const newData = this.arrayholder.filter(function(item) {
@@ -276,7 +276,7 @@ class HomeScreen extends Component {
   <LinearGradient
   colors={['#36D1DC', '#5B86E5']}
   height={100}
-  width={120}
+  width={Dimensions.get('window').width/3 - 20}
   style={{
    borderRadius: 5,
    alignItems: 'flex-start',
@@ -318,7 +318,7 @@ onPress ={() => {
 <LinearGradient
 colors={['#80f9b7', '#00A8C5']}
 height={100}
-width={120}
+width={Dimensions.get('window').width/3 - 20}
 style={{
  borderRadius: 5,
  alignItems: 'flex-start',
@@ -360,7 +360,7 @@ onPress ={() => {
 <LinearGradient
 colors={['#ff839d', '#f50b9a']}
 height={100}
-width={120}
+width={Dimensions.get('window').width/3 - 20}
 style={{
  borderRadius: 5,
  alignItems: 'flex-start',

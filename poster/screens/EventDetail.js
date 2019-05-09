@@ -81,6 +81,7 @@ export default class EventDetail extends Component {
             </Text>
             <Text style={styles.params1}>{"Meet at"} {this.state.location} </Text>
             <Text style={styles.params2}> {this.state.desc} </Text>
+            <Text style={styles.params1}>{"Hosted by"} {this.state.host}</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Icon
                 name='users'
@@ -89,7 +90,7 @@ export default class EventDetail extends Component {
                 size = {15}
                 />
               <Text style={styles.params3}>
-                {"  "}{this.state.numberJoined}{" of "}{this.state.capacity}{" attending"}
+                {"  "}{this.state.capacity-this.state.numberJoined}{" of "}{this.state.capacity}{" slots available"}
               </Text>
             </View>
             <TouchableOpacity style={styles.joinButton} onPress={() => {
@@ -124,8 +125,9 @@ export default class EventDetail extends Component {
             <Text style={styles.date}> {this.state.startdate.substring(5,7)}{"/"}{this.state.startdate.substring(8,10)}
             {"  ║  ◷ "}{this.state.startdate.substring(11,16)}
             </Text>
-            <Text style={styles.params1}>{"meet @ "} {this.state.location} </Text>
+            <Text style={styles.params1}>{"Meet at "} {this.state.location} </Text>
             <Text style={styles.params2}> {this.state.desc} </Text>
+            <Text style={styles.params1}>{"Hosted by"} {this.state.host}</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Icon
                 name='users'
@@ -134,7 +136,7 @@ export default class EventDetail extends Component {
                 size = {15}
                 />
               <Text style={styles.params3}>
-                {"  "}{this.state.numberJoined}{" of "}{this.state.capacity}{" attending"}
+                {"  "}{this.state.capacity-this.state.numberJoined}{" of "}{this.state.capacity}{" slots available"}
               </Text>
             </View>
             <TouchableOpacity style={styles.joinButton} onPress={() => {
@@ -166,6 +168,7 @@ export default class EventDetail extends Component {
             </Text>
             <Text style={styles.params1}>{"Meet at "} {this.state.location} </Text>
             <Text style={styles.params2}> {this.state.desc} </Text>
+            <Text style={styles.params1}>{"Hosted by"} {this.state.host}</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Icon
                 name='users'
@@ -174,7 +177,7 @@ export default class EventDetail extends Component {
                 size = {15}
                 />
               <Text style={styles.params3}>
-                {"  "}{this.state.numberJoined}{" of "}{this.state.capacity}{" attending"}
+                {"  "}{this.state.capacity-this.state.numberJoined}{" of "}{this.state.capacity}{" slots available"}
               </Text>
             </View>
             <TouchableOpacity style={styles.joinButton} onPress={() => {
@@ -240,6 +243,16 @@ const styles = StyleSheet.create({
 		margin: 17,
 		color: "#f5fffa",
 	},
+
+    params1: {
+    ...iOSUIKit.largeTitleEmphasizedObject,
+    fontSize: 18,
+    textAlign: "center",
+    lineHeight:20,
+    margin: 17,
+    color: "#f5fffa",
+  },
+
 	params2: {
     ...iOSUIKit.largeTitleEmphasizedObject,
 		textAlign: "center",
