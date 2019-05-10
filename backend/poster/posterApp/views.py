@@ -39,6 +39,9 @@ def event(request, username):
         formData = json.loads(request.body)
         e1 = Event(title = formData["title"], desc = formData["desc"], location = formData["location"], startDate = dateutil.parser.parse(formData["startdate"]), endDate = dateutil.parser.parse(formData["enddate"]), capacity = formData["capacity"], numberJoined = 0, tags = formData["tags"], host = formData["host"], chatroom = formData["chatId"])
         e1.save()
+        e1.startDate = e1.startDate - datetime.timedelta(hours = 4)
+        e1.endDate = e1.endDate - datetime.timedelta(hours = 4)
+        e1.save()
         return addHosted(request, formData["host"], str(e1.id))
 
 def eventId(request, eventString):
@@ -63,6 +66,7 @@ def hosted(request, username):
 
 def addHosted(request, username, idString):
     idList = idString.split(",")
+    username = username.lower()
     user = User.objects.get(username = username)
     currentHosted = user.hosted
     if currentHosted == "":
@@ -126,10 +130,10 @@ def addUser(request, username, passHash, first, last):
 def notifications(request, username):
     username = username.lower()
     user = User.objects.get(username = username)
-    notificationString = user.notifications
+    returnValue = eventId(request, user.notifications)
     user.notifications = ""
     user.save()
-    return eventId(request, notificationString)
+    return returnValue
 
 def newMessages(request, username):
     username = username.lower()
@@ -227,7 +231,7 @@ def recommendations(request, username):
         elif Tags[tag] > Tags[sec]:
             sec = tag
     values = Event.objects.filter(Q(tags__contains = top) | Q(tags__contains = sec))
-    values = values.filter(startDate__gt =  datetime.datetime.now())
+    values = values.filter(startDate__gt =  datetime.datetime.now() - datetime.timedelta(hours = 4))
     for item in EventList:
         if len(item) > 0:
             values = values.exclude(id = item)
@@ -240,7 +244,7 @@ def recommendations(request, username):
 
 def today(request, username):
     username = username.lower()
-    values = Event.objects.filter(endDate__gte = datetime.datetime.now()).filter(startDate__lt = datetime.date.today() + datetime.timedelta(days = 1)).exclude(numberJoined = F('capacity')).values()
+    values = Event.objects.filter(endDate__gte = datetime.datetime.now() - datetime.timedelta(hours = 4)).filter(startDate__lt = datetime.date.today() + datetime.timedelta(days = 1)).exclude(numberJoined = F('capacity')).values()
     values_list = list(values)
     return JsonResponse(values_list, safe = False)
 
