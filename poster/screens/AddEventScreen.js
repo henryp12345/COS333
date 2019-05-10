@@ -55,7 +55,7 @@ const fields = [
                 	label: 'How many people do you need?',
                 },
                 {
-                	type: 'text',
+                	type: 'text2',
                 	name: 'location',
                 	required: false,
                 	label: 'Where will this be held?',
