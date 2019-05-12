@@ -77,7 +77,7 @@ renderItem={({ item }) => (
 
     <LinearGradient
     colors={['#47e5bc', '#a2efdb']}
-    height={220}
+    height='auto'
     width={240}
     style={{
      marginHorizontal: 5,
