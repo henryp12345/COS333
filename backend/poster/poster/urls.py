@@ -25,7 +25,6 @@ urlpatterns = [
     path('addHosted/<str:username>/<str:idString>/', views.addHosted),
     path('joined/<str:username>/', views.joined),
     path('addJoined/<str:username>/<str:idString>/', views.addJoined),
-    path('clear/', views.clearAll),
     path('addUser/<str:username>/<str:passHash>/<str:first>/<str:last>/', views.addUser),
     path('notifications/<str:username>/', views.notifications),
     path('newMessages/<str:username>/', views.newMessages),

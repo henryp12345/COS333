@@ -267,8 +267,3 @@ def authUser(request, username, passHash):
         return HttpResponse("Incorrect username/password")
     else:
         return HttpResponse("OK")
-
-def clearAll(request):
-    User.objects.all().delete()
-    Event.objects.all().delete()
-    return HttpResponse('Tables cleared')
