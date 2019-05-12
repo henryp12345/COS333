@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Animated, AppRegistry, Dimensions, ListView, StyleSheet, Text, TouchableOpacity, TouchableHighlight, View, ScrollView, FlatList } from 'react-native';
-import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { iOSUIKit } from 'react-native-typography';
 import { SearchBar, Button, Icon, Card } from 'react-native-elements';

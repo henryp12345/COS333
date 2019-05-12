@@ -1,7 +1,5 @@
 import React from "react";
-
 import { createAppContainer, createBottomTabNavigator } from "react-navigation";
-
 import { Icon, TabBar } from "../components";
 import Home from "../screens/HomeScreen";
 import Discover from "../screens/DiscoverScreen";

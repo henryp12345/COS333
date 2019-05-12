@@ -1,7 +1,7 @@
 import { createAppContainer, createStackNavigator } from "react-navigation";
 import Login from "../screens/Login";
 import createUser from "../screens/createUser";
-import Dashboard from "../screens/Dashboard";
+import Dashboard from "../navigators/Dashboard";
 
 const LoginStackNav = createStackNavigator({
 	Login: {
